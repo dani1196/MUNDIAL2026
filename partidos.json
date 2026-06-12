@@ -1,0 +1,56 @@
+[
+  {
+    "id_partido": 1,
+    "equipo_1": "México",
+    "equipo_2": "Sudáfrica",
+    "fecha": "2026-06-11",
+    "goles_1_real": 2,
+    "goles_2_real": 0,
+    "estado": "finalizado"
+  },
+  {
+    "id_partido": 2,
+    "equipo_1": "Corea del Sur",
+    "equipo_2": "República Checa",
+    "fecha": "2026-06-11",
+    "goles_1_real": 2,
+    "goles_2_real": 1,
+    "estado": "finalizado"
+  },
+  {
+    "id_partido": 3,
+    "equipo_1": "Canadá",
+    "equipo_2": "Bosnia y Herzegovina",
+    "fecha": "2026-06-12",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 4,
+    "equipo_1": "Estados Unidos",
+    "equipo_2": "Paraguay",
+    "fecha": "2026-06-12",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 5,
+    "equipo_1": "Catar",
+    "equipo_2": "Suiza",
+    "fecha": "2026-06-13",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 6,
+    "equipo_1": "Brasil",
+    "equipo_2": "Marruecos",
+    "fecha": "2026-06-13",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  }
+]
