@@ -1,0 +1,17 @@
+[
+  {
+    "nombre": "Dani",
+    "monedas": 50,
+    "dolares_depositados": 5
+  },
+  {
+    "nombre": "Dominic",
+    "monedas": 50,
+    "dolares_depositados": 5
+  },
+  {
+    "nombre": "Banco",
+    "monedas": 0,
+    "dolares_depositados": 10
+  }
+]
