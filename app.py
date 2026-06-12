@@ -54,7 +54,7 @@ st.title("🏆 Mundial 2026")
 # Mostramos únicamente el Tipo de Cambio, centrado para mejor estética
 col_vacia1, col_tasa, col_vacia2 = st.columns([1, 2, 1])
 with col_tasa:
-    st.metric("📈 Tipo de Cambio Actual", f"{tasa_actual:.2f} Sobolevs por cada USD")
+    st.metric("Cambio actual", f"{tasa_actual:.2f} Sobolevs por cada USD")
 
 st.markdown("---")
 
