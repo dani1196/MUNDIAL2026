@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Sobolev", page_icon="⚽", layout="centered")
 
@@ -51,13 +51,10 @@ else:
 # ==========================================
 st.title("🏆 Mundial 2026")
 
-col_usd, col_sob, col_tasa = st.columns(3)
-with col_usd:
-    st.metric("Reservas del Banco", f"${dolares_reserva:.2f}")
-with col_sob:
-    st.metric("Liquidez del Banco", f"{sobolevs_reserva:.0f} Sob")
+# Mostramos únicamente el Tipo de Cambio, centrado para mejor estética
+col_vacia1, col_tasa, col_vacia2 = st.columns([1, 2, 1])
 with col_tasa:
-    st.metric("Tipo de Cambio", f"{tasa_actual:.2f} Sob/USD")
+    st.metric("📈 Tipo de Cambio Actual", f"{tasa_actual:.2f} Sobolevs por cada USD")
 
 st.markdown("---")
 
@@ -67,7 +64,7 @@ if nombres_jugadores:
     usuario_actual = st.selectbox("👤 Identifícate:", nombres_jugadores)
     
     saldo_usuario = df_usuarios[df_usuarios["nombre"] == usuario_actual].iloc[0]["monedas"]
-    st.warning(f"Tu billetera: **{saldo_usuario:.2f} Sobolevs**")
+    #st.warning(f"Tu billetera: **{saldo_usuario:.2f} Sobolevs**")
 
     tab_tienda, tab_apuestas, tab_posiciones, tab_control = st.tabs([
         "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "⚙️ Control"
@@ -119,22 +116,46 @@ if nombres_jugadores:
         else:
             st.write("Aún no hay transacciones registradas en el historial.")
 
-  # --- PESTAÑA: APUESTAS ---
+ # --- PESTAÑA: APUESTAS ---
     with tab_apuestas:
+        hora_actual_local = datetime.utcnow() - timedelta(hours=5)
+        
+        partidos_abiertos = []
+        partidos_cerrados = []
+        
+        # 1. Clasificamos los partidos automáticamente
+        for p in partidos:
+            if p.get("estado") != "futuro": # Ignoramos los partidos de fases finales aún no definidos
+                fecha_str = p.get("fecha", "")
+                hora_str = p.get("hora", "23:59")
+                try:
+                    fecha_partido = datetime.strptime(f"{fecha_str} {hora_str}", "%Y-%m-%d %H:%M")
+                    # Si aún no es la hora, está abierto
+                    if hora_actual_local < fecha_partido and p.get("estado") == "pendiente":
+                        partidos_abiertos.append(p)
+                    else:
+                        # Si ya pasó la hora o ya finalizó, está cerrado
+                        partidos_cerrados.append((p, fecha_partido))
+                except ValueError:
+                    pass
+        
+        # ==========================================
+        # SECCIÓN 1: PARTIDOS PARA PRONOSTICAR
+        # ==========================================
         st.subheader("📅 Partidos Disponibles")
-        
-        partidos_pendientes = [p for p in partidos if p.get("estado") == "pendiente"]
-        
-        if not partidos_pendientes:
-            st.info("No hay partidos pendientes para apostar en este momento.")
+        if not partidos_abiertos:
+            st.info("No hay partidos abiertos para pronósticos en este momento.")
         else:
-            for partido in partidos_pendientes:
+            st.warning(f"🕒 Hora del servidor: {hora_actual_local.strftime('%H:%M:%S')}. Los formularios se bloquean al pitazo inicial.")
+            
+            for partido in partidos_abiertos:
                 id_p = partido["id_partido"]
                 equipo1 = partido["equipo_1"]
                 equipo2 = partido["equipo_2"]
+                hora_partido = partido.get("hora", "")
                 
                 with st.form(key=f"form_apuesta_{id_p}"):
-                    st.write(f"**Partido {id_p}** | {partido.get('fecha', '')}")
+                    st.write(f"**Partido {id_p}** | {partido.get('fecha', '')} {hora_partido}")
                     
                     col1, col2, col3, col4 = st.columns([2, 1, 1, 2])
                     with col1:
@@ -147,26 +168,26 @@ if nombres_jugadores:
                         st.markdown(f"<h4>{equipo2}</h4>", unsafe_allow_html=True)
                         
                     st.markdown("---")
-                    # Nuevo selector de inversión dinámico
                     max_apuesta = int(saldo_usuario) if saldo_usuario > 0 else 1
-                    monto_apostado = st.number_input("Sobolevs a invertir en este pronóstico:", min_value=1, max_value=max_apuesta, step=1, key=f"monto_{id_p}")
+                    monto_apostado = st.number_input("Sobolevs a invertir:", min_value=1, max_value=max_apuesta, step=1, key=f"monto_{id_p}")
                     
                     boton_apostar = st.form_submit_button("Guardar Pronóstico")
                     
                     if boton_apostar:
+                        hora_verificacion = datetime.utcnow() - timedelta(hours=5)
+                        if hora_verificacion >= datetime.strptime(f"{partido.get('fecha')} {partido.get('hora', '23:59')}", "%Y-%m-%d %H:%M"):
+                            st.error("❌ Demasiado tarde. El partido ya ha comenzado.")
+                            continue
+
                         if saldo_usuario >= monto_apostado:
                             apuesta_existente = False
-                            
-                            # Revisar si ya existía una apuesta previa para este partido
                             for pron in pronosticos:
                                 if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p:
-                                    # Reembolsar el monto de la apuesta anterior al usuario
                                     monto_anterior = pron.get("monto_apostado", 0)
                                     for u in usuarios:
                                         if u["nombre"] == usuario_actual:
                                             u["monedas"] += monto_anterior
                                             
-                                    # Actualizar el pronóstico con los nuevos valores
                                     pron["goles_1_pronostico"] = goles1
                                     pron["goles_2_pronostico"] = goles2
                                     pron["monto_apostado"] = monto_apostado
@@ -174,43 +195,122 @@ if nombres_jugadores:
                                     break
                             
                             if not apuesta_existente:
-                                # Es una apuesta nueva
-                                nuevo_pronostico = {
+                                pronosticos.append({
                                     "usuario": usuario_actual,
                                     "id_partido": id_p,
                                     "goles_1_pronostico": goles1,
                                     "goles_2_pronostico": goles2,
                                     "monto_apostado": monto_apostado,
                                     "puntos_ganados": 0
-                                }
-                                pronosticos.append(nuevo_pronostico)
+                                })
 
-                            # Descontar el nuevo monto apostado del saldo actual
                             for u in usuarios:
                                 if u["nombre"] == usuario_actual:
                                     u["monedas"] -= monto_apostado
                             
-                            # Guardar bases de datos JSON
                             guardar_datos("usuarios.json", usuarios)
                             guardar_datos("pronosticos.json", pronosticos)
                             
-                            # Registrar en el archivo de texto para auditoría
-                            fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            registro_apuesta = f"[{fecha_hora}] APUESTA | Usuario: {usuario_actual} | Partido {id_p} ({equipo1} vs {equipo2}) | Goles: {goles1}-{goles2} | Monto: {monto_apostado} Sobolevs\n"
+                            registro_apuesta = f"[{hora_verificacion.strftime('%Y-%m-%d %H:%M:%S')}] APUESTA | {usuario_actual} | Partido {id_p} | Goles: {goles1}-{goles2} | Monto: {monto_apostado}\n"
                             with open("historial_apuestas.txt", "a", encoding="utf-8") as f_log:
                                 f_log.write(registro_apuesta)
                                 
-                            st.success(f"¡Inversión de {monto_apostado} Sobolevs registrada con éxito!")
+                            st.success(f"¡Inversión de {monto_apostado} Sobolevs registrada!")
                             st.rerun()
                         else:
-                            st.error("❌ No tienes suficientes Sobolevs para esta apuesta.")
-
+                            st.error("❌ No tienes suficientes Sobolevs.")
+                            
+        # ==========================================
+        # SECCIÓN 2: PARTIDOS CERRADOS (Tendencias)
+        # ==========================================
+        st.markdown("---")
+        st.subheader("🔒 Partidos en Juego / Finalizados")
+        st.write("*(Mira qué marcadores predijo la familia. Los nombres se mantienen en secreto 🤫)*")
+        
+        # Ordenamos los partidos para que los más recientes salgan primero
+        partidos_cerrados.sort(key=lambda x: x[1], reverse=True)
+        
+        for p, _ in partidos_cerrados:
+            id_p = p["id_partido"]
+            equipo1 = p["equipo_1"]
+            equipo2 = p["equipo_2"]
+            estado = p.get("estado", "pendiente")
+            
+            # Usamos st.expander para que no ocupe toda la pantalla a menos que el usuario le dé clic
+            with st.expander(f"Partido {id_p}: {equipo1} vs {equipo2} ({estado.capitalize()})"):
+                
+                # Si el partido ya acabó y tú pusiste los goles reales en el JSON, se mostrarán aquí:
+                if estado == "finalizado":
+                    st.success(f"**Resultado Final:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
+                
+                # Buscamos todas las apuestas asociadas a este ID de partido
+                apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                
+                if apuestas_partido:
+                    conteo_marcadores = {}
+                    # Agrupamos cuántas veces se repite exactamente el mismo marcador
+                    for pron in apuestas_partido:
+                        marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                        conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                    
+                    st.markdown("**Tendencias del Mercado:**")
+                    # Ordenamos para mostrar los marcadores más votados arriba
+                    for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
+                        st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
+                else:
+                    st.write("Ningún familiar registró pronósticos para este encuentro.")
     # --- PESTAÑA: POSICIONES ---
     with tab_posiciones:
-        st.subheader("Ranking Familiar")
-        df_ranking = df_usuarios[df_usuarios["nombre"] != "Banco"][["nombre", "monedas"]].sort_values(by="monedas", ascending=False)
-        df_ranking = df_ranking.rename(columns={"nombre": "Familiar", "monedas": "Sobolevs"})
-        st.dataframe(df_ranking.reset_index(drop=True), use_container_width=True)
+        st.subheader("📊 Ranking de Pronósticos")
+        st.write("*(Los saldos totales son secretos 🤫. Aquí solo se muestra el rendimiento de las apuestas)*")
+        
+        datos_ranking = []
+        
+        # Recorremos cada usuario para calcular sus estadísticas
+        for u in usuarios:
+            if u["nombre"] == "Banco": 
+                continue # Omitimos al banco del ranking
+                
+            nombre_familiar = u["nombre"]
+            apostado_total = 0
+            balance_neto = 0
+            
+            # Buscamos todas las apuestas de este familiar
+            for pron in pronosticos:
+                if pron["usuario"] == nombre_familiar:
+                    monto = pron.get("monto_apostado", 0)
+                    ganado = pron.get("puntos_ganados", 0)
+                    
+                    apostado_total += monto
+                    
+                    # Buscamos el estado del partido apostado
+                    estado_partido = "pendiente"
+                    for p in partidos:
+                        if p["id_partido"] == pron["id_partido"]:
+                            estado_partido = p.get("estado", "pendiente")
+                            break
+                    
+                    # Solo calculamos pérdidas/ganancias si el partido ya terminó
+                    if estado_partido == "finalizado":
+                        balance_neto += (ganado - monto)
+            
+            # Agregamos los datos calculados a nuestra lista
+            datos_ranking.append({
+                "Familiar": nombre_familiar,
+                "Total Invertido": apostado_total,
+                "Rendimiento Neto": balance_neto
+            })
+            
+        # Convertimos la lista en una tabla visual con Pandas
+        if datos_ranking:
+            df_ranking = pd.DataFrame(datos_ranking)
+            # Ordenamos para que el que tenga mayor rendimiento neto esté primero
+            df_ranking = df_ranking.sort_values(by="Rendimiento Neto", ascending=False).reset_index(drop=True)
+            
+            # Mostramos la tabla
+            st.dataframe(df_ranking, use_container_width=True)
+        else:
+            st.info("Aún no hay estadísticas suficientes para generar el ranking.")
 
     # --- PESTAÑA: CONTROL ---
     with tab_control:
