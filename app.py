@@ -119,10 +119,91 @@ if nombres_jugadores:
         else:
             st.write("Aún no hay transacciones registradas en el historial.")
 
-    # --- PESTAÑA: APUESTAS ---
+  # --- PESTAÑA: APUESTAS ---
     with tab_apuestas:
-        st.subheader("Tus Pronósticos")
-        st.write("*(Los partidos se cargarán desde partidos.json)*")
+        st.subheader("📅 Partidos Disponibles")
+        
+        partidos_pendientes = [p for p in partidos if p.get("estado") == "pendiente"]
+        
+        if not partidos_pendientes:
+            st.info("No hay partidos pendientes para apostar en este momento.")
+        else:
+            for partido in partidos_pendientes:
+                id_p = partido["id_partido"]
+                equipo1 = partido["equipo_1"]
+                equipo2 = partido["equipo_2"]
+                
+                with st.form(key=f"form_apuesta_{id_p}"):
+                    st.write(f"**Partido {id_p}** | {partido.get('fecha', '')}")
+                    
+                    col1, col2, col3, col4 = st.columns([2, 1, 1, 2])
+                    with col1:
+                        st.markdown(f"<h4 style='text-align: right;'>{equipo1}</h4>", unsafe_allow_html=True)
+                    with col2:
+                        goles1 = st.number_input("Goles", min_value=0, max_value=15, step=1, key=f"g1_{id_p}")
+                    with col3:
+                        goles2 = st.number_input("Goles", min_value=0, max_value=15, step=1, key=f"g2_{id_p}")
+                    with col4:
+                        st.markdown(f"<h4>{equipo2}</h4>", unsafe_allow_html=True)
+                        
+                    st.markdown("---")
+                    # Nuevo selector de inversión dinámico
+                    max_apuesta = int(saldo_usuario) if saldo_usuario > 0 else 1
+                    monto_apostado = st.number_input("Sobolevs a invertir en este pronóstico:", min_value=1, max_value=max_apuesta, step=1, key=f"monto_{id_p}")
+                    
+                    boton_apostar = st.form_submit_button("Guardar Pronóstico")
+                    
+                    if boton_apostar:
+                        if saldo_usuario >= monto_apostado:
+                            apuesta_existente = False
+                            
+                            # Revisar si ya existía una apuesta previa para este partido
+                            for pron in pronosticos:
+                                if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p:
+                                    # Reembolsar el monto de la apuesta anterior al usuario
+                                    monto_anterior = pron.get("monto_apostado", 0)
+                                    for u in usuarios:
+                                        if u["nombre"] == usuario_actual:
+                                            u["monedas"] += monto_anterior
+                                            
+                                    # Actualizar el pronóstico con los nuevos valores
+                                    pron["goles_1_pronostico"] = goles1
+                                    pron["goles_2_pronostico"] = goles2
+                                    pron["monto_apostado"] = monto_apostado
+                                    apuesta_existente = True
+                                    break
+                            
+                            if not apuesta_existente:
+                                # Es una apuesta nueva
+                                nuevo_pronostico = {
+                                    "usuario": usuario_actual,
+                                    "id_partido": id_p,
+                                    "goles_1_pronostico": goles1,
+                                    "goles_2_pronostico": goles2,
+                                    "monto_apostado": monto_apostado,
+                                    "puntos_ganados": 0
+                                }
+                                pronosticos.append(nuevo_pronostico)
+
+                            # Descontar el nuevo monto apostado del saldo actual
+                            for u in usuarios:
+                                if u["nombre"] == usuario_actual:
+                                    u["monedas"] -= monto_apostado
+                            
+                            # Guardar bases de datos JSON
+                            guardar_datos("usuarios.json", usuarios)
+                            guardar_datos("pronosticos.json", pronosticos)
+                            
+                            # Registrar en el archivo de texto para auditoría
+                            fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            registro_apuesta = f"[{fecha_hora}] APUESTA | Usuario: {usuario_actual} | Partido {id_p} ({equipo1} vs {equipo2}) | Goles: {goles1}-{goles2} | Monto: {monto_apostado} Sobolevs\n"
+                            with open("historial_apuestas.txt", "a", encoding="utf-8") as f_log:
+                                f_log.write(registro_apuesta)
+                                
+                            st.success(f"¡Inversión de {monto_apostado} Sobolevs registrada con éxito!")
+                            st.rerun()
+                        else:
+                            st.error("❌ No tienes suficientes Sobolevs para esta apuesta.")
 
     # --- PESTAÑA: POSICIONES ---
     with tab_posiciones:
@@ -133,8 +214,25 @@ if nombres_jugadores:
 
     # --- PESTAÑA: CONTROL ---
     with tab_control:
-        st.subheader("Información del Sistema")
-        st.write("Estás utilizando bases de datos en formato JSON. Para actualizaciones permanentes, modifica los archivos directamente en tu editor o en GitHub.")
+        st.subheader("⚙️ Panel de Administración y Respaldos")
+        st.info("Descarga los archivos actualizados al final del día y súbelos a tu repositorio para guardar los cambios permanentemente.")
+        
+        col_json1, col_json2, col_txt = st.columns(3)
+        
+        with col_json1:
+            if os.path.exists("usuarios.json"):
+                with open("usuarios.json", "r", encoding="utf-8") as f_usr:
+                    st.download_button(label="⬇️ Descargar usuarios.json", data=f_usr.read(), file_name="usuarios.json", mime="application/json")
+                    
+        with col_json2:
+            if os.path.exists("pronosticos.json"):
+                with open("pronosticos.json", "r", encoding="utf-8") as f_pron:
+                    st.download_button(label="⬇️ Descargar pronosticos.json", data=f_pron.read(), file_name="pronosticos.json", mime="application/json")
+                    
+        with col_txt:
+            if os.path.exists("historial_apuestas.txt"):
+                with open("historial_apuestas.txt", "r", encoding="utf-8") as f_hist:
+                    st.download_button(label="⬇️ Descargar Auditoría", data=f_hist.read(), file_name="historial_apuestas.txt", mime="text/plain")
 
 else:
     st.error("No hay usuarios registrados en la base de datos JSON.")
