@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime
 
-st.set_page_config(page_title="Prode Financiero", page_icon="📊", layout="centered")
+st.set_page_config(page_title="Sobolev", page_icon="⚽", layout="centered")
 
 # ==========================================
 # FUNCIONES DE LECTURA Y ESCRITURA JSON
