@@ -1,17 +1,20 @@
 [
-  {
-    "nombre": "Dani",
-    "monedas": 50,
-    "dolares_depositados": 5
-  },
-  {
-    "nombre": "Dominic",
-    "monedas": 50,
-    "dolares_depositados": 5
-  },
-  {
-    "nombre": "Banco",
-    "monedas": 0,
-    "dolares_depositados": 10
-  }
+    {
+        "nombre": "Dani",
+        "monedas": 50,
+        "dolares_depositados": 5,
+        "pin": "1235"
+    },
+    {
+        "nombre": "Dominic",
+        "monedas": 50,
+        "dolares_depositados": 5,
+        "pin": "5678"
+    },
+    {
+        "nombre": "Banco",
+        "monedas": 0,
+        "dolares_depositados": 10,
+        "pin": "0000"
+    }
 ]
