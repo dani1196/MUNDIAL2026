@@ -49,12 +49,8 @@ else:
 # ==========================================
 st.title("🏆 Mundial 2026")
 
-# Ocupa toda la línea para garantizar una lectura completa en cualquier pantalla
-st.metric(
-    label="📈 Valor de Mercado de la Moneda", 
-    value=f"{tasa_actual:.2f} Sobolevs por cada 1.00 USD"
-)
-
+# Visualización compacta
+st.metric(label="💵 (USD ➔ Sobolev)", value=f"{tasa_actual:.2f}")
 st.markdown("---")
 nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
 
