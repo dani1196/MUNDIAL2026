@@ -183,6 +183,9 @@ if nombres_jugadores:
                         except ValueError:
                             pass
                 
+                # ==========================================
+                # SECCIÓN 1: PARTIDOS PARA PRONOSTICAR
+                # ==========================================
                 st.subheader("📅 Partidos Disponibles")
                 if not partidos_abiertos:
                     st.info("No hay partidos abiertos para pronósticos en este momento.")
@@ -194,24 +197,21 @@ if nombres_jugadores:
                         equipo1 = partido["equipo_1"]
                         equipo2 = partido["equipo_2"]
                         hora_partido = partido.get("hora", "")
+                        grupo = partido.get("grupo", "")
                         
-                        # NUEVO: Buscar si el usuario ya tiene un pick guardado para este partido
                         pick_actual = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
                         
                         st.markdown("---")
-                        # Mostrar el pick actual si existe
                         if pick_actual:
-                            st.info(f"👉 **Tu pick actual:** {equipo1} **{pick_actual['goles_1_pronostico']} - {pick_actual['goles_2_pronostico']}** {equipo2} | Inversión: **{pick_actual['monto_apostado']}** Sobolevs. *(Puedes cambiarlo abajo)*")
+                            st.info(f"👉 **Tu pick actual:** {equipo1} **{pick_actual['goles_1_pronostico']} - {pick_actual['goles_2_pronostico']}** {equipo2} | Inversión: **{pick_actual['monto_apostado']}** Sobolevs.")
                         
                         with st.form(key=f"form_apuesta_{id_p}"):
-                            grupo = partido.get("grupo", "")
                             st.write(f"**Partido {id_p}** | **{grupo}** | {partido.get('fecha', '')} {hora_partido}")
                             
                             col1, col2, col3, col4 = st.columns([2, 1, 1, 2])
                             with col1:
                                 st.markdown(f"<h4 style='text-align: right;'>{equipo1}</h4>", unsafe_allow_html=True)
                             with col2:
-                                # Si ya hay pick, ponemos esos goles por defecto en el formulario
                                 default_g1 = int(pick_actual["goles_1_pronostico"]) if pick_actual else 0
                                 goles1 = st.number_input("Goles", min_value=0, max_value=15, step=1, value=default_g1, key=f"g1_{id_p}")
                             with col3:
@@ -224,7 +224,6 @@ if nombres_jugadores:
                             default_monto = int(pick_actual["monto_apostado"]) if pick_actual else 1
                             monto_apostado = st.number_input("Sobolevs a invertir:", min_value=1, max_value=max_apuesta + default_monto, step=1, value=default_monto, key=f"monto_{id_p}")
                             
-                            # Cambiamos el texto del botón si ya hay una apuesta
                             texto_boton = "Actualizar Pronóstico" if pick_actual else "Guardar Pronóstico"
                             boton_apostar = st.form_submit_button(texto_boton)
                             
@@ -270,55 +269,62 @@ if nombres_jugadores:
                                     with open("historial_apuestas.txt", "a", encoding="utf-8") as f_log:
                                         f_log.write(registro_apuesta)
                                         
-                                    st.success(f"¡Pronóstico actualizado: {equipo1} {goles1} - {goles2} {equipo2} por {monto_apostado} Sobolevs!")
+                                    st.success(f"¡Pronóstico guardado: {equipo1} {goles1} - {goles2} {equipo2} por {monto_apostado} Sobolevs!")
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
+                
+                # ==========================================
+                # SECCIÓN 2: PARTIDOS CERRADOS (En Juego / Finalizados)
+                # ==========================================
                 st.markdown("---")
                 st.subheader("🔒 Partidos en Juego / Finalizados")
                 st.write("*(Mira qué marcadores predijo la familia. Los nombres se mantienen en secreto 🤫)*")
                 
                 partidos_cerrados.sort(key=lambda x: x[1], reverse=True)
                 
-                for p, _ in partidos_cerrados:
-                    id_p = p["id_partido"]
-                    equipo1 = p["equipo_1"]
-                    equipo2 = p["equipo_2"]
-                    estado = p.get("estado", "pendiente")
-                    grupo = p.get("grupo", "")
-                    
-                    with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} ({estado.capitalize()})"):
+                if not partidos_cerrados:
+                    st.info("Aún no hay partidos en juego o finalizados.")
+                else:
+                    for p, _ in partidos_cerrados:
+                        id_p = p["id_partido"]
+                        equipo1 = p["equipo_1"]
+                        equipo2 = p["equipo_2"]
+                        estado = p.get("estado", "pendiente")
+                        grupo = p.get("grupo", "")
                         
-                        # 1. Mostrar resultado real si ya terminó
-                        if estado == "finalizado":
-                            st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
-                        
-                        # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
-                        mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
-                        
-                        if mi_apuesta:
-                            st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} ({estado.capitalize()})"):
+                            
+                            # 1. Mostrar resultado real si ya terminó
                             if estado == "finalizado":
-                                st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
-                        else:
-                            st.warning("No registraste ningún pronóstico para este encuentro.")
+                                st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
                             
-                        st.markdown("---")
-                        
-                        # 3. Mostrar las tendencias anónimas del resto de la familia
-                        apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
-                        
-                        if apuestas_partido:
-                            conteo_marcadores = {}
-                            for pron in apuestas_partido:
-                                marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
-                                conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                            # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
+                            mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
                             
-                            st.markdown("**Tendencias del Mercado (Anónimo):**")
-                            for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
-                                st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
-                        else:
-                            st.write("Ningún familiar registró pronósticos para este encuentro.")
+                            if mi_apuesta:
+                                st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                                if estado == "finalizado":
+                                    st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                            else:
+                                st.warning("No registraste ningún pronóstico para este encuentro.")
+                                
+                            st.markdown("---")
+                            
+                            # 3. Mostrar las tendencias anónimas del resto de la familia
+                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                            
+                            if apuestas_partido:
+                                conteo_marcadores = {}
+                                for pron in apuestas_partido:
+                                    marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                                
+                                st.markdown("**Tendencias del Mercado (Anónimo):**")
+                                for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
+                                    st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
+                            else:
+                                st.write("Ningún familiar registró pronósticos para este encuentro.")
             # --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
                 st.subheader("📊 Ranking de Pronósticos")
