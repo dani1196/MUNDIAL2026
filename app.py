@@ -77,26 +77,41 @@ if nombres_jugadores:
             # NUEVO: Mostramos el saldo del usuario siempre visible en la parte superior
             st.info(f"💰 **Tu saldo disponible:** {saldo_usuario} Sobolevs")
 
-           # Declaración dinámica de pestañas (Control invisible para el resto)
-            titulos_pestanas = ["🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📜 Reglas"]
+         # Declaración dinámica de pestañas
+            titulos_pestanas = ["🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📜 Reglas", "📢 Edictos"]
             
-            # Si eres tú, se añade la pestaña secreta al menú
             if usuario_actual == "Daniela":
                 titulos_pestanas.append("⚙️ Control")
                 
             pestanas = st.tabs(titulos_pestanas)
             
-            # Asignamos el contenido a cada pestaña
+            # Asignamos
             tab_perfil = pestanas[0]
             tab_tienda = pestanas[1]
             tab_apuestas = pestanas[2]
             tab_posiciones = pestanas[3]
             tab_reglas = pestanas[4]
+            tab_edictos = pestanas[5]
             
-            # Solo si eres Daniela, se activa la variable tab_control
             if usuario_actual == "Daniela":
-                tab_control = pestanas[5]
+                tab_control = pestanas[6]
             
+            # --- PESTAÑA: EDICTOS ---
+            with tab_edictos:
+                st.subheader("📢 Edictos del Comisionado")
+                st.balloons()
+                st.markdown("""
+                ### ¡Bienvenidos a la gloria eterna! 🌍⚽
+                
+                Se le informa a toda la familia que el **Banco Central de Sobolevs** ha entrado en fase de máxima emisión. 
+                
+                * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a un compañero o compañera, aunque dudamos que acepte Sobolevs.
+                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran.
+                * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
+                
+                **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
+                """)
+
             # --- PESTAÑA: REGLAS ---
             with tab_reglas:
                 st.subheader("📜 Reglas de Puntuación y Multiplicadores")
