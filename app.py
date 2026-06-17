@@ -195,6 +195,11 @@ if nombres_jugadores:
 
             # --- PESTAÑA: APUESTAS ---
             with tab_apuestas:
+                # Candado de memoria: Muestra el mensaje de éxito con el saldo restante tras el reinicio
+                if "mensaje_exito" in st.session_state:
+                    st.success(st.session_state["mensaje_exito"])
+                    del st.session_state["mensaje_exito"] # Lo borramos para que no se repita eternamente
+
                 hora_actual_local = datetime.utcnow() - timedelta(hours=5)
                 
                 # Creamos 3 listas separadas
@@ -347,11 +352,57 @@ if nombres_jugadores:
                                     with open("historial_apuestas.txt", "a", encoding="utf-8") as f_log:
                                         f_log.write(registro_apuesta)
                                         
-                                    st.success(f"¡Pronóstico guardado: {equipo1} {goles1} - {goles2} {equipo2} por {monto_apostado} Sobolevs!")
+                                    # LÓGICA MATEMÁTICA: Calculamos el saldo exacto que le queda al usuario en este microsegundo
+                                    saldo_restante = saldo_usuario + (pick_actual["monto_apostado"] if pick_actual else 0) - monto_apostado
+                                    
+                                    # Guardamos el mensaje estructurado en la memoria de sesión para que sobreviva al rerun
+                                    st.session_state["mensaje_exito"] = f"🎯 ¡Pronóstico guardado! {equipo1} **{goles1} - {goles2}** {equipo2} por **{monto_apostado}** Sobolevs. Tu saldo disponible restante es: 💰 **{saldo_restante} Sobolevs**."
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
 
+                # ==========================================
+                # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
+                # ==========================================
+                st.markdown("---")
+                st.subheader("✅ Partidos Finalizados")
+                
+                if not partidos_finalizados:
+                    st.info("Aún no hay partidos finalizados.")
+                else:
+                    partidos_finalizados.sort(key=lambda x: x[1], reverse=True)
+                    
+                    for p, _ in partidos_finalizados:
+                        id_p = p["id_partido"]
+                        equipo1 = p["equipo_1"]
+                        equipo2 = p["equipo_2"]
+                        grupo = p.get("grupo", "")
+                        
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - Finalizado"):
+                            st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
+                            
+                            mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
+                            
+                            if mi_apuesta:
+                                st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                                st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                            else:
+                                st.warning("No registraste ningún pronóstico para este encuentro.")
+                                
+                            st.markdown("---")
+                            
+                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                            if apuestas_partido:
+                                conteo_marcadores = {}
+                                for pron in apuestas_partido:
+                                    marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                                
+                                st.markdown("**Tendencias del Mercado (Anónimo):**")
+                                for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
+                                    st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
+                            else:
+                                st.write("Ningún familiar registró pronósticos para este encuentro.")
                 # ==========================================
                 # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
                 # ==========================================
