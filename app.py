@@ -184,13 +184,79 @@ if nombres_jugadores:
                             pass
                 
                 # ==========================================
-                # SECCIÓN 1: PARTIDOS PARA PRONOSTICAR
+                # SECCIÓN 1: PARTIDOS CERRADOS / EN JUEGO
                 # ==========================================
-                st.subheader("📅 Partidos Disponibles")
+                st.subheader("🔒 Partidos en Curso / Finalizados")
+                st.write("*(Mira qué marcadores predijo la familia. Los nombres se mantienen en secreto 🤫)*")
+                
+                # DOBLE ORDENAMIENTO CRUCIAL:
+                # 1. Primero ordenamos por fecha (los más recientes primero)
+                partidos_cerrados.sort(key=lambda x: x[1], reverse=True)
+                # 2. Luego empujamos los "finalizados" al fondo, dejando los "En Curso" arriba
+                partidos_cerrados.sort(key=lambda x: 1 if x[0].get("estado") == "finalizado" else 0)
+                
+                if not partidos_cerrados:
+                    st.info("Aún no hay partidos en juego o finalizados.")
+                else:
+                    for p, _ in partidos_cerrados:
+                        id_p = p["id_partido"]
+                        equipo1 = p["equipo_1"]
+                        equipo2 = p["equipo_2"]
+                        estado_json = p.get("estado", "pendiente")
+                        grupo = p.get("grupo", "")
+                        
+                        # Lógica para la etiqueta visual inteligente
+                        if estado_json == "finalizado":
+                            etiqueta = "Finalizado"
+                        else:
+                            etiqueta = "Cerrado (En Curso) 🟢"
+                        
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - {etiqueta}"):
+                            
+                            # 1. Mostrar resultado real si ya terminó
+                            if estado_json == "finalizado":
+                                st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
+                            
+                            # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
+                            mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
+                            
+                            if mi_apuesta:
+                                st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                                if estado_json == "finalizado":
+                                    st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                            else:
+                                st.warning("No registraste ningún pronóstico para este encuentro.")
+                                
+                            st.markdown("---")
+                            
+                            # 3. Mostrar las tendencias anónimas del resto de la familia
+                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                            
+                            if apuestas_partido:
+                                conteo_marcadores = {}
+                                for pron in apuestas_partido:
+                                    marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                                
+                                st.markdown("**Tendencias del Mercado (Anónimo):**")
+                                for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
+                                    st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
+                            else:
+                                st.write("Ningún familiar registró pronósticos para este encuentro.")
+
+                # ==========================================
+                # SECCIÓN 2: PARTIDOS PARA PRONOSTICAR
+                # ==========================================
+                st.markdown("---")
+                st.subheader("📅 Próximos Partidos Disponibles")
+                
                 if not partidos_abiertos:
                     st.info("No hay partidos abiertos para pronósticos en este momento.")
                 else:
                     st.warning(f"🕒 Hora del servidor: {hora_actual_local.strftime('%H:%M:%S')}. Los formularios se bloquean al pitazo inicial.")
+                    
+                    # Ordenamos los partidos abiertos cronológicamente
+                    partidos_abiertos.sort(key=lambda x: datetime.strptime(f"{x.get('fecha','')} {x.get('hora','23:59')}", "%Y-%m-%d %H:%M"))
                     
                     for partido in partidos_abiertos:
                         id_p = partido["id_partido"]
@@ -273,7 +339,6 @@ if nombres_jugadores:
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
-                
                 # ==========================================
                 # SECCIÓN 2: PARTIDOS CERRADOS (En Juego / Finalizados)
                 # ==========================================
