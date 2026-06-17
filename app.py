@@ -77,9 +77,9 @@ if nombres_jugadores:
             
             st.success(f"🔓 Acceso concedido a la sesión de {usuario_actual}")
 
-            # Declaración actualizada de las 6 pestañas
-            tab_tienda, tab_apuestas, tab_posiciones, tab_control, tab_perfil, tab_reglas = st.tabs([
-                "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "⚙️ Control", "🔐 Mi Perfil", "📜 Reglas"
+            # Declaración reordenada de las 6 pestañas
+            tab_perfil, tab_tienda, tab_apuestas, tab_posiciones, tab_reglas, tab_control = st.tabs([
+                "🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📜 Reglas", "⚙️ Control"
             ])
             
             # --- PESTAÑA: REGLAS ---
@@ -204,7 +204,8 @@ if nombres_jugadores:
                             st.info(f"👉 **Tu pick actual:** {equipo1} **{pick_actual['goles_1_pronostico']} - {pick_actual['goles_2_pronostico']}** {equipo2} | Inversión: **{pick_actual['monto_apostado']}** Sobolevs. *(Puedes cambiarlo abajo)*")
                         
                         with st.form(key=f"form_apuesta_{id_p}"):
-                            st.write(f"**Partido {id_p}** | {partido.get('fecha', '')} {hora_partido}")
+                            grupo = partido.get("grupo", "")
+                            st.write(f"**Partido {id_p}** | **{grupo}** | {partido.get('fecha', '')} {hora_partido}")
                             
                             col1, col2, col3, col4 = st.columns([2, 1, 1, 2])
                             with col1:
@@ -285,7 +286,8 @@ if nombres_jugadores:
                     equipo2 = p["equipo_2"]
                     estado = p.get("estado", "pendiente")
                     
-                    with st.expander(f"Partido {id_p}: {equipo1} vs {equipo2} ({estado.capitalize()})"):
+                    grupo = p.get("grupo", "")
+                    with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} ({estado.capitalize()})"):
                         if estado == "finalizado":
                             st.success(f"**Resultado Final:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
                         
@@ -352,6 +354,64 @@ if nombres_jugadores:
                 st.subheader("⚙️ Panel de Administración y Respaldos")
                 st.info("Descarga los archivos actualizados al final del día y súbelos a tu repositorio para guardar los cambios permanentemente.")
                 
+                st.markdown("---")
+                st.subheader("🏦 Repartición de Premios")
+                st.write("Presiona este botón después de poner un partido en estado 'finalizado' para transferir las ganancias automáticamente.")
+                
+                if st.button("Calcular y Pagar Premios Pendientes"):
+                    cambios_realizados = False
+                    
+                    for p in partidos:
+                        if p.get("estado") == "finalizado":
+                            g1_real = p.get("goles_1_real")
+                            g2_real = p.get("goles_2_real")
+                            
+                            # Verificamos que los goles reales sí estén registrados en el JSON
+                            if g1_real is not None and g2_real is not None:
+                                
+                                for pron in pronosticos:
+                                    # Buscamos apuestas de este partido que no tengan la etiqueta 'pagado'
+                                    if pron["id_partido"] == p["id_partido"] and not pron.get("pagado", False):
+                                        g1_pron = pron["goles_1_pronostico"]
+                                        g2_pron = pron["goles_2_pronostico"]
+                                        monto = pron.get("monto_apostado", 0)
+                                        
+                                        multiplicador = 0
+                                        
+                                        # 1. Acierto de Marcador (x10)
+                                        if g1_real == g1_pron and g2_real == g2_pron:
+                                            multiplicador = 10
+                                        # 2. Acierto de Diferencia o Empate (x6)
+                                        elif (g1_real - g2_real) == (g1_pron - g2_pron):
+                                            multiplicador = 6
+                                        # 3. Acierto de Ganador (x4)
+                                        elif (g1_real > g2_real and g1_pron > g2_pron) or (g1_real < g2_real and g1_pron < g2_pron):
+                                            multiplicador = 4
+                                            
+                                        ganancia = monto * multiplicador
+                                        
+                                        # Actualizamos la base de datos de la apuesta
+                                        pron["puntos_ganados"] = ganancia
+                                        pron["pagado"] = True # Candado de seguridad para no pagar dos veces
+                                        
+                                        # Depositamos los Sobolevs ganados al usuario
+                                        if ganancia > 0:
+                                            for u in usuarios:
+                                                if u["nombre"] == pron["usuario"]:
+                                                    u["monedas"] += ganancia
+                                                    break
+                                                    
+                                        cambios_realizados = True
+                                        
+                    if cambios_realizados:
+                        guardar_datos("usuarios.json", usuarios)
+                        guardar_datos("pronosticos.json", pronosticos)
+                        st.success("✅ ¡Premios calculados! Los multiplicadores han sido aplicados y el dinero está en sus billeteras.")
+                        st.rerun()
+                    else:
+                        st.info("No hay premios nuevos pendientes por repartir en este momento.")
+                
+                st.markdown("---")
                 col_json1, col_json2, col_txt = st.columns(3)
                 
                 with col_json1:
