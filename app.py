@@ -81,10 +81,25 @@ if nombres_jugadores:
             # NUEVO: Mostramos el saldo del usuario siempre visible en la parte superior
             st.info(f"💰 **Tu saldo disponible:** {saldo_usuario} Sobolevs")
 
-            # Declaración reordenada de las 6 pestañas
-            tab_perfil, tab_tienda, tab_apuestas, tab_posiciones, tab_reglas, tab_control = st.tabs([
-                "🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📜 Reglas", "⚙️ Control"
-            ])
+           # Declaración dinámica de pestañas (Control invisible para el resto)
+            titulos_pestanas = ["🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📜 Reglas"]
+            
+            # Si eres tú, se añade la pestaña secreta al menú
+            if usuario_actual == "Daniela":
+                titulos_pestanas.append("⚙️ Control")
+                
+            pestanas = st.tabs(titulos_pestanas)
+            
+            # Asignamos el contenido a cada pestaña
+            tab_perfil = pestanas[0]
+            tab_tienda = pestanas[1]
+            tab_apuestas = pestanas[2]
+            tab_posiciones = pestanas[3]
+            tab_reglas = pestanas[4]
+            
+            # Solo si eres Daniela, se activa la variable tab_control
+            if usuario_actual == "Daniela":
+                tab_control = pestanas[5]
             
             # --- PESTAÑA: REGLAS ---
             with tab_reglas:
@@ -420,85 +435,86 @@ if nombres_jugadores:
                 else:
                     st.info("Aún no hay estadísticas suficientes para generar el ranking.")
 
-            # --- PESTAÑA: CONTROL ---
-            with tab_control:
-                st.subheader("⚙️ Panel de Administración y Respaldos")
-                st.info("Descarga los archivos actualizados al final del día y súbelos a tu repositorio para guardar los cambios permanentemente.")
-                
-                st.markdown("---")
-                st.subheader("🏦 Repartición de Premios")
-                st.write("Presiona este botón después de poner un partido en estado 'finalizado' para transferir las ganancias automáticamente.")
-                
-                if st.button("Calcular y Pagar Premios Pendientes"):
-                    cambios_realizados = False
+            # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
+            if usuario_actual == "Daniela":
+                with tab_control:
+                    st.subheader("⚙️ Panel de Administración y Respaldos")
+                    st.info("Descarga los archivos actualizados al final del día y súbelos a tu repositorio para guardar los cambios permanentemente.")
                     
-                    for p in partidos:
-                        if p.get("estado") == "finalizado":
-                            g1_real = p.get("goles_1_real")
-                            g2_real = p.get("goles_2_real")
-                            
-                            # Verificamos que los goles reales sí estén registrados en el JSON
-                            if g1_real is not None and g2_real is not None:
+                    st.markdown("---")
+                    st.subheader("🏦 Repartición de Premios")
+                    st.write("Presiona este botón después de poner un partido en estado 'finalizado' para transferir las ganancias automáticamente.")
+                    
+                    if st.button("Calcular y Pagar Premios Pendientes"):
+                        cambios_realizados = False
+                        
+                        for p in partidos:
+                            if p.get("estado") == "finalizado":
+                                g1_real = p.get("goles_1_real")
+                                g2_real = p.get("goles_2_real")
                                 
-                                for pron in pronosticos:
-                                    # Buscamos apuestas de este partido que no tengan la etiqueta 'pagado'
-                                    if pron["id_partido"] == p["id_partido"] and not pron.get("pagado", False):
-                                        g1_pron = pron["goles_1_pronostico"]
-                                        g2_pron = pron["goles_2_pronostico"]
-                                        monto = pron.get("monto_apostado", 0)
-                                        
-                                        multiplicador = 0
-                                        
-                                        # 1. Acierto de Marcador (x10)
-                                        if g1_real == g1_pron and g2_real == g2_pron:
-                                            multiplicador = 10
-                                        # 2. Acierto de Diferencia o Empate (x6)
-                                        elif (g1_real - g2_real) == (g1_pron - g2_pron):
-                                            multiplicador = 6
-                                        # 3. Acierto de Ganador (x4)
-                                        elif (g1_real > g2_real and g1_pron > g2_pron) or (g1_real < g2_real and g1_pron < g2_pron):
-                                            multiplicador = 4
+                                # Verificamos que los goles reales sí estén registrados en el JSON
+                                if g1_real is not None and g2_real is not None:
+                                    
+                                    for pron in pronosticos:
+                                        # Buscamos apuestas de este partido que no tengan la etiqueta 'pagado'
+                                        if pron["id_partido"] == p["id_partido"] and not pron.get("pagado", False):
+                                            g1_pron = pron["goles_1_pronostico"]
+                                            g2_pron = pron["goles_2_pronostico"]
+                                            monto = pron.get("monto_apostado", 0)
                                             
-                                        ganancia = monto * multiplicador
-                                        
-                                        # Actualizamos la base de datos de la apuesta
-                                        pron["puntos_ganados"] = ganancia
-                                        pron["pagado"] = True # Candado de seguridad para no pagar dos veces
-                                        
-                                        # Depositamos los Sobolevs ganados al usuario
-                                        if ganancia > 0:
-                                            for u in usuarios:
-                                                if u["nombre"] == pron["usuario"]:
-                                                    u["monedas"] += ganancia
-                                                    break
-                                                    
-                                        cambios_realizados = True
-                                        
-                    if cambios_realizados:
-                        guardar_datos("usuarios.json", usuarios)
-                        guardar_datos("pronosticos.json", pronosticos)
-                        st.success("✅ ¡Premios calculados! Los multiplicadores han sido aplicados y el dinero está en sus billeteras.")
-                        st.rerun()
-                    else:
-                        st.info("No hay premios nuevos pendientes por repartir en este momento.")
-                
-                st.markdown("---")
-                col_json1, col_json2, col_txt = st.columns(3)
-                
-                with col_json1:
-                    if os.path.exists("usuarios.json"):
-                        with open("usuarios.json", "r", encoding="utf-8") as f_usr:
-                            st.download_button(label="⬇️ Descargar usuarios.json", data=f_usr.read(), file_name="usuarios.json", mime="application/json")
-                            
-                with col_json2:
-                    if os.path.exists("pronosticos.json"):
-                        with open("pronosticos.json", "r", encoding="utf-8") as f_pron:
-                            st.download_button(label="⬇️ Descargar pronosticos.json", data=f_pron.read(), file_name="pronosticos.json", mime="application/json")
-                            
-                with col_txt:
-                    if os.path.exists("historial_apuestas.txt"):
-                        with open("historial_apuestas.txt", "r", encoding="utf-8") as f_hist:
-                            st.download_button(label="⬇️ Descargar Auditoría", data=f_hist.read(), file_name="historial_apuestas.txt", mime="text/plain")
+                                            multiplicador = 0
+                                            
+                                            # 1. Acierto de Marcador (x10)
+                                            if g1_real == g1_pron and g2_real == g2_pron:
+                                                multiplicador = 10
+                                            # 2. Acierto de Diferencia o Empate (x6)
+                                            elif (g1_real - g2_real) == (g1_pron - g2_pron):
+                                                multiplicador = 6
+                                            # 3. Acierto de Ganador (x4)
+                                            elif (g1_real > g2_real and g1_pron > g2_pron) or (g1_real < g2_real and g1_pron < g2_pron):
+                                                multiplicador = 4
+                                                
+                                            ganancia = monto * multiplicador
+                                            
+                                            # Actualizamos la base de datos de la apuesta
+                                            pron["puntos_ganados"] = ganancia
+                                            pron["pagado"] = True # Candado de seguridad
+                                            
+                                            # Depositamos los Sobolevs ganados al usuario
+                                            if ganancia > 0:
+                                                for u in usuarios:
+                                                    if u["nombre"] == pron["usuario"]:
+                                                        u["monedas"] += ganancia
+                                                        break
+                                                        
+                                            cambios_realizados = True
+                                            
+                        if cambios_realizados:
+                            guardar_datos("usuarios.json", usuarios)
+                            guardar_datos("pronosticos.json", pronosticos)
+                            st.success("✅ ¡Premios calculados! Los multiplicadores han sido aplicados y el dinero está en sus billeteras.")
+                            st.rerun()
+                        else:
+                            st.info("No hay premios nuevos pendientes por repartir en este momento.")
+                    
+                    st.markdown("---")
+                    col_json1, col_json2, col_txt = st.columns(3)
+                    
+                    with col_json1:
+                        if os.path.exists("usuarios.json"):
+                            with open("usuarios.json", "r", encoding="utf-8") as f_usr:
+                                st.download_button(label="⬇️ Descargar usuarios.json", data=f_usr.read(), file_name="usuarios.json", mime="application/json")
+                                
+                    with col_json2:
+                        if os.path.exists("pronosticos.json"):
+                            with open("pronosticos.json", "r", encoding="utf-8") as f_pron:
+                                st.download_button(label="⬇️ Descargar pronosticos.json", data=f_pron.read(), file_name="pronosticos.json", mime="application/json")
+                                
+                    with col_txt:
+                        if os.path.exists("historial_apuestas.txt"):
+                            with open("historial_apuestas.txt", "r", encoding="utf-8") as f_hist:
+                                st.download_button(label="⬇️ Descargar Auditoría", data=f_hist.read(), file_name="historial_apuestas.txt", mime="text/plain")
         
         elif pin_ingresado != "":
             # Se añade esta alerta visual por si escriben mal el PIN
