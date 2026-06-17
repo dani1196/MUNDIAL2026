@@ -49,18 +49,19 @@ else:
 # ==========================================
 st.title("🏆 Mundial 2026")
 
-col_vacia1, col_tasa, col_vacia2 = st.columns([1, 2, 1])
-with col_tasa:
-    st.metric("Cambio actual", f"{tasa_actual:.2f} Sobolevs por cada USD")
+# Ocupa toda la línea para garantizar una lectura completa en cualquier pantalla
+st.metric(
+    label="📈 Valor de Mercado de la Moneda", 
+    value=f"{tasa_actual:.2f} Sobolevs por cada 1.00 USD"
+)
 
 st.markdown("---")
-
 nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
 
 if nombres_jugadores:
     usuario_seleccionado = st.selectbox("👤 Identifícate:", nombres_jugadores)
     
-    # SOLUCIÓN CRUCIAL: Buscamos directamente en la lista de diccionarios original de Python
+    # Buscamos directamente en la lista de diccionarios original de Python
     datos_usuario_sel = next((u for u in usuarios if u["nombre"] == usuario_seleccionado), None)
     
     if datos_usuario_sel:
@@ -76,6 +77,9 @@ if nombres_jugadores:
             saldo_usuario = datos_usuario_sel["monedas"]
             
             st.success(f"🔓 Acceso concedido a la sesión de {usuario_actual}")
+            
+            # NUEVO: Mostramos el saldo del usuario siempre visible en la parte superior
+            st.info(f"💰 **Tu saldo disponible:** {saldo_usuario} Sobolevs")
 
             # Declaración reordenada de las 6 pestañas
             tab_perfil, tab_tienda, tab_apuestas, tab_posiciones, tab_reglas, tab_control = st.tabs([
@@ -167,71 +171,54 @@ if nombres_jugadores:
             with tab_apuestas:
                 hora_actual_local = datetime.utcnow() - timedelta(hours=5)
                 
+                # Creamos 3 listas separadas
                 partidos_abiertos = []
-                partidos_cerrados = []
+                partidos_en_curso = []
+                partidos_finalizados = []
                 
                 for p in partidos:
                     if p.get("estado") != "futuro":
                         fecha_str = p.get("fecha", "")
                         hora_str = p.get("hora", "23:59")
+                        estado_json = p.get("estado", "pendiente")
                         try:
                             fecha_partido = datetime.strptime(f"{fecha_str} {hora_str}", "%Y-%m-%d %H:%M")
-                            if hora_actual_local < fecha_partido and p.get("estado") == "pendiente":
-                                partidos_abiertos.append(p)
+                            
+                            if estado_json == "finalizado":
+                                partidos_finalizados.append((p, fecha_partido))
+                            elif hora_actual_local >= fecha_partido:
+                                partidos_en_curso.append((p, fecha_partido))
                             else:
-                                partidos_cerrados.append((p, fecha_partido))
+                                partidos_abiertos.append(p)
                         except ValueError:
                             pass
                 
                 # ==========================================
-                # SECCIÓN 1: PARTIDOS CERRADOS / EN JUEGO
+                # SECCIÓN 1: PARTIDOS EN CURSO (TOP / ARRIBA)
                 # ==========================================
-                st.subheader("🔒 Partidos en Curso / Finalizados")
-                st.write("*(Mira qué marcadores predijo la familia. Los nombres se mantienen en secreto 🤫)*")
-                
-                # DOBLE ORDENAMIENTO CRUCIAL:
-                # 1. Primero ordenamos por fecha (los más recientes primero)
-                partidos_cerrados.sort(key=lambda x: x[1], reverse=True)
-                # 2. Luego empujamos los "finalizados" al fondo, dejando los "En Curso" arriba
-                partidos_cerrados.sort(key=lambda x: 1 if x[0].get("estado") == "finalizado" else 0)
-                
-                if not partidos_cerrados:
-                    st.info("Aún no hay partidos en juego o finalizados.")
-                else:
-                    for p, _ in partidos_cerrados:
+                if partidos_en_curso:
+                    st.subheader("🔥 Partidos en Curso")
+                    st.write("*(El balón está rodando. Mira las tendencias de la familia 🤫)*")
+                    
+                    partidos_en_curso.sort(key=lambda x: x[1], reverse=True)
+                    
+                    for p, _ in partidos_en_curso:
                         id_p = p["id_partido"]
                         equipo1 = p["equipo_1"]
                         equipo2 = p["equipo_2"]
-                        estado_json = p.get("estado", "pendiente")
                         grupo = p.get("grupo", "")
                         
-                        # Lógica para la etiqueta visual inteligente
-                        if estado_json == "finalizado":
-                            etiqueta = "Finalizado"
-                        else:
-                            etiqueta = "Cerrado (En Curso) 🟢"
-                        
-                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - {etiqueta}"):
-                            
-                            # 1. Mostrar resultado real si ya terminó
-                            if estado_json == "finalizado":
-                                st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
-                            
-                            # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - Cerrado (En Curso) 🟢"):
                             mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
                             
                             if mi_apuesta:
                                 st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
-                                if estado_json == "finalizado":
-                                    st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
                             else:
                                 st.warning("No registraste ningún pronóstico para este encuentro.")
                                 
                             st.markdown("---")
                             
-                            # 3. Mostrar las tendencias anónimas del resto de la familia
                             apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
-                            
                             if apuestas_partido:
                                 conteo_marcadores = {}
                                 for pron in apuestas_partido:
@@ -245,7 +232,7 @@ if nombres_jugadores:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
 
                 # ==========================================
-                # SECCIÓN 2: PARTIDOS PARA PRONOSTICAR
+                # SECCIÓN 2: PARTIDOS PARA PRONOSTICAR (MEDIO)
                 # ==========================================
                 st.markdown("---")
                 st.subheader("📅 Próximos Partidos Disponibles")
@@ -255,7 +242,6 @@ if nombres_jugadores:
                 else:
                     st.warning(f"🕒 Hora del servidor: {hora_actual_local.strftime('%H:%M:%S')}. Los formularios se bloquean al pitazo inicial.")
                     
-                    # Ordenamos los partidos abiertos cronológicamente
                     partidos_abiertos.sort(key=lambda x: datetime.strptime(f"{x.get('fecha','')} {x.get('hora','23:59')}", "%Y-%m-%d %H:%M"))
                     
                     for partido in partidos_abiertos:
@@ -339,46 +325,38 @@ if nombres_jugadores:
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
+
                 # ==========================================
-                # SECCIÓN 2: PARTIDOS CERRADOS (En Juego / Finalizados)
+                # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
                 # ==========================================
                 st.markdown("---")
-                st.subheader("🔒 Partidos en Juego / Finalizados")
-                st.write("*(Mira qué marcadores predijo la familia. Los nombres se mantienen en secreto 🤫)*")
+                st.subheader("✅ Partidos Finalizados")
                 
-                partidos_cerrados.sort(key=lambda x: x[1], reverse=True)
-                
-                if not partidos_cerrados:
-                    st.info("Aún no hay partidos en juego o finalizados.")
+                if not partidos_finalizados:
+                    st.info("Aún no hay partidos finalizados.")
                 else:
-                    for p, _ in partidos_cerrados:
+                    partidos_finalizados.sort(key=lambda x: x[1], reverse=True)
+                    
+                    for p, _ in partidos_finalizados:
                         id_p = p["id_partido"]
                         equipo1 = p["equipo_1"]
                         equipo2 = p["equipo_2"]
-                        estado = p.get("estado", "pendiente")
                         grupo = p.get("grupo", "")
                         
-                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} ({estado.capitalize()})"):
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - Finalizado"):
+                            st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
                             
-                            # 1. Mostrar resultado real si ya terminó
-                            if estado == "finalizado":
-                                st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
-                            
-                            # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
                             mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
                             
                             if mi_apuesta:
                                 st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
-                                if estado == "finalizado":
-                                    st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                                st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
                             else:
                                 st.warning("No registraste ningún pronóstico para este encuentro.")
                                 
                             st.markdown("---")
                             
-                            # 3. Mostrar las tendencias anónimas del resto de la familia
                             apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
-                            
                             if apuestas_partido:
                                 conteo_marcadores = {}
                                 for pron in apuestas_partido:
@@ -390,10 +368,11 @@ if nombres_jugadores:
                                     st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
                             else:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
+
             # --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
                 st.subheader("📊 Ranking de Pronósticos")
-                st.write("*(Los saldos totales son secretos 🤫. Aquí solo se muestra el rendimiento de las apuestas)*")
+                st.write("*(Aquí puedes ver el rendimiento neto de las apuestas de toda la familia)*")
                 
                 datos_ranking = []
                 
@@ -423,14 +402,21 @@ if nombres_jugadores:
                     
                     datos_ranking.append({
                         "Familiar": nombre_familiar,
-                        "Total Invertido": apostado_total,
                         "Rendimiento Neto": balance_neto
                     })
                     
                 if datos_ranking:
                     df_ranking = pd.DataFrame(datos_ranking)
                     df_ranking = df_ranking.sort_values(by="Rendimiento Neto", ascending=False).reset_index(drop=True)
-                    st.dataframe(df_ranking, use_container_width=True)
+                    
+                    # 1. Creamos la columna de posiciones
+                    df_ranking["Puesto"] = df_ranking.index + 1
+                    df_ranking["Puesto"] = df_ranking["Puesto"].apply(lambda x: f"{x}º")
+                    
+                    # 2. Mostramos TODO de forma pública
+                    df_publico = df_ranking[["Puesto", "Familiar", "Rendimiento Neto"]]
+                    st.dataframe(df_publico, use_container_width=True)
+                    
                 else:
                     st.info("Aún no hay estadísticas suficientes para generar el ranking.")
 
