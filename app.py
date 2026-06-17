@@ -285,12 +285,27 @@ if nombres_jugadores:
                     equipo1 = p["equipo_1"]
                     equipo2 = p["equipo_2"]
                     estado = p.get("estado", "pendiente")
-                    
                     grupo = p.get("grupo", "")
+                    
                     with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} ({estado.capitalize()})"):
-                        if estado == "finalizado":
-                            st.success(f"**Resultado Final:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
                         
+                        # 1. Mostrar resultado real si ya terminó
+                        if estado == "finalizado":
+                            st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
+                        
+                        # 2. Mostrar EXCLUSIVAMENTE tu pronóstico personal
+                        mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
+                        
+                        if mi_apuesta:
+                            st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                            if estado == "finalizado":
+                                st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                        else:
+                            st.warning("No registraste ningún pronóstico para este encuentro.")
+                            
+                        st.markdown("---")
+                        
+                        # 3. Mostrar las tendencias anónimas del resto de la familia
                         apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
                         
                         if apuestas_partido:
@@ -299,12 +314,11 @@ if nombres_jugadores:
                                 marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
                                 conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
                             
-                            st.markdown("**Tendencias del Mercado:**")
+                            st.markdown("**Tendencias del Mercado (Anónimo):**")
                             for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
                                 st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
                         else:
                             st.write("Ningún familiar registró pronósticos para este encuentro.")
-
             # --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
                 st.subheader("📊 Ranking de Pronósticos")
