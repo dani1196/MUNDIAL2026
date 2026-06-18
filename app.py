@@ -122,10 +122,10 @@ if nombres_jugadores:
             if usuario_actual == "Daniela":
                 tab_control = pestanas[7]
             
-            # --- PESTAÑA: RESULTADOS (Desglose por partido finalizado) ---
+            # --- PESTAÑA: RESULTADOS (Desglose Anónimo por partido finalizado) ---
             with tab_resultados:
-                st.subheader("📝 Desglose de Resultados Familiares")
-                st.write("*(El escrutinio público. Revisa qué pronosticó cada persona en los partidos finalizados)*")
+                st.subheader("📝 Desglose de Resultados")
+                st.write("*(Revisa de forma anónima los marcadores apostados y su nivel de acierto en los partidos finalizados)*")
                 
                 partidos_terminados = [p for p in partidos if p.get("estado") == "finalizado"]
                 
@@ -155,38 +155,34 @@ if nombres_jugadores:
                                     datos_desglose = []
                                     
                                     for pron in apuestas_partido:
-                                        familiar = pron["usuario"]
                                         g1_p = pron["goles_1_pronostico"]
                                         g2_p = pron["goles_2_pronostico"]
-                                        inversion = pron.get("monto_apostado", 0)
                                         ganancia = pron.get("puntos_ganados", 0)
                                         
-                                        # Determinamos el tipo de acierto (similar a la lógica de pagos)
+                                        # Determinamos el tipo de acierto visual
                                         if ganancia > 0:
                                             if g1_real == g1_p and g2_real == g2_p:
-                                                texto_acierto = "🎯 Marcador Exacto (x10)"
+                                                texto_acierto = "🎯 Marcador Exacto"
                                             elif (g1_real - g2_real) == (g1_p - g2_p):
-                                                texto_acierto = "⚖️ Diferencia (x6)"
+                                                texto_acierto = "⚖️ Diferencia"
                                             else:
-                                                texto_acierto = "✅ Ganador (x4)"
+                                                texto_acierto = "✅ Ganador"
                                         else:
                                             texto_acierto = "❌ Fallo"
                                             
+                                        # Solo guardamos las dos columnas solicitadas
                                         datos_desglose.append({
-                                            "Familiar": familiar,
                                             "Pronóstico": f"{g1_p} - {g2_p}",
-                                            "Inversión": f"{inversion} S.",
-                                            "Resultado": texto_acierto,
-                                            "Ganancia": f"+{ganancia} S." if ganancia > 0 else "0 S."
+                                            "Resultado": texto_acierto
                                         })
                                         
                                     df_desglose = pd.DataFrame(datos_desglose)
-                                    # Se muestra sin el índice numérico de la izquierda para que sea más limpio
+                                    # Se muestra la tabla limpia y sin índices
                                     st.dataframe(df_desglose, use_container_width=True, hide_index=True)
                             else:
                                 with st.expander(f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"):
                                     st.write("Ningún familiar registró pronósticos para este encuentro.")
-                                    
+
             # --- PESTAÑA: EDICTOS ---
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
@@ -567,12 +563,11 @@ if nombres_jugadores:
                     st.info("Descarga los archivos actualizados al final del día y súbelos a tu repositorio para guardar los cambios permanentemente.")
                     
                     # ==========================================
-                    # NUEVO: ESTADO DE LA BÓVEDA
+                    # ESTADO DE LA BÓVEDA
                     # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Bóveda del Banco Central")
                     
-                    # Extraemos los datos frescos del Banco
                     usuarios_banco = cargar_datos("usuarios.json", [])
                     datos_banco_actualizado = next((u for u in usuarios_banco if u["nombre"] == "Banco"), None)
                     
@@ -586,10 +581,12 @@ if nombres_jugadores:
                         st.warning("No se encontró la cuenta 'Banco' en usuarios.json.")
 
                     # ==========================================
-                    
+                    # REPARTICIÓN DE PREMIOS (MODELO DE SUMA CERO)
+                    # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Repartición de Premios")
                     st.write("Presiona este botón después de poner un partido en estado 'finalizado' para transferir las ganancias automáticamente.")
+                    
                     if st.button("Calcular y Pagar Premios Pendientes"):
                         cambios_realizados = False
                         
@@ -598,11 +595,8 @@ if nombres_jugadores:
                                 g1_real = p.get("goles_1_real")
                                 g2_real = p.get("goles_2_real")
                                 
-                                # Verificamos que los goles reales sí estén registrados en el JSON
                                 if g1_real is not None and g2_real is not None:
-                                    
                                     for pron in pronosticos:
-                                        # Buscamos apuestas de este partido que no tengan la etiqueta 'pagado'
                                         if pron["id_partido"] == p["id_partido"] and not pron.get("pagado", False):
                                             g1_pron = pron["goles_1_pronostico"]
                                             g2_pron = pron["goles_2_pronostico"]
@@ -610,13 +604,10 @@ if nombres_jugadores:
                                             
                                             multiplicador = 0
                                             
-                                            # 1. Acierto de Marcador (x10)
                                             if g1_real == g1_pron and g2_real == g2_pron:
                                                 multiplicador = 10
-                                            # 2. Acierto de Diferencia o Empate (x6)
                                             elif (g1_real - g2_real) == (g1_pron - g2_pron):
                                                 multiplicador = 6
-                                            # 3. Acierto de Ganador (x4)
                                             elif (g1_real > g2_real and g1_pron > g2_pron) or (g1_real < g2_real and g1_pron < g2_pron):
                                                 multiplicador = 4
                                                 
@@ -624,21 +615,26 @@ if nombres_jugadores:
                                             
                                             # Actualizamos la base de datos de la apuesta
                                             pron["puntos_ganados"] = ganancia
-                                            pron["pagado"] = True # Candado de seguridad
+                                            pron["pagado"] = True 
                                             
-                                            # Depositamos los Sobolevs ganados al usuario
-                                            if ganancia > 0:
-                                                for u in usuarios:
-                                                    if u["nombre"] == pron["usuario"]:
-                                                        u["monedas"] += ganancia
-                                                        break
+                                            # LÓGICA DEL BANCO: "La Casa" recauda la inversión inicial y asume los pagos de premios
+                                            flujo_banco = monto - ganancia
+                                            
+                                            for u in usuarios:
+                                                # Pagamos al familiar si acertó
+                                                if u["nombre"] == pron["usuario"] and ganancia > 0:
+                                                    u["monedas"] += ganancia
+                                                
+                                                # El Banco suma las pérdidas de la familia, o resta si tuvo que pagar premios gigantes
+                                                if u["nombre"] == "Banco":
+                                                    u["monedas"] += flujo_banco
                                                         
                                             cambios_realizados = True
                                             
                         if cambios_realizados:
                             guardar_datos("usuarios.json", usuarios)
                             guardar_datos("pronosticos.json", pronosticos)
-                            st.success("✅ ¡Premios calculados! Los multiplicadores han sido aplicados y el dinero está en sus billeteras.")
+                            st.success("✅ ¡Premios calculados! Los Sobolevs de las apuestas perdidas han pasado al Banco y los ganadores han recibido sus fondos.")
                             st.rerun()
                         else:
                             st.info("No hay premios nuevos pendientes por repartir en este momento.")
