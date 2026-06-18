@@ -50,7 +50,7 @@ else:
 st.title("🏆 Mundial 2026")
 
 # Visualización compacta
-st.metric(label="💵 (USD ➔ Sobolev)", value=f"{tasa_actual:.2f}")
+st.metric(label="💵 1 USD equivale a ", value=f"{tasa_actual:.2f} Sobolevs")
 st.markdown("---")
 nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
 
@@ -202,7 +202,6 @@ if nombres_jugadores:
 
                 hora_actual_local = datetime.utcnow() - timedelta(hours=5)
                 
-                # Creamos 3 listas separadas
                 partidos_abiertos = []
                 partidos_en_curso = []
                 partidos_finalizados = []
@@ -214,8 +213,11 @@ if nombres_jugadores:
                         estado_json = p.get("estado", "pendiente")
                         try:
                             fecha_partido = datetime.strptime(f"{fecha_str} {hora_str}", "%Y-%m-%d %H:%M")
+                            # LÓGICA DE 2 HORAS: Calculamos cuándo debería terminar el partido
+                            hora_fin_estimada = fecha_partido + timedelta(hours=2)
                             
-                            if estado_json == "finalizado":
+                            # Entra a finalizados si el JSON lo dice, o si ya pasaron 2 horas
+                            if estado_json == "finalizado" or hora_actual_local >= hora_fin_estimada:
                                 partidos_finalizados.append((p, fecha_partido))
                             elif hora_actual_local >= fecha_partido:
                                 partidos_en_curso.append((p, fecha_partido))
@@ -352,16 +354,61 @@ if nombres_jugadores:
                                     with open("historial_apuestas.txt", "a", encoding="utf-8") as f_log:
                                         f_log.write(registro_apuesta)
                                         
-                                    # LÓGICA MATEMÁTICA: Calculamos el saldo exacto que le queda al usuario en este microsegundo
                                     saldo_restante = saldo_usuario + (pick_actual["monto_apostado"] if pick_actual else 0) - monto_apostado
-                                    
-                                    # Guardamos el mensaje estructurado en la memoria de sesión para que sobreviva al rerun
                                     st.session_state["mensaje_exito"] = f"🎯 ¡Pronóstico guardado! {equipo1} **{goles1} - {goles2}** {equipo2} por **{monto_apostado}** Sobolevs. Tu saldo disponible restante es: 💰 **{saldo_restante} Sobolevs**."
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
 
                 # ==========================================
+                # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
+                # ==========================================
+                st.markdown("---")
+                st.subheader("✅ Partidos Finalizados")
+                
+                if not partidos_finalizados:
+                    st.info("Aún no hay partidos finalizados.")
+                else:
+                    partidos_finalizados.sort(key=lambda x: x[1], reverse=True)
+                    
+                    for p, _ in partidos_finalizados:
+                        id_p = p["id_partido"]
+                        equipo1 = p["equipo_1"]
+                        equipo2 = p["equipo_2"]
+                        grupo = p.get("grupo", "")
+                        estado_json = p.get("estado", "pendiente")
+                        
+                        with st.expander(f"Partido {id_p} ({grupo}): {equipo1} vs {equipo2} - Finalizado"):
+                            
+                            # Mostrar resultado real solo si la administradora ya lo guardó en el JSON
+                            if estado_json == "finalizado":
+                                st.success(f"**Resultado Final Oficial:** {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {equipo2}")
+                            else:
+                                st.warning("⏳ Esperando que la administradora registre el resultado oficial para pagar los premios.")
+                                
+                            mi_apuesta = next((pron for pron in pronosticos if pron["usuario"] == usuario_actual and pron["id_partido"] == id_p), None)
+                            
+                            if mi_apuesta:
+                                st.info(f"📝 **Tu pronóstico:** {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs")
+                                if estado_json == "finalizado":
+                                    st.write(f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**")
+                            else:
+                                st.warning("No registraste ningún pronóstico para este encuentro.")
+                                
+                            st.markdown("---")
+                            
+                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                            if apuestas_partido:
+                                conteo_marcadores = {}
+                                for pron in apuestas_partido:
+                                    marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    conteo_marcadores[marcador] = conteo_marcadores.get(marcador, 0) + 1
+                                
+                                st.markdown("**Tendencias del Mercado (Anónimo):**")
+                                for marcador, cantidad in sorted(conteo_marcadores.items(), key=lambda x: x[1], reverse=True):
+                                    st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
+                            else:
+                                st.write("Ningún familiar registró pronósticos para este encuentro.")                # ==========================================
                 # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
                 # ==========================================
                 st.markdown("---")

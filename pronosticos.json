@@ -1,0 +1,10 @@
+[
+    {
+        "usuario": "Daniela",
+        "id_partido": 25,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 1,
+        "monto_apostado": 10,
+        "puntos_ganados": 0
+    }
+]
