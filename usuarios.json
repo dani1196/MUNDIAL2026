@@ -13,14 +13,14 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 50,
-        "dolares_depositados": 5,
-        "pin": "1111"
+        "monedas": 309,
+        "dolares_depositados": 35.0,
+        "pin": "1514"
     },
     {
         "nombre": "Banco",
         "monedas": 17,
-        "dolares_depositados": 10,
+        "dolares_depositados": 40.0,
         "pin": "0000"
     }
 ]
