@@ -1,1 +1,3 @@
 [2026-06-18 10:15:42] APUESTA | Daniela | Partido 25 | Goles: 2-1 | Monto: 10
+[2026-06-18 10:53:16] APUESTA | Daniel | Partido 25 | Goles: 2-0 | Monto: 5
+[2026-06-18 10:58:32] APUESTA | Daniel | Partido 25 | Goles: 2-0 | Monto: 7
