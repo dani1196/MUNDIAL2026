@@ -237,8 +237,8 @@
     "equipo_2": "Croacia",
     "fecha": "2026-06-17",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 4,
+    "goles_2_real": 2,
     "estado": "pendiente"
   },
   {
@@ -248,8 +248,8 @@
     "equipo_2": "Panamá",
     "fecha": "2026-06-17",
     "hora": "18:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 1,
+    "goles_2_real": 0,
     "estado": "pendiente"
   },
   {
@@ -259,8 +259,8 @@
     "equipo_2": "Colombia",
     "fecha": "2026-06-17",
     "hora": "21:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 1,
+    "goles_2_real": 3,
     "estado": "pendiente"
   },
   {
