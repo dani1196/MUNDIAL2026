@@ -506,10 +506,10 @@ if nombres_jugadores:
                             else:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
 
-            # --- PESTAÑA: POSICIONES ---
+ # --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
                 st.subheader("📊 Ranking de Pronósticos")
-                st.write("*(Aquí puedes ver el rendimiento neto de las apuestas de toda la familia)*")
+                st.write("*(Aquí puedes ver la cantidad total de Sobolevs que ha ganado cada familiar)*")
                 
                 datos_ranking = []
                 
@@ -518,44 +518,34 @@ if nombres_jugadores:
                         continue
                         
                     nombre_familiar = u["nombre"]
-                    apostado_total = 0
-                    balance_neto = 0
+                    sobolevs_ganados = 0
                     
                     for pron in pronosticos:
                         if pron["usuario"] == nombre_familiar:
-                            monto = pron.get("monto_apostado", 0)
-                            ganado = pron.get("puntos_ganados", 0)
-                            
-                            apostado_total += monto
-                            
-                            estado_partido = "pendiente"
-                            for p in partidos:
-                                if p["id_partido"] == pron["id_partido"]:
-                                    estado_partido = p.get("estado", "pendiente")
-                                    break
-                            
-                            if estado_partido == "finalizado":
-                                balance_neto += (ganado - monto)
+                            # Sumamos únicamente los premios ganados
+                            sobolevs_ganados += pron.get("puntos_ganados", 0)
                     
                     datos_ranking.append({
                         "Familiar": nombre_familiar,
-                        "Rendimiento Neto": balance_neto
+                        "Sobolevs Ganados": sobolevs_ganados
                     })
                     
                 if datos_ranking:
                     df_ranking = pd.DataFrame(datos_ranking)
-                    df_ranking = df_ranking.sort_values(by="Rendimiento Neto", ascending=False).reset_index(drop=True)
+                    # Ordenamos de mayor a menor según los Sobolevs ganados
+                    df_ranking = df_ranking.sort_values(by="Sobolevs Ganados", ascending=False).reset_index(drop=True)
                     
                     # 1. Creamos la columna de posiciones
                     df_ranking["Puesto"] = df_ranking.index + 1
                     df_ranking["Puesto"] = df_ranking["Puesto"].apply(lambda x: f"{x}º")
                     
-                    # 2. Mostramos TODO de forma pública
-                    df_publico = df_ranking[["Puesto", "Familiar", "Rendimiento Neto"]]
-                    st.dataframe(df_publico, use_container_width=True)
+                    # 2. Mostramos SOLO las tres columnas solicitadas y ocultamos el índice numérico
+                    df_publico = df_ranking[["Puesto", "Familiar", "Sobolevs Ganados"]]
+                    st.dataframe(df_publico, use_container_width=True, hide_index=True)
                     
                 else:
                     st.info("Aún no hay estadísticas suficientes para generar el ranking.")
+
 # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
             if usuario_actual == "Daniela":
                 with tab_control:
