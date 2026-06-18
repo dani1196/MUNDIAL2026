@@ -20,7 +20,9 @@ banderas = {
     "Egipto": "🇪🇬", "Canadá": "🇨🇦", "Bosnia y Herzegovina": "🇧🇦", 
     "Corea del Sur": "🇰🇷", "República Checa": "🇨🇿", "México": "🇲🇽", 
     "Sudáfrica": "🇿🇦", "Brasil": "🇧🇷", "Alemania": "🇩🇪", "Italia": "🇮🇹",
-    "Países Bajos": "🇳🇱", "Estados Unidos": "🇺🇸", "Japón": "🇯🇵", "Marruecos": "🇲🇦", "Suiza":"🇨🇭", "Catar":"🇶🇦"
+    "Países Bajos": "🇳🇱", "Estados Unidos": "🇺🇸", "Japón": "🇯🇵", "Marruecos": "🇲🇦", "Suiza":"🇨🇭", "Catar":"🇶🇦",
+    "Australia":"🇦🇺", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "Paraguay": "🇵🇾", "Turquía": "🇹🇷", "Costa de Marfil":"🇨🇮", "Curazao": "🇨🇼",
+    "Suecia":"🇸🇪"
 }
 
 # ==========================================
