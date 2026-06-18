@@ -239,7 +239,7 @@
     "hora": "15:00",
     "goles_1_real": 4,
     "goles_2_real": 2,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 23,
@@ -250,7 +250,7 @@
     "hora": "18:00",
     "goles_1_real": 1,
     "goles_2_real": 0,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 24,
@@ -261,7 +261,7 @@
     "hora": "21:00",
     "goles_1_real": 1,
     "goles_2_real": 3,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 25,
