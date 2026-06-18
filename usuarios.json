@@ -12,6 +12,12 @@
         "pin": "5678"
     },
     {
+        "nombre": "Jorge",
+        "monedas": 50,
+        "dolares_depositados": 5,
+        "pin": "1111"
+    },
+    {
         "nombre": "Banco",
         "monedas": 17,
         "dolares_depositados": 10,
