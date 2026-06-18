@@ -5,7 +5,8 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 1,
         "monto_apostado": 10,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": false
     },
     {
         "usuario": "Daniel",
@@ -13,6 +14,7 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
         "monto_apostado": 7,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": false
     }
 ]
