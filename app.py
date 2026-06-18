@@ -69,7 +69,7 @@ else:
 st.title("🏆 Mundial 2026")
 
 # Visualización compacta
-st.metric(label="💵 1 USD equivale a", value=f"{tasa_actual:.2f}Sobolevs")
+st.metric(label="💵 1 USD equivale a", value=f"{tasa_actual:.2f} Sobolevs")
 st.markdown("---")
 
 nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
@@ -130,7 +130,7 @@ if nombres_jugadores:
                 Se le informa a toda la familia que el **Banco Central del Sobolev** ha entrado en fase de máxima emisión. 
                 
                 * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a quien lidere la tabla, aunque dudamos que acepte Sobolevs.
-                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus mansiones de cristal en Sobolevia.
+                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos.
                 * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
                 
                 **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
