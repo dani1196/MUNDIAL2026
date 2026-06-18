@@ -20,7 +20,7 @@ banderas = {
     "Egipto": "🇪🇬", "Canadá": "🇨🇦", "Bosnia y Herzegovina": "🇧🇦", 
     "Corea del Sur": "🇰🇷", "República Checa": "🇨🇿", "México": "🇲🇽", 
     "Sudáfrica": "🇿🇦", "Brasil": "🇧🇷", "Alemania": "🇩🇪", "Italia": "🇮🇹",
-    "Países Bajos": "🇳🇱", "Estados Unidos": "🇺🇸", "Japón": "🇯🇵", "Marruecos": "🇲🇦"
+    "Países Bajos": "🇳🇱", "Estados Unidos": "🇺🇸", "Japón": "🇯🇵", "Marruecos": "🇲🇦", "Suiza":"🇨🇭", "Catar":"🇶🇦"
 }
 
 # ==========================================
@@ -122,7 +122,6 @@ if nombres_jugadores:
             # --- PESTAÑA: EDICTOS ---
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
-                st.balloons()
                 st.markdown("""
                 ### ¡Bienvenidos a la gloria eterna! 🌍⚽
                 
