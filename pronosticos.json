@@ -67,5 +67,13 @@
         "goles_2_pronostico": 1,
         "monto_apostado": 6,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 29,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 1,
+        "monto_apostado": 5,
+        "puntos_ganados": 0
     }
 ]

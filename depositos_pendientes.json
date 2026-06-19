@@ -1,0 +1,26 @@
+[
+    {
+        "id_transaccion": 1,
+        "usuario": "Daniela",
+        "dolares": 2.0,
+        "sobolevs": 20,
+        "fecha": "2026-06-19 16:08:59",
+        "estado": "aprobado"
+    },
+    {
+        "id_transaccion": 2,
+        "usuario": "Daniela",
+        "dolares": 2.0,
+        "sobolevs": 20,
+        "fecha": "2026-06-19 18:13:15",
+        "estado": "aprobado"
+    },
+    {
+        "id_transaccion": 3,
+        "usuario": "Jorge",
+        "dolares": 10.0,
+        "sobolevs": 100,
+        "fecha": "2026-06-19 18:49:42",
+        "estado": "pendiente"
+    }
+]
