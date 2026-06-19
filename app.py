@@ -9,7 +9,6 @@ st.set_page_config(page_title="Sobolev", page_icon="⚽", layout="centered")
 # ==========================================
 # DICCIONARIO DE BANDERAS
 # ==========================================
-# Si falta un país en tu JSON, simplemente agrégalo aquí con su emoji
 banderas = {
     "Ecuador": "🇪🇨", "Ghana": "🇬🇭", "Panamá": "🇵🇦", "Uzbekistán": "🇺🇿", 
     "Colombia": "🇨🇴", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Croacia": "🇭🇷", "Portugal": "🇵🇹", 
@@ -68,7 +67,6 @@ else:
 # ==========================================
 st.title("🏆 Mundial 2026")
 
-# Visualización compacta
 st.metric(label="💵 1 USD equivale a", value=f"{tasa_actual:.2f} Sobolevs")
 st.markdown("---")
 
@@ -77,24 +75,18 @@ nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
 if nombres_jugadores:
     usuario_seleccionado = st.selectbox("👤 Identifícate:", nombres_jugadores)
     
-    # Buscamos directamente en la lista de diccionarios original de Python
     datos_usuario_sel = next((u for u in usuarios if u["nombre"] == usuario_seleccionado), None)
     
     if datos_usuario_sel:
-        # Extraemos el PIN como texto puro y limpiamos espacios accidentales
         pin_correcto = str(datos_usuario_sel.get("pin", "1234")).strip()
-        
-        # Entrada de contraseña
         pin_ingresado = st.text_input("🔑 Ingresa tu PIN de acceso:", type="password", key=f"pin_{usuario_seleccionado}").strip()
         
-        # VALIDACIÓN: Comparación limpia de cadenas de texto
         if pin_ingresado == pin_correcto:
             usuario_actual = usuario_seleccionado
             saldo_usuario = datos_usuario_sel["monedas"]
             
             st.success(f"🔓 Acceso concedido a la sesión de {usuario_actual}")
             
-            # --- SALDO SIEMPRE VISIBLE EN SIDEBAR ---
             st.sidebar.subheader("🏦 Tu Billetera")
             usuarios_frescos = cargar_datos("usuarios.json", [])
             saldo_fresco = next((u["monedas"] for u in usuarios_frescos if u["nombre"] == usuario_actual), 0)
@@ -102,7 +94,7 @@ if nombres_jugadores:
             st.sidebar.metric("Sobolevs Disponibles", f"{saldo_fresco} 💰")
             st.sidebar.markdown("---")
 
-          # Declaración dinámica de pestañas
+            # Declaración dinámica de pestañas
             titulos_pestanas = ["🔐 Mi Perfil", "🛒 Tienda", "⚽ Apuestas", "📊 Posiciones", "📝 Resultados", "📜 Reglas", "📢 Edictos"]
             
             if usuario_actual == "Daniela":
@@ -110,108 +102,18 @@ if nombres_jugadores:
                 
             pestanas = st.tabs(titulos_pestanas)
             
-            # Asignamos
             tab_perfil = pestanas[0]
             tab_tienda = pestanas[1]
             tab_apuestas = pestanas[2]
             tab_posiciones = pestanas[3]
-            tab_resultados = pestanas[4] # NUEVA PESTAÑA
+            tab_resultados = pestanas[4]
             tab_reglas = pestanas[5]
             tab_edictos = pestanas[6]
             
             if usuario_actual == "Daniela":
                 tab_control = pestanas[7]
-            
-            # --- PESTAÑA: RESULTADOS (Desglose Anónimo por partido finalizado) ---
-            with tab_resultados:
-                st.subheader("📝 Desglose de Resultados")
-                st.write("*(Revisa de forma anónima los marcadores apostados y su nivel de acierto en los partidos finalizados)*")
-                
-                partidos_terminados = [p for p in partidos if p.get("estado") == "finalizado"]
-                
-                if not partidos_terminados:
-                    st.info("Aún no hay partidos finalizados con resultados oficiales registrados.")
-                else:
-                    # Ordenar para que el último finalizado salga primero
-                    partidos_terminados.sort(key=lambda x: x.get("id_partido", 0), reverse=True)
-                    
-                    for p in partidos_terminados:
-                        id_p = p["id_partido"]
-                        equipo1 = p["equipo_1"]
-                        equipo2 = p["equipo_2"]
-                        g1_real = p.get("goles_1_real")
-                        g2_real = p.get("goles_2_real")
-                        
-                        # Extraer bandera o poner genérica si no existe
-                        b1 = banderas.get(equipo1, "🏳️")
-                        b2 = banderas.get(equipo2, "🏳️")
-                        
-                        # Verificamos que el partido tenga goles reales y no sea null
-                        if g1_real is not None and g2_real is not None:
-                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
-                            
-                            if apuestas_partido:
-                                with st.expander(f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"):
-                                    datos_desglose = []
-                                    
-                                    for pron in apuestas_partido:
-                                        g1_p = pron["goles_1_pronostico"]
-                                        g2_p = pron["goles_2_pronostico"]
-                                        ganancia = pron.get("puntos_ganados", 0)
-                                        
-                                        # Determinamos el tipo de acierto visual
-                                        if ganancia > 0:
-                                            if g1_real == g1_p and g2_real == g2_p:
-                                                texto_acierto = "🎯 Marcador Exacto"
-                                            elif (g1_real - g2_real) == (g1_p - g2_p):
-                                                texto_acierto = "⚖️ Diferencia"
-                                            else:
-                                                texto_acierto = "✅ Ganador"
-                                        else:
-                                            texto_acierto = "❌ Fallo"
-                                            
-                                        # Solo guardamos las dos columnas solicitadas
-                                        datos_desglose.append({
-                                            "Pronóstico": f"{g1_p} - {g2_p}",
-                                            "Resultado": texto_acierto
-                                        })
-                                        
-                                    df_desglose = pd.DataFrame(datos_desglose)
-                                    # Se muestra la tabla limpia y sin índices
-                                    st.dataframe(df_desglose, use_container_width=True, hide_index=True)
-                            else:
-                                with st.expander(f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"):
-                                    st.write("Ningún familiar registró pronósticos para este encuentro.")
 
-            # --- PESTAÑA: EDICTOS ---
-            with tab_edictos:
-                st.subheader("📢 Edictos del Comisionado")
-                st.markdown("""
-                ### ¡Bienvenidos a la gloria eterna! 🌍⚽
-                
-                Se le informa a toda la familia que el **Banco Central del Sobolev** ha entrado en fase de máxima emisión. 
-                
-                * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a quien lidere la tabla, aunque dudamos que acepte Sobolevs.
-                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos.
-                * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
-                
-                **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
-                """)
-
-            # --- PESTAÑA: REGLAS ---
-            with tab_reglas:
-                st.subheader("📜 Reglas de Puntuación y Multiplicadores")
-                st.write("Dependiendo de tu nivel de precisión en los pronósticos, tus Sobolevs invertidos se multiplicarán de la siguiente manera:")
-                
-                st.markdown("""
-                * **🎯 Acierto de Marcador (x10):** Adivinas los goles exactos de ambos equipos. *(Ej: Pronosticas 2-1 y termina 2-1)*. Tu inversión se multiplica por 10.
-                * **⚖️ Acierto de Diferencia (x6):** Adivinas el ganador y la diferencia de goles exacta (o el empate). *(Ej: Pronosticas 2-0 y termina 3-1, la diferencia de goles es +2)*. Tu inversión se multiplica por 6.
-                * **✅ Acierto de Ganador (x4):** Solo adivinas quién gana o si hay empate, pero fallas la diferencia. *(Ej: Pronosticas 1-0 y termina 3-0)*. Tu inversión se multiplica por 4.
-                * **❌ Fallo Total (x0):** No adivinas el resultado final. Pierdes tu inversión.
-                """)
-                st.info("💡 **Dato clave:** Puedes cambiar tu pronóstico y la cantidad invertida todas las veces que desees. La aplicación tomará únicamente la última apuesta registrada antes del inicio del partido.")
-
-            # --- PESTAÑA: MI PERFIL (Seguridad) ---
+            # --- PESTAÑA: MI PERFIL ---
             with tab_perfil:
                 st.subheader("🔐 Seguridad de la Cuenta")
                 st.write("Aquí puedes cambiar tu clave de acceso. ¡Asegúrate de no olvidarla!")
@@ -235,11 +137,11 @@ if nombres_jugadores:
                             st.error("❌ Las contraseñas no coinciden. Inténtalo de nuevo.")
                         else:
                             st.warning("⚠️ El PIN no puede estar completamente vacío.")
-                            
-       # --- PESTAÑA: TIENDA ---
+
+            # --- PESTAÑA: TIENDA ---
             with tab_tienda:
                 st.subheader("Casa de Cambio Autorizada")
-                st.write("⚠️ **Aviso:** Las recargas no son inmediatas. Debes transferir el dinero real a Daniela. Una vez verificado, se aprobará la emisión de tus Sobolevs.")
+                st.write("⚠️ **Aviso:** Una vez verificado el depósito se aprobará la emisión de tus Sobolevs.")
                 
                 dolares = st.number_input("Cantidad de Dólares a depositar ($)", min_value=1.0, step=1.0)
                 sobolevs_comprados = int(dolares * tasa_actual)
@@ -247,7 +149,6 @@ if nombres_jugadores:
                 st.info(f"Recibirás **{sobolevs_comprados} Sobolevs**")
                 
                 if st.button("Solicitar Transacción"):
-                    # Cargamos o creamos el archivo de pendientes
                     depositos_pendientes = cargar_datos("depositos_pendientes.json", [])
                     
                     nuevo_deposito = {
@@ -265,9 +166,6 @@ if nombres_jugadores:
                     st.success("✅ ¡Solicitud enviada con éxito! Por favor, realiza la transferencia bancaria. Tus Sobolevs se cargarán en cuanto se apruebe la transacción.")
                     st.rerun()
 
-                # ==========================================
-                # NUEVO: HISTORIAL PERSONAL DE SOLICITUDES
-                # ==========================================
                 st.markdown("---")
                 st.subheader("📋 Mis Solicitudes de Recarga")
                 
@@ -276,7 +174,6 @@ if nombres_jugadores:
                 
                 if mis_depositos:
                     datos_mostrar = []
-                    # Leemos la lista al revés para que la solicitud más reciente salga arriba
                     for d in reversed(mis_depositos):
                         if d["estado"] == "aprobado":
                             estado_visual = "✅ Aprobada"
@@ -297,28 +194,11 @@ if nombres_jugadores:
                 else:
                     st.info("Aún no has realizado ninguna solicitud de recarga.")
 
-                st.markdown("---")
-                st.write("📄 **Auditoría del Banco Central**")
-                
-                if os.path.exists("historial_depositos.txt"):
-                    with open("historial_depositos.txt", "r", encoding="utf-8") as f_log:
-                        contenido_log = f_log.read()
-                    
-                    st.download_button(
-                        label="⬇️ Descargar Historial de Depósitos",
-                        data=contenido_log,
-                        file_name="historial_depositos.txt",
-                        mime="text/plain"
-                    )
-                else:
-                    st.write("Aún no hay transacciones oficiales registradas en el historial.")
-            
             # --- PESTAÑA: APUESTAS ---
             with tab_apuestas:
-                # Candado de memoria: Muestra el mensaje de éxito con el saldo restante tras el reinicio
                 if "mensaje_exito" in st.session_state:
                     st.success(st.session_state["mensaje_exito"])
-                    del st.session_state["mensaje_exito"] # Lo borramos para que no se repita eternamente
+                    del st.session_state["mensaje_exito"]
 
                 hora_actual_local = datetime.utcnow() - timedelta(hours=5)
                 
@@ -333,10 +213,8 @@ if nombres_jugadores:
                         estado_json = p.get("estado", "pendiente")
                         try:
                             fecha_partido = datetime.strptime(f"{fecha_str} {hora_str}", "%Y-%m-%d %H:%M")
-                            # LÓGICA DE 2 HORAS: Calculamos cuándo debería terminar el partido
                             hora_fin_estimada = fecha_partido + timedelta(hours=2)
                             
-                            # Entra a finalizados si el JSON lo dice, o si ya pasaron 2 horas
                             if estado_json == "finalizado" or hora_actual_local >= hora_fin_estimada:
                                 partidos_finalizados.append((p, fecha_partido))
                             elif hora_actual_local >= fecha_partido:
@@ -346,9 +224,6 @@ if nombres_jugadores:
                         except ValueError:
                             pass
                 
-                # ==========================================
-                # SECCIÓN 1: PARTIDOS EN CURSO (TOP / ARRIBA)
-                # ==========================================
                 if partidos_en_curso:
                     st.subheader("🔥 Partidos en Curso")
                     st.write("*(El balón está rodando. Mira las tendencias de la familia 🤫)*")
@@ -361,7 +236,6 @@ if nombres_jugadores:
                         equipo2 = p["equipo_2"]
                         grupo = p.get("grupo", "")
                         
-                        # Extraer bandera o poner genérica si no existe
                         b1 = banderas.get(equipo1, "🏳️")
                         b2 = banderas.get(equipo2, "🏳️")
                         
@@ -388,9 +262,6 @@ if nombres_jugadores:
                             else:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
 
-                # ==========================================
-                # SECCIÓN 2: PARTIDOS PARA PRONOSTICAR (MEDIO)
-                # ==========================================
                 st.markdown("---")
                 st.subheader("📅 Próximos Partidos Disponibles")
                 
@@ -487,9 +358,6 @@ if nombres_jugadores:
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
 
-                # ==========================================
-                # SECCIÓN 3: PARTIDOS FINALIZADOS (AL FONDO)
-                # ==========================================
                 st.markdown("---")
                 st.subheader("✅ Partidos Finalizados")
                 
@@ -509,8 +377,6 @@ if nombres_jugadores:
                         b2 = banderas.get(equipo2, "🏳️")
                         
                         with st.expander(f"Partido {id_p} ({grupo}): {b1} {equipo1} vs {b2} {equipo2} - Finalizado"):
-                            
-                            # Mostrar resultado real solo si la administradora ya lo guardó en el JSON
                             if estado_json == "finalizado":
                                 st.success(f"**Resultado Final Oficial:** {b1} {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {b2} {equipo2}")
                             else:
@@ -539,20 +405,19 @@ if nombres_jugadores:
                                     st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
                             else:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
-# --- PESTAÑA: POSICIONES ---
+
+            # --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
                 st.subheader("📊 Ranking de la Familia")
                 st.write("*(El poder económico de Sobolevia. Quien tiene más Sobolevs disponibles, lidera la tabla)*")
                 
                 datos_ranking = []
                 
-                # Recorremos directamente la lista de usuarios para ver su saldo actual
                 for u in usuarios:
                     if u["nombre"] == "Banco": 
                         continue
                         
                     nombre_familiar = u["nombre"]
-                    # Tomamos las monedas directamente de su perfil
                     saldo_actual = u.get("monedas", 0) 
                     
                     datos_ranking.append({
@@ -562,20 +427,100 @@ if nombres_jugadores:
                     
                 if datos_ranking:
                     df_ranking = pd.DataFrame(datos_ranking)
-                    # Ordenamos de mayor a menor según el saldo disponible
                     df_ranking = df_ranking.sort_values(by="Sobolevs Disponibles", ascending=False).reset_index(drop=True)
                     
-                    # Creamos la columna de posiciones
                     df_ranking["Puesto"] = df_ranking.index + 1
                     df_ranking["Puesto"] = df_ranking["Puesto"].apply(lambda x: f"{x}º")
                     
-                    # Mostramos las tres columnas solicitadas ocultando el índice
                     df_publico = df_ranking[["Puesto", "Familiar", "Sobolevs Disponibles"]]
                     st.dataframe(df_publico, use_container_width=True, hide_index=True)
-                    
                 else:
                     st.info("Aún no hay usuarios suficientes para generar el ranking.")
-# --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
+
+            # --- PESTAÑA: RESULTADOS ---
+            with tab_resultados:
+                st.subheader("📝 Desglose de Resultados")
+                st.write("*(Revisa de forma anónima los marcadores apostados y su nivel de acierto en los partidos finalizados)*")
+                
+                partidos_terminados = [p for p in partidos if p.get("estado") == "finalizado"]
+                
+                if not partidos_terminados:
+                    st.info("Aún no hay partidos finalizados con resultados oficiales registrados.")
+                else:
+                    partidos_terminados.sort(key=lambda x: x.get("id_partido", 0), reverse=True)
+                    
+                    for p in partidos_terminados:
+                        id_p = p["id_partido"]
+                        equipo1 = p["equipo_1"]
+                        equipo2 = p["equipo_2"]
+                        g1_real = p.get("goles_1_real")
+                        g2_real = p.get("goles_2_real")
+                        
+                        b1 = banderas.get(equipo1, "🏳️")
+                        b2 = banderas.get(equipo2, "🏳️")
+                        
+                        if g1_real is not None and g2_real is not None:
+                            apuestas_partido = [pron for pron in pronosticos if pron["id_partido"] == id_p]
+                            
+                            if apuestas_partido:
+                                with st.expander(f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"):
+                                    datos_desglose = []
+                                    
+                                    for pron in apuestas_partido:
+                                        g1_p = pron["goles_1_pronostico"]
+                                        g2_p = pron["goles_2_pronostico"]
+                                        ganancia = pron.get("puntos_ganados", 0)
+                                        
+                                        if ganancia > 0:
+                                            if g1_real == g1_p and g2_real == g2_p:
+                                                texto_acierto = "🎯 Marcador Exacto"
+                                            elif (g1_real - g2_real) == (g1_p - g2_p):
+                                                texto_acierto = "⚖️ Diferencia"
+                                            else:
+                                                texto_acierto = "✅ Ganador"
+                                        else:
+                                            texto_acierto = "❌ Fallo"
+                                            
+                                        datos_desglose.append({
+                                            "Pronóstico": f"{g1_p} - {g2_p}",
+                                            "Resultado": texto_acierto
+                                        })
+                                        
+                                    df_desglose = pd.DataFrame(datos_desglose)
+                                    st.dataframe(df_desglose, use_container_width=True, hide_index=True)
+                            else:
+                                with st.expander(f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"):
+                                    st.write("Ningún familiar registró pronósticos para este encuentro.")
+
+            # --- PESTAÑA: REGLAS ---
+            with tab_reglas:
+                st.subheader("📜 Reglas de Puntuación y Multiplicadores")
+                st.write("Dependiendo de tu nivel de precisión en los pronósticos, tus Sobolevs invertidos se multiplicarán de la siguiente manera:")
+                
+                st.markdown("""
+                * **🎯 Acierto de Marcador (x10):** Adivinas los goles exactos de ambos equipos. *(Ej: Pronosticas 2-1 y termina 2-1)*. Tu inversión se multiplica por 10.
+                * **⚖️ Acierto de Diferencia (x6):** Adivinas el ganador y la diferencia de goles exacta (o el empate). *(Ej: Pronosticas 2-0 y termina 3-1, la diferencia de goles es +2)*. Tu inversión se multiplica por 6.
+                * **✅ Acierto de Ganador (x4):** Solo adivinas quién gana o si hay empate, pero fallas la diferencia. *(Ej: Pronosticas 1-0 y termina 3-0)*. Tu inversión se multiplica por 4.
+                * **❌ Fallo Total (x0):** No adivinas el resultado final. Pierdes tu inversión.
+                """)
+                st.info("💡 **Dato clave:** Puedes cambiar tu pronóstico y la cantidad invertida todas las veces que desees. La aplicación tomará únicamente la última apuesta registrada antes del inicio del partido.")
+
+            # --- PESTAÑA: EDICTOS ---
+            with tab_edictos:
+                st.subheader("📢 Edictos del Comisionado")
+                st.markdown("""
+                ### ¡Bienvenidos a la gloria eterna! 🌍⚽
+                
+                Se le informa a toda la familia que el **Banco Central del Sobolev** ha entrado en fase de máxima emisión. 
+                
+                * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a quien lidere la tabla, aunque dudamos que acepte Sobolevs.
+                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos.
+                * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
+                
+                **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
+                """)
+
+            # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
             if usuario_actual == "Daniela":
                 with tab_control:
                     st.subheader("⚙️ Panel de Administración y Respaldos")
@@ -600,7 +545,7 @@ if nombres_jugadores:
                         st.warning("No se encontró la cuenta 'Banco' en usuarios.json.")
 
                     # ==========================================
-                    # APROBACIÓN DE DEPÓSITOS (NUEVO SISTEMA)
+                    # APROBACIÓN DE DEPÓSITOS
                     # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Bandeja de Depósitos Pendientes")
@@ -626,7 +571,6 @@ if nombres_jugadores:
                                 
                                 with col_aprobar:
                                     if st.button(f"✅ Aprobar y Cargar", key=f"aprobar_{id_dep}"):
-                                        # 1. Cargamos el dinero al usuario y al banco
                                         for u in usuarios:
                                             if u["nombre"] == usuario_solicitante:
                                                 u["monedas"] += sobolevs_a_entregar
@@ -636,12 +580,10 @@ if nombres_jugadores:
                                         
                                         guardar_datos("usuarios.json", usuarios)
                                         
-                                        # 2. Guardamos en el archivo de texto histórico
                                         registro = f"[{dep['fecha']}] APROBADO por Admin | Usuario: {usuario_solicitante} | Depósito: ${dolares_solicitados} | Sobolevs: {sobolevs_a_entregar}\n"
                                         with open("historial_depositos.txt", "a", encoding="utf-8") as f_log:
                                             f_log.write(registro)
                                             
-                                        # 3. Cambiamos el estado de la solicitud
                                         dep["estado"] = "aprobado"
                                         guardar_datos("depositos_pendientes.json", depositos_pendientes)
                                         
@@ -654,8 +596,9 @@ if nombres_jugadores:
                                         guardar_datos("depositos_pendientes.json", depositos_pendientes)
                                         st.error("Solicitud rechazada y anulada.")
                                         st.rerun()
+
                     # ==========================================
-                    # REPARTICIÓN DE PREMIOS (MODELO DE SUMA CERO)
+                    # REPARTICIÓN DE PREMIOS
                     # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Repartición de Premios")
@@ -687,19 +630,14 @@ if nombres_jugadores:
                                                 
                                             ganancia = monto * multiplicador
                                             
-                                            # Actualizamos la base de datos de la apuesta
                                             pron["puntos_ganados"] = ganancia
                                             pron["pagado"] = True 
                                             
-                                            # LÓGICA DEL BANCO: "La Casa" recauda la inversión inicial y asume los pagos de premios
                                             flujo_banco = monto - ganancia
                                             
                                             for u in usuarios:
-                                                # Pagamos al familiar si acertó
                                                 if u["nombre"] == pron["usuario"] and ganancia > 0:
                                                     u["monedas"] += ganancia
-                                                
-                                                # El Banco suma las pérdidas de la familia, o resta si tuvo que pagar premios gigantes
                                                 if u["nombre"] == "Banco":
                                                     u["monedas"] += flujo_banco
                                                         
@@ -713,24 +651,37 @@ if nombres_jugadores:
                         else:
                             st.info("No hay premios nuevos pendientes por repartir en este momento.")
                     
+                    # ==========================================
+                    # RESPALDOS Y DESCARGAS DEL SISTEMA
+                    # ==========================================
                     st.markdown("---")
-                    col_json1, col_json2, col_txt = st.columns(3)
+                    st.subheader("💾 Respaldos de la Base de Datos")
+                    st.write("Descarga los archivos al final de la jornada y súbelos a tu repositorio local de GitHub para no perder el historial.")
                     
-                    with col_json1:
+                    col_archivos1, col_archivos2 = st.columns(2)
+                    
+                    with col_archivos1:
                         if os.path.exists("usuarios.json"):
                             with open("usuarios.json", "r", encoding="utf-8") as f_usr:
-                                st.download_button(label="⬇️ Descargar usuarios.json", data=f_usr.read(), file_name="usuarios.json", mime="application/json")
+                                st.download_button("⬇️ Descargar usuarios.json", f_usr.read(), "usuarios.json", "application/json", use_container_width=True)
                                 
-                    with col_json2:
                         if os.path.exists("pronosticos.json"):
                             with open("pronosticos.json", "r", encoding="utf-8") as f_pron:
-                                st.download_button(label="⬇️ Descargar pronosticos.json", data=f_pron.read(), file_name="pronosticos.json", mime="application/json")
+                                st.download_button("⬇️ Descargar pronosticos.json", f_pron.read(), "pronosticos.json", "application/json", use_container_width=True)
                                 
-                    with col_txt:
+                        if os.path.exists("depositos_pendientes.json"):
+                            with open("depositos_pendientes.json", "r", encoding="utf-8") as f_dep:
+                                st.download_button("⬇️ Descargar depositos_pendientes.json", f_dep.read(), "depositos_pendientes.json", "application/json", use_container_width=True)
+
+                    with col_archivos2:
                         if os.path.exists("historial_apuestas.txt"):
-                            with open("historial_apuestas.txt", "r", encoding="utf-8") as f_hist:
-                                st.download_button(label="⬇️ Descargar Auditoría", data=f_hist.read(), file_name="historial_apuestas.txt", mime="text/plain")
-        
+                            with open("historial_apuestas.txt", "r", encoding="utf-8") as f_hist_ap:
+                                st.download_button("⬇️ Auditoría de Apuestas (.txt)", f_hist_ap.read(), "historial_apuestas.txt", "text/plain", use_container_width=True)
+                                
+                        if os.path.exists("historial_depositos.txt"):
+                            with open("historial_depositos.txt", "r", encoding="utf-8") as f_hist_dep:
+                                st.download_button("⬇️ Auditoría de Depósitos (.txt)", f_hist_dep.read(), "historial_depositos.txt", "text/plain", use_container_width=True)
+
         elif pin_ingresado != "":
             st.error("❌ PIN incorrecto. No tienes autorización para ingresar.")
 else:
