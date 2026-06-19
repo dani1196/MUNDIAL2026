@@ -20,7 +20,7 @@
     {
         "nombre": "Banco",
         "monedas": 2,
-        "dolares_depositados": 40.0,
+        "dolares_depositados": 45.0,
         "pin": "0000"
     }
 ]
