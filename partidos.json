@@ -303,8 +303,8 @@
     "equipo_2": "Corea del Sur",
     "fecha": "2026-06-18",
     "hora": "20:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 1,
+    "goles_2_real": 0,
     "estado": "pendiente"
   },
   {
