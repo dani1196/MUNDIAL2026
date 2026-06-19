@@ -236,32 +236,66 @@ if nombres_jugadores:
                         else:
                             st.warning("⚠️ El PIN no puede estar completamente vacío.")
                             
-            # --- PESTAÑA: TIENDA ---
+       # --- PESTAÑA: TIENDA ---
             with tab_tienda:
                 st.subheader("Casa de Cambio Autorizada")
+                st.write("⚠️ **Aviso:** Las recargas no son inmediatas. Debes transferir el dinero real a Daniela. Una vez verificado, se aprobará la emisión de tus Sobolevs.")
+                
                 dolares = st.number_input("Cantidad de Dólares a depositar ($)", min_value=1.0, step=1.0)
                 sobolevs_comprados = int(dolares * tasa_actual)
                 
                 st.info(f"Recibirás **{sobolevs_comprados} Sobolevs**")
                 
-                if st.button("Ejecutar Transacción"):
-                    for u in usuarios:
-                        if u["nombre"] == usuario_actual:
-                            u["monedas"] += sobolevs_comprados
-                            u["dolares_depositados"] += dolares
-                        if u["nombre"] == "Banco":
-                            u["dolares_depositados"] += dolares
+                if st.button("Solicitar Transacción"):
+                    # Cargamos o creamos el archivo de pendientes
+                    depositos_pendientes = cargar_datos("depositos_pendientes.json", [])
                     
-                    guardar_datos("usuarios.json", usuarios)
+                    nuevo_deposito = {
+                        "id_transaccion": len(depositos_pendientes) + 1,
+                        "usuario": usuario_actual,
+                        "dolares": dolares,
+                        "sobolevs": sobolevs_comprados,
+                        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "estado": "pendiente"
+                    }
                     
-                    fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    registro = f"[{fecha_hora}] Usuario: {usuario_actual} | Depósito: ${dolares} | Sobolevs: {sobolevs_comprados}\n"
+                    depositos_pendientes.append(nuevo_deposito)
+                    guardar_datos("depositos_pendientes.json", depositos_pendientes)
                     
-                    with open("historial_depositos.txt", "a", encoding="utf-8") as f_log:
-                        f_log.write(registro)
-                        
-                    st.success("¡Transacción procesada y registrada en el historial!")
+                    st.success("✅ ¡Solicitud enviada con éxito! Por favor, realiza la transferencia bancaria. Tus Sobolevs se cargarán en cuanto se apruebe la transacción.")
                     st.rerun()
+
+                # ==========================================
+                # NUEVO: HISTORIAL PERSONAL DE SOLICITUDES
+                # ==========================================
+                st.markdown("---")
+                st.subheader("📋 Mis Solicitudes de Recarga")
+                
+                depositos_historial = cargar_datos("depositos_pendientes.json", [])
+                mis_depositos = [d for d in depositos_historial if d["usuario"] == usuario_actual]
+                
+                if mis_depositos:
+                    datos_mostrar = []
+                    # Leemos la lista al revés para que la solicitud más reciente salga arriba
+                    for d in reversed(mis_depositos):
+                        if d["estado"] == "aprobado":
+                            estado_visual = "✅ Aprobada"
+                        elif d["estado"] == "rechazado":
+                            estado_visual = "❌ Rechazada"
+                        else:
+                            estado_visual = "⏳ En proceso"
+                            
+                        datos_mostrar.append({
+                            "Fecha": d["fecha"],
+                            "Dólares": f"${d['dolares']}",
+                            "Sobolevs": d["sobolevs"],
+                            "Estado": estado_visual
+                        })
+                        
+                    df_mis_depositos = pd.DataFrame(datos_mostrar)
+                    st.dataframe(df_mis_depositos, use_container_width=True, hide_index=True)
+                else:
+                    st.info("Aún no has realizado ninguna solicitud de recarga.")
 
                 st.markdown("---")
                 st.write("📄 **Auditoría del Banco Central**")
@@ -277,8 +311,8 @@ if nombres_jugadores:
                         mime="text/plain"
                     )
                 else:
-                    st.write("Aún no hay transacciones registradas en el historial.")
-
+                    st.write("Aún no hay transacciones oficiales registradas en el historial.")
+            
             # --- PESTAÑA: APUESTAS ---
             with tab_apuestas:
                 # Candado de memoria: Muestra el mensaje de éxito con el saldo restante tras el reinicio
@@ -565,6 +599,61 @@ if nombres_jugadores:
                     else:
                         st.warning("No se encontró la cuenta 'Banco' en usuarios.json.")
 
+                    # ==========================================
+                    # APROBACIÓN DE DEPÓSITOS (NUEVO SISTEMA)
+                    # ==========================================
+                    st.markdown("---")
+                    st.subheader("🏦 Bandeja de Depósitos Pendientes")
+                    st.write("Aprueba las recargas únicamente cuando hayas confirmado que el dinero está en tu cuenta bancaria real.")
+                    
+                    depositos_pendientes = cargar_datos("depositos_pendientes.json", [])
+                    pendientes = [d for d in depositos_pendientes if d.get("estado") == "pendiente"]
+
+                    if not pendientes:
+                        st.info("Todo al día. No hay solicitudes de recarga pendientes.")
+                    else:
+                        for dep in pendientes:
+                            id_dep = dep['id_transaccion']
+                            usuario_solicitante = dep['usuario']
+                            dolares_solicitados = dep['dolares']
+                            sobolevs_a_entregar = dep['sobolevs']
+                            
+                            with st.expander(f"⏳ Solicitud de {usuario_solicitante} - ${dolares_solicitados} USD"):
+                                st.write(f"**Fecha:** {dep['fecha']}")
+                                st.write(f"**Acreditar:** {sobolevs_a_entregar} Sobolevs")
+                                
+                                col_aprobar, col_rechazar = st.columns(2)
+                                
+                                with col_aprobar:
+                                    if st.button(f"✅ Aprobar y Cargar", key=f"aprobar_{id_dep}"):
+                                        # 1. Cargamos el dinero al usuario y al banco
+                                        for u in usuarios:
+                                            if u["nombre"] == usuario_solicitante:
+                                                u["monedas"] += sobolevs_a_entregar
+                                                u["dolares_depositados"] += dolares_solicitados
+                                            if u["nombre"] == "Banco":
+                                                u["dolares_depositados"] += dolares_solicitados
+                                        
+                                        guardar_datos("usuarios.json", usuarios)
+                                        
+                                        # 2. Guardamos en el archivo de texto histórico
+                                        registro = f"[{dep['fecha']}] APROBADO por Admin | Usuario: {usuario_solicitante} | Depósito: ${dolares_solicitados} | Sobolevs: {sobolevs_a_entregar}\n"
+                                        with open("historial_depositos.txt", "a", encoding="utf-8") as f_log:
+                                            f_log.write(registro)
+                                            
+                                        # 3. Cambiamos el estado de la solicitud
+                                        dep["estado"] = "aprobado"
+                                        guardar_datos("depositos_pendientes.json", depositos_pendientes)
+                                        
+                                        st.success(f"¡Dinero cargado a la cuenta de {usuario_solicitante}!")
+                                        st.rerun()
+                                        
+                                with col_rechazar:
+                                    if st.button(f"❌ Rechazar", key=f"rechazar_{id_dep}"):
+                                        dep["estado"] = "rechazado"
+                                        guardar_datos("depositos_pendientes.json", depositos_pendientes)
+                                        st.error("Solicitud rechazada y anulada.")
+                                        st.rerun()
                     # ==========================================
                     # REPARTICIÓN DE PREMIOS (MODELO DE SUMA CERO)
                     # ==========================================
