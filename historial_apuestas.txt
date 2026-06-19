@@ -2,3 +2,6 @@
 [2026-06-18 10:53:16] APUESTA | Daniel | Partido 25 | Goles: 2-0 | Monto: 5
 [2026-06-18 10:58:32] APUESTA | Daniel | Partido 25 | Goles: 2-0 | Monto: 7
 [2026-06-18 14:23:48] APUESTA | Daniela | Partido 27 | Goles: 1-0 | Monto: 5
+[2026-06-18 16:41:14] APUESTA | Jorge | Partido 27 | Goles: 0-2 | Monto: 5
+[2026-06-18 18:48:00] APUESTA | Jorge | Partido 28 | Goles: 2-2 | Monto: 5
+[2026-06-18 18:48:08] APUESTA | Jorge | Partido 28 | Goles: 2-2 | Monto: 5

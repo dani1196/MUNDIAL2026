@@ -24,5 +24,21 @@
         "goles_2_pronostico": 0,
         "monto_apostado": 5,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 27,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 5,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 28,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 5,
+        "puntos_ganados": 0
     }
 ]
