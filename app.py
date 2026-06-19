@@ -505,47 +505,42 @@ if nombres_jugadores:
                                     st.write(f"📊 Marcador **{marcador}** ➔ Votado por **{cantidad}** persona(s)")
                             else:
                                 st.write("Ningún familiar registró pronósticos para este encuentro.")
-
- # --- PESTAÑA: POSICIONES ---
+# --- PESTAÑA: POSICIONES ---
             with tab_posiciones:
-                st.subheader("📊 Ranking de Pronósticos")
-                st.write("*(Aquí puedes ver la cantidad total de Sobolevs que ha ganado cada familiar)*")
+                st.subheader("📊 Ranking de la Familia")
+                st.write("*(El poder económico de Sobolevia. Quien tiene más Sobolevs disponibles, lidera la tabla)*")
                 
                 datos_ranking = []
                 
+                # Recorremos directamente la lista de usuarios para ver su saldo actual
                 for u in usuarios:
                     if u["nombre"] == "Banco": 
                         continue
                         
                     nombre_familiar = u["nombre"]
-                    sobolevs_ganados = 0
-                    
-                    for pron in pronosticos:
-                        if pron["usuario"] == nombre_familiar:
-                            # Sumamos únicamente los premios ganados
-                            sobolevs_ganados += pron.get("puntos_ganados", 0)
+                    # Tomamos las monedas directamente de su perfil
+                    saldo_actual = u.get("monedas", 0) 
                     
                     datos_ranking.append({
                         "Familiar": nombre_familiar,
-                        "Sobolevs Ganados": sobolevs_ganados
+                        "Sobolevs Disponibles": saldo_actual
                     })
                     
                 if datos_ranking:
                     df_ranking = pd.DataFrame(datos_ranking)
-                    # Ordenamos de mayor a menor según los Sobolevs ganados
-                    df_ranking = df_ranking.sort_values(by="Sobolevs Ganados", ascending=False).reset_index(drop=True)
+                    # Ordenamos de mayor a menor según el saldo disponible
+                    df_ranking = df_ranking.sort_values(by="Sobolevs Disponibles", ascending=False).reset_index(drop=True)
                     
-                    # 1. Creamos la columna de posiciones
+                    # Creamos la columna de posiciones
                     df_ranking["Puesto"] = df_ranking.index + 1
                     df_ranking["Puesto"] = df_ranking["Puesto"].apply(lambda x: f"{x}º")
                     
-                    # 2. Mostramos SOLO las tres columnas solicitadas y ocultamos el índice numérico
-                    df_publico = df_ranking[["Puesto", "Familiar", "Sobolevs Ganados"]]
+                    # Mostramos las tres columnas solicitadas ocultando el índice
+                    df_publico = df_ranking[["Puesto", "Familiar", "Sobolevs Disponibles"]]
                     st.dataframe(df_publico, use_container_width=True, hide_index=True)
                     
                 else:
-                    st.info("Aún no hay estadísticas suficientes para generar el ranking.")
-
+                    st.info("Aún no hay usuarios suficientes para generar el ranking.")
 # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
             if usuario_actual == "Daniela":
                 with tab_control:

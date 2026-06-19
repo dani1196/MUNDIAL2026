@@ -7,7 +7,7 @@
     },
     {
         "nombre": "Daniela",
-        "monedas": 49,
+        "monedas": 69,
         "dolares_depositados": 5,
         "pin": "5678"
     },
@@ -19,7 +19,7 @@
     },
     {
         "nombre": "Banco",
-        "monedas": 7,
+        "monedas": 2,
         "dolares_depositados": 40.0,
         "pin": "0000"
     }
