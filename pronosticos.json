@@ -59,7 +59,8 @@
         "goles_1_pronostico": 1,
         "goles_2_pronostico": 2,
         "monto_apostado": 10,
-        "puntos_ganados": 0
+        "puntos_ganados": 60,
+        "pagado": true
     },
     {
         "usuario": "Daniela",
