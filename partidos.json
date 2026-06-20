@@ -325,9 +325,9 @@
     "equipo_2": "Marruecos",
     "fecha": "2026-06-19",
     "hora": "17:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 29,
