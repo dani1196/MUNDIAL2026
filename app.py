@@ -175,6 +175,90 @@ if nombres_jugadores:
 
             # --- PESTAÑA: MI PERFIL ---
             with tab_perfil:
+                st.subheader("👤 Mi Perfil y Estadísticas")
+
+                # ==========================================
+                # ESTADÍSTICAS DEL JUGADOR
+                # ==========================================
+                mis_pronosticos = [
+                    pron for pron in pronosticos if pron["usuario"] == usuario_actual
+                ]
+
+                total_apuestas = len(mis_pronosticos)
+                total_invertido = sum(
+                    p.get("monto_apostado", 0) for p in mis_pronosticos
+                )
+                apuestas_ganadas = sum(
+                    1 for p in mis_pronosticos if p.get("puntos_ganados", 0) > 0
+                )
+
+                col_est1, col_est2, col_est3 = st.columns(3)
+                with col_est1:
+                    st.metric("Sobolevs Invertidos", f"{total_invertido} 💰")
+                with col_est2:
+                    st.metric("Apuestas Realizadas", f"{total_apuestas} 🎟️")
+                with col_est3:
+                    st.metric("Apuestas Ganadas", f"{apuestas_ganadas} 🏆")
+
+                # ==========================================
+                # HISTORIAL DE APUESTAS
+                # ==========================================
+                st.markdown("---")
+                st.subheader("📋 Mi Historial de Apuestas")
+
+                if mis_pronosticos:
+                    historial_data = []
+                    # Leemos la lista al revés para que la apuesta más reciente salga arriba
+                    for p in reversed(mis_pronosticos):
+                        id_p = p["id_partido"]
+                        g1 = p["goles_1_pronostico"]
+                        g2 = p["goles_2_pronostico"]
+                        monto = p.get("monto_apostado", 0)
+                        ganancia = p.get("puntos_ganados", 0)
+                        pagado = p.get("pagado", False)
+
+                        # Determinar el estado visual de la apuesta
+                        if ganancia > 0:
+                            estado = "✅ Ganada"
+                        elif pagado and ganancia == 0:
+                            estado = "❌ Perdida"
+                        else:
+                            estado = "⏳ Pendiente"
+
+                        # Buscar los nombres de los equipos y banderas para que se vea profesional
+                        equipo1, equipo2 = "Equipo 1", "Equipo 2"
+                        b1, b2 = "🏳️", "🏳️"
+                        for partido in partidos:
+                            if partido["id_partido"] == id_p:
+                                equipo1 = partido["equipo_1"]
+                                equipo2 = partido["equipo_2"]
+                                b1 = banderas.get(equipo1, "🏳️")
+                                b2 = banderas.get(equipo2, "🏳️")
+                                break
+
+                        historial_data.append(
+                            {
+                                "Partido": f"{b1} {equipo1} vs {b2} {equipo2}",
+                                "Mi Pronóstico": f"{g1} - {g2}",
+                                "Inversión": monto,
+                                "Retorno": ganancia if estado == "✅ Ganada" else "-",
+                                "Estado": estado,
+                            }
+                        )
+
+                    df_historial = pd.DataFrame(historial_data)
+                    st.dataframe(
+                        df_historial, use_container_width=True, hide_index=True
+                    )
+                else:
+                    st.info(
+                        "Aún no has realizado ninguna apuesta. ¡Ve a la pestaña de Apuestas para empezar!"
+                    )
+
+                # ==========================================
+                # SEGURIDAD DE LA CUENTA
+                # ==========================================
+                st.markdown("---")
                 st.subheader("🔐 Seguridad de la Cuenta")
                 st.write(
                     "Aquí puedes cambiar tu clave de acceso. ¡Asegúrate de no olvidarla!"
