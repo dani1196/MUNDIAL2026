@@ -86,6 +86,7 @@
         "goles_1_pronostico": 5,
         "goles_2_pronostico": 0,
         "monto_apostado": 100,
-        "puntos_ganados": 0
+        "puntos_ganados": 400,
+        "pagado": true
     }
 ]
