@@ -314,9 +314,9 @@
     "equipo_2": "Haití",
     "fecha": "2026-06-19",
     "hora": "19:30",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 30,
