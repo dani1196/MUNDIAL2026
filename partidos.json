@@ -347,9 +347,9 @@
     "equipo_2": "Paraguay",
     "fecha": "2026-06-19",
     "hora": "22:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 33,
