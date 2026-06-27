@@ -12,7 +12,7 @@
         "pin": "5678"
     },
     {
-        "nombre": "Iván Andrés",
+        "nombre": "Iv\u00e1n Andr\u00e9s",
         "monedas": 0,
         "dolares_depositados": 0,
         "pin": "0001"
@@ -24,13 +24,13 @@
         "pin": "0002"
     },
     {
-        "nombre": "Iván",
+        "nombre": "Iv\u00e1n",
         "monedas": 0,
         "dolares_depositados": 0,
         "pin": "0003"
     },
     {
-        "nombre": "Belén",
+        "nombre": "Bel\u00e9n",
         "monedas": 0,
         "dolares_depositados": 0,
         "pin": "0005"
@@ -55,14 +55,14 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 20,
-        "dolares_depositados": 2,
+        "monedas": 110,
+        "dolares_depositados": 12.0,
         "pin": "1514"
     },
     {
         "nombre": "Banco",
         "monedas": 0,
-        "dolares_depositados": 6,
+        "dolares_depositados": 16.0,
         "pin": "0000"
     }
 ]
