@@ -658,5 +658,181 @@
     "goles_1_real": null,
     "goles_2_real": null,
     "estado": "pendiente"
+  },
+  {
+    "id_partido": 61,
+    "grupo": "Grupo L",
+    "equipo_1": "Panamá",
+    "equipo_2": "Inglaterra",
+    "fecha": "2026-06-27",
+    "hora": "16:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 62,
+    "grupo": "Grupo L",
+    "equipo_1": "Croacia",
+    "equipo_2": "Ghana",
+    "fecha": "2026-06-27",
+    "hora": "16:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 63,
+    "grupo": "Grupo K",
+    "equipo_1": "Colombia",
+    "equipo_2": "Portugal",
+    "fecha": "2026-06-27",
+    "hora": "18:30",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 64,
+    "grupo": "Grupo K",
+    "equipo_1": "R. D. del Congo",
+    "equipo_2": "Uzbekistán",
+    "fecha": "2026-06-27",
+    "hora": "18:30",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 65,
+    "grupo": "Grupo J",
+    "equipo_1": "Jordania",
+    "equipo_2": "Argentina",
+    "fecha": "2026-06-27",
+    "hora": "21:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 66,
+    "grupo": "Grupo J",
+    "equipo_1": "Argelia",
+    "equipo_2": "Austria",
+    "fecha": "2026-06-27",
+    "hora": "21:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 67,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Sudáfrica",
+    "equipo_2": "Canadá",
+    "fecha": "2026-06-28",
+    "hora": "14:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 68,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Brasil",
+    "equipo_2": "Japón",
+    "fecha": "2026-06-29",
+    "hora": "12:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 69,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Alemania",
+    "equipo_2": "Paraguay",
+    "fecha": "2026-06-29",
+    "hora": "15:30",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 70,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Países Bajos",
+    "equipo_2": "Marruecos",
+    "fecha": "2026-06-29",
+    "hora": "20:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 71,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Costa de Marfil",
+    "equipo_2": "Noruega",
+    "fecha": "2026-06-30",
+    "hora": "12:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 72,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Francia",
+    "equipo_2": "Suecia",
+    "fecha": "2026-06-30",
+    "hora": "16:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 73,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "México",
+    "equipo_2": "Tercer lugar Grupo C/E/F/H/I",
+    "fecha": "2026-06-30",
+    "hora": "20:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 74,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Primero Grupo L",
+    "equipo_2": "Tercer lugar Grupo E/H/I/J/K",
+    "fecha": "2026-07-01",
+    "hora": "11:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 75,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Bélgica",
+    "equipo_2": "Tercer lugar Grupo A/E/H/I/J",
+    "fecha": "2026-07-01",
+    "hora": "15:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
+  },
+  {
+    "id_partido": 76,
+    "grupo": "Dieciseisavos",
+    "equipo_1": "Estados Unidos",
+    "equipo_2": "Bosnia y Herzegovina",
+    "fecha": "2026-07-01",
+    "hora": "19:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "estado": "pendiente"
   }
 ]

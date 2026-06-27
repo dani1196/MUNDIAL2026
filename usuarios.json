@@ -1,26 +1,74 @@
 [
     {
         "nombre": "Daniel",
-        "monedas": 183,
-        "dolares_depositados": 5,
+        "monedas": 20,
+        "dolares_depositados": 2,
         "pin": "1234"
     },
     {
         "nombre": "Daniela",
-        "monedas": 109,
-        "dolares_depositados": 7.0,
+        "monedas": 20,
+        "dolares_depositados": 2,
         "pin": "5678"
     },
     {
         "nombre": "Jorge",
-        "monedas": 724,
-        "dolares_depositados": 45.0,
+        "monedas": 20,
+        "dolares_depositados": 2,
+        "pin": "1514"
+    },
+    {
+        "nombre": "Iván Andrés",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0001"
+    },
+    {
+        "nombre": "Vane",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0002"
+    },
+    {
+        "nombre": "Iván",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0003"
+    },
+    {
+        "nombre": "Belén",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0005"
+    },
+    {
+        "nombre": "Carlitos",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0006"
+    },
+    {
+        "nombre": "Elo",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0007"
+    },
+    {
+        "nombre": "Albita",
+        "monedas": 0,
+        "dolares_depositados": 0,
+        "pin": "0008"
+    },
+    {
+        "nombre": "Jorge",
+        "monedas": 20,
+        "dolares_depositados": 2,
         "pin": "1514"
     },
     {
         "nombre": "Banco",
-        "monedas": -97,
-        "dolares_depositados": 57.0,
+        "monedas": 0,
+        "dolares_depositados": 6,
         "pin": "0000"
     }
 ]
