@@ -12,12 +12,6 @@
         "pin": "5678"
     },
     {
-        "nombre": "Jorge",
-        "monedas": 20,
-        "dolares_depositados": 2,
-        "pin": "1514"
-    },
-    {
         "nombre": "Iván Andrés",
         "monedas": 0,
         "dolares_depositados": 0,
