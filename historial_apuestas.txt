@@ -1,0 +1,2 @@
+[2026-06-27 14:49:32] APUESTA | Daniela | Partido 61 | Goles: 0-3 | Monto: 5
+[2026-06-27 14:49:46] APUESTA | Daniela | Partido 62 | Goles: 0-0 | Monto: 2

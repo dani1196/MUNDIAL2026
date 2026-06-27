@@ -1,0 +1,10 @@
+[
+    {
+        "id_transaccion": 1,
+        "usuario": "Jorge",
+        "dolares": 10.0,
+        "sobolevs": 100,
+        "fecha": "2026-06-27 18:21:16",
+        "estado": "pendiente"
+    }
+]
