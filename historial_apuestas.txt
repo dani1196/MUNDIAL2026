@@ -7,3 +7,5 @@
 [2026-06-27 18:14:44] APUESTA | Daniel | Partido 64 | Goles: 1-1 | Monto: 1
 [2026-06-27 18:15:56] APUESTA | Daniela | Partido 63 | Goles: 1-2 | Monto: 2
 [2026-06-27 18:16:56] APUESTA | Daniela | Partido 64 | Goles: 2-1 | Monto: 1
+[2026-06-27 20:33:24] APUESTA | Daniela | Partido 65 | Goles: 0-3 | Monto: 10
+[2026-06-27 20:33:57] APUESTA | Daniela | Partido 66 | Goles: 0-0 | Monto: 3
