@@ -5,7 +5,8 @@
         "goles_1_pronostico": 0,
         "goles_2_pronostico": 3,
         "monto_apostado": 5,
-        "puntos_ganados": 0
+        "puntos_ganados": 20,
+        "pagado": true
     },
     {
         "usuario": "Daniela",
@@ -13,7 +14,8 @@
         "goles_1_pronostico": 0,
         "goles_2_pronostico": 0,
         "monto_apostado": 2,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
@@ -21,7 +23,8 @@
         "goles_1_pronostico": 0,
         "goles_2_pronostico": 4,
         "monto_apostado": 7,
-        "puntos_ganados": 0
+        "puntos_ganados": 28,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
@@ -29,7 +32,8 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 3,
         "monto_apostado": 3,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
