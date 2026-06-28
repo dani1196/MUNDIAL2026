@@ -122,7 +122,8 @@
         "goles_1_pronostico": 1,
         "goles_2_pronostico": 2,
         "monto_apostado": 7,
-        "puntos_ganados": 0
+        "puntos_ganados": 42,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
@@ -130,7 +131,8 @@
         "goles_1_pronostico": 1,
         "goles_2_pronostico": 2,
         "monto_apostado": 20,
-        "puntos_ganados": 0
+        "puntos_ganados": 120,
+        "pagado": true
     },
     {
         "usuario": "Ivan",
