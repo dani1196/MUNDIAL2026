@@ -1073,7 +1073,7 @@ if nombres_jugadores:
                                             # 2. ACERTO DE DIFERENCIA EXACTA (x6)
                                             elif (g1_real - g2_real) == (
                                                 g1_pron - g2_pron
-                                            ) and g1_real != g2_real:
+                                            ):
                                                 multiplicador = 6
 
                                             # 3. ACERTO DE GANADOR / EMPATE NO EXACTO (x4)
