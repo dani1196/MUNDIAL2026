@@ -826,7 +826,10 @@ if nombres_jugadores:
                                         if ganancia > 0:
                                             if g1_real == g1_p and g2_real == g2_p:
                                                 texto_acierto = "🎯 Marcador Exacto"
-                                            elif (g1_real - g2_real) == (g1_p - g2_p):
+                                            # Agregamos la condición de que los goles reales no sean iguales
+                                            elif (g1_real - g2_real) == (
+                                                g1_p - g2_p
+                                            ) and g1_real != g2_real:
                                                 texto_acierto = "⚖️ Diferencia"
                                             else:
                                                 texto_acierto = "✅ Ganador"
@@ -1034,7 +1037,7 @@ if nombres_jugadores:
                                         st.rerun()
 
                     # ==========================================
-                    # REPARTICIÓN DE PREMIOS
+                    # REPARTICIÓN DE PREMIOS (CORREGIDO E INDENTADO)
                     # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Repartición de Premios")
@@ -1061,19 +1064,33 @@ if nombres_jugadores:
 
                                             multiplicador = 0
 
+                                            # 1. ACERTO EXACTO (x10)
                                             if (
                                                 g1_real == g1_pron
                                                 and g2_real == g2_pron
                                             ):
                                                 multiplicador = 10
+
+                                            # 2. ACERTO DE DIFERENCIA EXACTA (x6)
                                             elif (g1_real - g2_real) == (
                                                 g1_pron - g2_pron
-                                            ):
+                                            ) and g1_real != g2_real:
                                                 multiplicador = 6
+
+                                            # 3. ACERTO DE GANADOR / EMPATE NO EXACTO (x4)
                                             elif (
-                                                g1_real > g2_real and g1_pron > g2_pron
-                                            ) or (
-                                                g1_real < g2_real and g1_pron < g2_pron
+                                                (
+                                                    g1_real > g2_real
+                                                    and g1_pron > g2_pron
+                                                )
+                                                or (
+                                                    g1_real < g2_real
+                                                    and g1_pron < g2_pron
+                                                )
+                                                or (
+                                                    g1_real == g2_real
+                                                    and g1_pron == g2_pron
+                                                )
                                             ):
                                                 multiplicador = 4
 
@@ -1082,7 +1099,6 @@ if nombres_jugadores:
                                             pron["puntos_ganados"] = ganancia
                                             pron["pagado"] = True
 
-                                            # IMPRESIÓN DE DINERO: El banco solo crea y entrega el premio. El dinero de apuestas fallidas ya fue quemado.
                                             for u in usuarios:
                                                 if (
                                                     u["nombre"] == pron["usuario"]
@@ -1105,7 +1121,7 @@ if nombres_jugadores:
                             )
 
                     # ==========================================
-                    # RESPALDOS Y DESCARGAS DEL SISTEMA
+                    # RESPALDOS Y DESCARGAS DEL SISTEMA (FUERA DEL ELSE)
                     # ==========================================
                     st.markdown("---")
                     st.subheader("💾 Respaldos de la Base de Datos")
@@ -1174,7 +1190,6 @@ if nombres_jugadores:
                                     "text/plain",
                                     use_container_width=True,
                                 )
-
         elif pin_ingresado != "":
             st.error("❌ PIN incorrecto. No tienes autorización para ingresar.")
 else:
