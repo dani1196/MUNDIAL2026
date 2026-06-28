@@ -884,6 +884,30 @@ if nombres_jugadores:
                 * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
                 
                 **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
+                            
+                ---
+                            
+                ## 📜 EDICTO ESPECIAL: EL TRIUNFO DE LA FE 🇪🇨🔥
+                            
+                **A todos los participantes, visionarios, escépticos y matemáticos del fútbol:**
+
+                Se hace saber y se proclama ante toda la comunidad que la Selección de Ecuador nos ha recordado la lección más grande que el deporte —y la vida— nos puede enseñar. 
+
+                Considerando que: Mientras muchos sumaban números y analizaban estadísticas con la cabeza fría, un país entero jugaba con el corazón ardiendo. Celebramos más que tres puntos o una clasificación; celebramos el trinunfo sobre lo imposible.
+
+                Se pone en conocimiento de todos los siguientes decretos: 
+                
+                ### 📢 DECRETO PRIMERO: DE LO IMPOSIBLE 
+                Queda terminantemente prohibido volver a decir *"es imposible"*. Nos demostraron que **todo es imposible... hasta que se hace**. Las barreras solo existen en el papel, y la Tri las rompió en la cancha.
+
+                ### 📢 DECRETO SEGUNDO: EL PODER DE CREER
+                Se establece que, de ahora en adelante, **todo lo que somos capaces de soñar, somos capaces de lograrlo**. No importan los pronósticos en contra ni los dados cargados; el destino le pertenece a los que se atreven a creer hasta el último minuto del tiempo de descuento.
+
+                > 💡 **Nota de la localía:** Sigan llenando sus cartillas, sigan apostando por sus corazonadas. Que si Ecuador pudo romper la historia, cualquiera de ustedes puede remontar en la tabla de posiciones. 
+
+                Dado, firmado y sellado por el Comisionado en el fragor de la victoria. 
+
+                **¡SI SE PUDO, SI SE PUEDE Y SIEMPRE SE PODRÁ!**
                 """)
 
             # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---
