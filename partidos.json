@@ -358,9 +358,9 @@
     "equipo_2": "Suecia",
     "fecha": "2026-06-20",
     "hora": "12:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 5,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 34,
@@ -369,9 +369,9 @@
     "equipo_2": "Costa de Marfil",
     "fecha": "2026-06-20",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 35,
@@ -380,9 +380,9 @@
     "equipo_2": "Curazao",
     "fecha": "2026-06-20",
     "hora": "19:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 36,
@@ -391,9 +391,9 @@
     "equipo_2": "Japón",
     "fecha": "2026-06-20",
     "hora": "23:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 4,
+    "estado": "finalizado"
   },
   {
     "id_partido": 37,
@@ -402,9 +402,9 @@
     "equipo_2": "Arabia Saudita",
     "fecha": "2026-06-21",
     "hora": "11:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 4,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 38,
@@ -413,9 +413,9 @@
     "equipo_2": "Irán",
     "fecha": "2026-06-21",
     "hora": "14:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 39,
@@ -424,9 +424,9 @@
     "equipo_2": "Cabo Verde",
     "fecha": "2026-06-21",
     "hora": "17:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 40,
@@ -435,9 +435,9 @@
     "equipo_2": "Egipto",
     "fecha": "2026-06-21",
     "hora": "20:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 41,
@@ -446,9 +446,9 @@
     "equipo_2": "Austria",
     "fecha": "2026-06-22",
     "hora": "12:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 42,
@@ -457,9 +457,9 @@
     "equipo_2": "Irak",
     "fecha": "2026-06-22",
     "hora": "16:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 43,
@@ -468,9 +468,9 @@
     "equipo_2": "Senegal",
     "fecha": "2026-06-22",
     "hora": "19:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 44,
@@ -479,9 +479,9 @@
     "equipo_2": "Argelia",
     "fecha": "2026-06-22",
     "hora": "22:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 45,
@@ -490,9 +490,9 @@
     "equipo_2": "Uzbekistán",
     "fecha": "2026-06-23",
     "hora": "12:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 5,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 46,
@@ -501,9 +501,9 @@
     "equipo_2": "Ghana",
     "fecha": "2026-06-23",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 47,
@@ -512,9 +512,9 @@
     "equipo_2": "Croacia",
     "fecha": "2026-06-23",
     "hora": "18:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 48,
@@ -523,9 +523,9 @@
     "equipo_2": "RD del Congo",
     "fecha": "2026-06-23",
     "hora": "21:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 49,
@@ -534,9 +534,9 @@
     "equipo_2": "Canadá",
     "fecha": "2026-06-24",
     "hora": "14:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 50,
@@ -545,9 +545,9 @@
     "equipo_2": "Catar",
     "fecha": "2026-06-24",
     "hora": "14:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 51,
@@ -556,9 +556,9 @@
     "equipo_2": "Brasil",
     "fecha": "2026-06-24",
     "hora": "17:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 52,
@@ -567,9 +567,9 @@
     "equipo_2": "Haití",
     "fecha": "2026-06-24",
     "hora": "17:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 4,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 53,
@@ -578,9 +578,9 @@
     "equipo_2": "México",
     "fecha": "2026-06-24",
     "hora": "20:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 54,
@@ -589,9 +589,9 @@
     "equipo_2": "Corea del Sur",
     "fecha": "2026-06-24",
     "hora": "20:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 55,
@@ -600,9 +600,9 @@
     "equipo_2": "Alemania",
     "fecha": "2026-06-25",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 56,
@@ -611,9 +611,9 @@
     "equipo_2": "Costa de Marfil",
     "fecha": "2026-06-25",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 57,
@@ -622,9 +622,9 @@
     "equipo_2": "Países Bajos",
     "fecha": "2026-06-25",
     "hora": "18:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 58,
@@ -633,9 +633,9 @@
     "equipo_2": "Suecia",
     "fecha": "2026-06-25",
     "hora": "18:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 59,
@@ -644,9 +644,9 @@
     "equipo_2": "Estados Unidos",
     "fecha": "2026-06-25",
     "hora": "21:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 60,
@@ -655,9 +655,9 @@
     "equipo_2": "Australia",
     "fecha": "2026-06-25",
     "hora": "21:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 61,
