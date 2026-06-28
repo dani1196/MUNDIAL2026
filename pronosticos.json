@@ -66,5 +66,21 @@
         "goles_2_pronostico": 1,
         "monto_apostado": 1,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 65,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 3,
+        "monto_apostado": 10,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 66,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 0,
+        "monto_apostado": 3,
+        "puntos_ganados": 0
     }
 ]

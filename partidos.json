@@ -688,9 +688,9 @@
     "equipo_2": "Portugal",
     "fecha": "2026-06-27",
     "hora": "18:30",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "estado": "finalizado"
   },
   {
     "id_partido": 64,
@@ -699,9 +699,9 @@
     "equipo_2": "Uzbekistán",
     "fecha": "2026-06-27",
     "hora": "18:30",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 3,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 65,
