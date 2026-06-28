@@ -7,7 +7,7 @@
     },
     {
         "nombre": "Daniela",
-        "monedas": 10,
+        "monedas": 30,
         "dolares_depositados": 2,
         "pin": "5678"
     },
@@ -55,7 +55,7 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 100,
+        "monedas": 128,
         "dolares_depositados": 12.0,
         "pin": "1514"
     },
