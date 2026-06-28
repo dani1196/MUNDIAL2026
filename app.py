@@ -82,7 +82,7 @@ pronosticos = cargar_datos("pronosticos.json", [])
 df_usuarios = pd.DataFrame(usuarios)
 
 # ==========================================
-# CÁLCULO DE ESTADO DEL BANCO Y TASA DE CAMBIO
+# CÁLCULO DE TASA DE CAMBIO (SOBOLEVS POR USD)
 # ==========================================
 if not df_usuarios.empty and "Banco" in df_usuarios["nombre"].values:
     datos_banco = df_usuarios[df_usuarios["nombre"] == "Banco"].iloc[0]
@@ -90,16 +90,15 @@ if not df_usuarios.empty and "Banco" in df_usuarios["nombre"].values:
 else:
     dolares_reserva = 0.0
 
-tasa_base = 10.0
-
-# El cálculo de emisión ahora es puramente lo que la familia tiene en sus manos
+# Total de Sobolevs en manos de los usuarios
 total_sobolevs_emitidos = df_usuarios[df_usuarios["nombre"] != "Banco"]["monedas"].sum()
 
 if total_sobolevs_emitidos > 0 and dolares_reserva > 0:
-    respaldo = dolares_reserva / total_sobolevs_emitidos
-    tasa_actual = max(2.0, min(10.0, respaldo * 100))
+    # Calculamos cuántos Sobolevs da el banco por cada 1 dólar
+    sobolevs_por_dolar = total_sobolevs_emitidos / dolares_reserva
 else:
-    tasa_actual = tasa_base
+    # Tasa inicial por defecto si no hay dinero ni monedas aún
+    sobolevs_por_dolar = 10.0
 
 
 # ==========================================
@@ -107,7 +106,8 @@ else:
 # ==========================================
 st.title("🏆 Mundial 2026")
 
-st.metric(label="💵 1 USD equivale a", value=f"{tasa_actual:.2f} Sobolevs")
+# Mostramos el resultado del cálculo anterior
+st.metric(label="💵 $1 equivale", value=f"{sobolevs_por_dolar:.2f} Sobolevs")
 st.markdown("---")
 
 nombres_jugadores = [u["nombre"] for u in usuarios if u["nombre"] != "Banco"]
@@ -303,7 +303,9 @@ if nombres_jugadores:
                 dolares = st.number_input(
                     "Cantidad de Dólares a depositar ($)", min_value=1.0, step=1.0
                 )
-                sobolevs_comprados = int(dolares * tasa_actual)
+
+                # Modificamos esta línea para usar la nueva variable
+                sobolevs_comprados = int(dolares * sobolevs_por_dolar)
 
                 st.info(f"Recibirás **{sobolevs_comprados} Sobolevs**")
 
