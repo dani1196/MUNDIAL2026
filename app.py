@@ -101,6 +101,7 @@ if total_sobolevs_emitidos > 0 and dolares_reserva > 0:
 else:
     tasa_actual = tasa_base
 
+
 # ==========================================
 # INTERFAZ PRINCIPAL
 # ==========================================
@@ -827,9 +828,7 @@ if nombres_jugadores:
                                             if g1_real == g1_p and g2_real == g2_p:
                                                 texto_acierto = "🎯 Marcador Exacto"
                                             # Agregamos la condición de que los goles reales no sean iguales
-                                            elif (g1_real - g2_real) == (
-                                                g1_p - g2_p
-                                            ) and g1_real != g2_real:
+                                            elif (g1_real - g2_real) == (g1_p - g2_p):
                                                 texto_acierto = "⚖️ Diferencia"
                                             else:
                                                 texto_acierto = "✅ Ganador"
