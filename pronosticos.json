@@ -115,5 +115,29 @@
         "monto_apostado": 5,
         "puntos_ganados": 30,
         "pagado": true
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 67,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 7,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 67,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 20,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Ivan",
+        "id_partido": 68,
+        "goles_1_pronostico": 3,
+        "goles_2_pronostico": 0,
+        "monto_apostado": 22,
+        "puntos_ganados": 0
     }
 ]

@@ -1,20 +1,20 @@
 [
     {
         "nombre": "Daniel",
-        "monedas": 54,
+        "monedas": 34,
         "dolares_depositados": 2,
         "pin": "1234"
     },
     {
         "nombre": "Daniela",
-        "monedas": 79,
+        "monedas": 72,
         "dolares_depositados": 2,
         "pin": "5678"
     },
     {
         "nombre": "Ivan Andres",
-        "monedas": 0,
-        "dolares_depositados": 0,
+        "monedas": 44,
+        "dolares_depositados": 1.0,
         "pin": "0001"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
         "nombre": "Ivan",
-        "monedas": 0,
-        "dolares_depositados": 0,
+        "monedas": 22,
+        "dolares_depositados": 1.0,
         "pin": "0003"
     },
     {
@@ -62,7 +62,7 @@
     {
         "nombre": "Banco",
         "monedas": 0,
-        "dolares_depositados": 15.0,
+        "dolares_depositados": 17.0,
         "pin": "0000"
     }
 ]

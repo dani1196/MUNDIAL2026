@@ -14,3 +14,7 @@
 [2026-06-27 20:49:52] APUESTA | Jorge | Partido 65 | Goles: 0-4 | Monto: 31
 [2026-06-27 20:50:04] APUESTA | Jorge | Partido 65 | Goles: 0-4 | Monto: 100
 [2026-06-27 20:50:38] APUESTA | Jorge | Partido 66 | Goles: 0-0 | Monto: 5
+[2026-06-28 11:31:20] APUESTA | Daniela | Partido 67 | Goles: 1-2 | Monto: 6
+[2026-06-28 13:36:39] APUESTA | Daniel | Partido 67 | Goles: 1-2 | Monto: 20
+[2026-06-28 13:53:44] APUESTA | Daniela | Partido 67 | Goles: 1-2 | Monto: 7
+[2026-06-28 14:01:30] APUESTA | Ivan | Partido 68 | Goles: 3-0 | Monto: 22

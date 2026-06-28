@@ -6,5 +6,21 @@
         "sobolevs": 100,
         "fecha": "2026-06-27 18:21:16",
         "estado": "aprobado"
+    },
+    {
+        "id_transaccion": 2,
+        "usuario": "Ivan Andres",
+        "dolares": 1.0,
+        "sobolevs": 44,
+        "fecha": "2026-06-28 18:58:08",
+        "estado": "aprobado"
+    },
+    {
+        "id_transaccion": 3,
+        "usuario": "Ivan",
+        "dolares": 1.0,
+        "sobolevs": 44,
+        "fecha": "2026-06-28 18:58:53",
+        "estado": "aprobado"
     }
 ]
