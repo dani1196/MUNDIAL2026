@@ -30,5 +30,37 @@
         "goles_2_pronostico": 3,
         "monto_apostado": 3,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 63,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 5,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 64,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 1,
+        "monto_apostado": 1,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 63,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "monto_apostado": 2,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 64,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 1,
+        "monto_apostado": 1,
+        "puntos_ganados": 0
     }
 ]

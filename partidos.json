@@ -666,9 +666,9 @@
     "equipo_2": "Inglaterra",
     "fecha": "2026-06-27",
     "hora": "16:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 2,
+    "estado": "finalizado"
   },
   {
     "id_partido": 62,
@@ -677,9 +677,9 @@
     "equipo_2": "Ghana",
     "fecha": "2026-06-27",
     "hora": "16:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 2,
+    "goles_2_real": 1,
+    "estado": "finalizado"
   },
   {
     "id_partido": 63,

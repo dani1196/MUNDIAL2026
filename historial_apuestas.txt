@@ -3,3 +3,7 @@
 [2026-06-27 15:05:48] APUESTA | Jorge | Partido 61 | Goles: 0-4 | Monto: 7
 [2026-06-27 15:06:20] APUESTA | Jorge | Partido 62 | Goles: 2-3 | Monto: 3
 [2026-06-27 15:06:24] APUESTA | Jorge | Partido 62 | Goles: 2-3 | Monto: 3
+[2026-06-27 17:59:38] APUESTA | Daniel | Partido 63 | Goles: 1-2 | Monto: 5
+[2026-06-27 18:14:44] APUESTA | Daniel | Partido 64 | Goles: 1-1 | Monto: 1
+[2026-06-27 18:15:56] APUESTA | Daniela | Partido 63 | Goles: 1-2 | Monto: 2
+[2026-06-27 18:16:56] APUESTA | Daniela | Partido 64 | Goles: 2-1 | Monto: 1
