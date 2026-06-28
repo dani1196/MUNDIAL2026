@@ -86,5 +86,29 @@
         "goles_2_pronostico": 0,
         "monto_apostado": 3,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 65,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 4,
+        "monto_apostado": 10,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 65,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 4,
+        "monto_apostado": 100,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 66,
+        "goles_1_pronostico": 0,
+        "goles_2_pronostico": 0,
+        "monto_apostado": 5,
+        "puntos_ganados": 0
     }
 ]
