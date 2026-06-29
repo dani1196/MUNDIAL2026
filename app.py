@@ -209,7 +209,6 @@ if nombres_jugadores:
 
                 if mis_pronosticos:
                     historial_data = []
-                    # Leemos la lista al revés para que la apuesta más reciente salga arriba
                     for p in reversed(mis_pronosticos):
                         id_p = p["id_partido"]
                         g1 = p["goles_1_pronostico"]
@@ -217,8 +216,12 @@ if nombres_jugadores:
                         monto = p.get("monto_apostado", 0)
                         ganancia = p.get("puntos_ganados", 0)
                         pagado = p.get("pagado", False)
+                        
+                        # Manejo visual de penales
+                        penales_str = ""
+                        if p.get("penales_1_pronostico") is not None and p.get("penales_2_pronostico") is not None:
+                            penales_str = f" (P: {p['penales_1_pronostico']}-{p['penales_2_pronostico']})"
 
-                        # Determinar el estado visual de la apuesta
                         if ganancia > 0:
                             estado = "✅ Ganada"
                         elif pagado and ganancia == 0:
@@ -226,7 +229,6 @@ if nombres_jugadores:
                         else:
                             estado = "⏳ Pendiente"
 
-                        # Buscar los nombres de los equipos y banderas para que se vea profesional
                         equipo1, equipo2 = "Equipo 1", "Equipo 2"
                         b1, b2 = "🏳️", "🏳️"
                         for partido in partidos:
@@ -240,7 +242,7 @@ if nombres_jugadores:
                         historial_data.append(
                             {
                                 "Partido": f"{b1} {equipo1} vs {b2} {equipo2}",
-                                "Mi Pronóstico": f"{g1} - {g2}",
+                                "Mi Pronóstico": f"{g1} - {g2}{penales_str}",
                                 "Inversión": monto,
                                 "Retorno": ganancia if estado == "✅ Ganada" else "-",
                                 "Estado": estado,
@@ -304,7 +306,6 @@ if nombres_jugadores:
                     "Cantidad de Dólares a depositar ($)", min_value=1.0, step=1.0
                 )
 
-                # Modificamos esta línea para usar la nueva variable
                 sobolevs_comprados = int(dolares * sobolevs_por_dolar)
 
                 st.info(f"Recibirás **{sobolevs_comprados} Sobolevs**")
@@ -429,9 +430,11 @@ if nombres_jugadores:
                             )
 
                             if mi_apuesta:
-                                st.info(
-                                    f"📝 **Tu pronóstico:** {b1} {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {b2} {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs"
-                                )
+                                msj_apuesta = f"📝 **Tu pronóstico:** {b1} {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {b2} {equipo2}"
+                                if mi_apuesta.get("penales_1_pronostico") is not None:
+                                    msj_apuesta += f" | ⚽ Penales: **{mi_apuesta['penales_1_pronostico']} - {mi_apuesta['penales_2_pronostico']}**"
+                                msj_apuesta += f" | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs"
+                                st.info(msj_apuesta)
                             else:
                                 st.warning(
                                     "No registraste ningún pronóstico para este encuentro."
@@ -448,6 +451,8 @@ if nombres_jugadores:
                                 conteo_marcadores = {}
                                 for pron in apuestas_partido:
                                     marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    if pron.get("penales_1_pronostico") is not None:
+                                        marcador += f" (P: {pron['penales_1_pronostico']}-{pron['penales_2_pronostico']})"
                                     conteo_marcadores[marcador] = (
                                         conteo_marcadores.get(marcador, 0) + 1
                                     )
@@ -507,9 +512,11 @@ if nombres_jugadores:
 
                         st.markdown("---")
                         if pick_actual:
-                            st.info(
-                                f"👉 **Tu pick actual:** {b1} {equipo1} **{pick_actual['goles_1_pronostico']} - {pick_actual['goles_2_pronostico']}** {b2} {equipo2} | Inversión: **{pick_actual['monto_apostado']}** Sobolevs."
-                            )
+                            msj_pick = f"👉 **Tu pick actual:** {b1} {equipo1} **{pick_actual['goles_1_pronostico']} - {pick_actual['goles_2_pronostico']}** {b2} {equipo2}"
+                            if pick_actual.get("penales_1_pronostico") is not None:
+                                msj_pick += f" | ⚽ Penales: **{pick_actual['penales_1_pronostico']} - {pick_actual['penales_2_pronostico']}**"
+                            msj_pick += f" | Inversión: **{pick_actual['monto_apostado']}** Sobolevs."
+                            st.info(msj_pick)
 
                         with st.form(key=f"form_apuesta_{id_p}"):
                             st.write(
@@ -554,6 +561,24 @@ if nombres_jugadores:
                                 st.markdown(
                                     f"<h4>{b2} {equipo2}</h4>", unsafe_allow_html=True
                                 )
+
+                            # ==========================================
+                            # LÓGICA DE PENALES PARA ELIMINATORIAS
+                            # ==========================================
+                            es_eliminatoria = "Grupo" not in grupo
+                            penales_1, penales_2 = None, None
+                            
+                            if es_eliminatoria and goles1 == goles2:
+                                st.markdown("---")
+                                st.write("⚽ **¡Empate!** En fase eliminatoria, define el marcador de los penales:")
+                                col_p1, col_p2 = st.columns(2)
+                                with col_p1:
+                                    def_p1 = int(pick_actual.get("penales_1_pronostico", 0)) if pick_actual and pick_actual.get("penales_1_pronostico") is not None else 0
+                                    penales_1 = st.number_input(f"Penales {equipo1}", min_value=0, max_value=20, step=1, value=def_p1, key=f"p1_{id_p}")
+                                with col_p2:
+                                    def_p2 = int(pick_actual.get("penales_2_pronostico", 0)) if pick_actual and pick_actual.get("penales_2_pronostico") is not None else 0
+                                    penales_2 = st.number_input(f"Penales {equipo2}", min_value=0, max_value=20, step=1, value=def_p2, key=f"p2_{id_p}")
+                                st.markdown("---")
 
                             max_apuesta = int(saldo_usuario) if saldo_usuario > 0 else 1
                             default_monto = (
@@ -612,6 +637,8 @@ if nombres_jugadores:
 
                                             pron["goles_1_pronostico"] = goles1
                                             pron["goles_2_pronostico"] = goles2
+                                            pron["penales_1_pronostico"] = penales_1 if (es_eliminatoria and goles1 == goles2) else None
+                                            pron["penales_2_pronostico"] = penales_2 if (es_eliminatoria and goles1 == goles2) else None
                                             pron["monto_apostado"] = monto_apostado
                                             apuesta_existente = True
                                             break
@@ -623,6 +650,8 @@ if nombres_jugadores:
                                                 "id_partido": id_p,
                                                 "goles_1_pronostico": goles1,
                                                 "goles_2_pronostico": goles2,
+                                                "penales_1_pronostico": penales_1 if (es_eliminatoria and goles1 == goles2) else None,
+                                                "penales_2_pronostico": penales_2 if (es_eliminatoria and goles1 == goles2) else None,
                                                 "monto_apostado": monto_apostado,
                                                 "puntos_ganados": 0,
                                             }
@@ -635,7 +664,11 @@ if nombres_jugadores:
                                     guardar_datos("usuarios.json", usuarios)
                                     guardar_datos("pronosticos.json", pronosticos)
 
-                                    registro_apuesta = f"[{hora_verificacion.strftime('%Y-%m-%d %H:%M:%S')}] APUESTA | {usuario_actual} | Partido {id_p} | Goles: {goles1}-{goles2} | Monto: {monto_apostado}\n"
+                                    registro_apuesta = f"[{hora_verificacion.strftime('%Y-%m-%d %H:%M:%S')}] APUESTA | {usuario_actual} | Partido {id_p} | Goles: {goles1}-{goles2}"
+                                    if penales_1 is not None and penales_2 is not None:
+                                        registro_apuesta += f" | Penales: {penales_1}-{penales_2}"
+                                    registro_apuesta += f" | Monto: {monto_apostado}\n"
+                                    
                                     with open(
                                         "historial_apuestas.txt", "a", encoding="utf-8"
                                     ) as f_log:
@@ -650,9 +683,13 @@ if nombres_jugadores:
                                         )
                                         - monto_apostado
                                     )
-                                    st.session_state["mensaje_exito"] = (
-                                        f"🎯 ¡Pronóstico guardado! {b1} {equipo1} **{goles1} - {goles2}** {b2} {equipo2} por **{monto_apostado}** Sobolevs. Tu saldo disponible restante es: 💰 **{saldo_restante} Sobolevs**."
-                                    )
+                                    
+                                    msj_exito = f"🎯 ¡Pronóstico guardado! {b1} {equipo1} **{goles1} - {goles2}** {b2} {equipo2}"
+                                    if penales_1 is not None:
+                                        msj_exito += f" | ⚽ Penales: **{penales_1} - {penales_2}**"
+                                    msj_exito += f" por **{monto_apostado}** Sobolevs. Tu saldo restante es: 💰 **{saldo_restante} Sobolevs**."
+                                    
+                                    st.session_state["mensaje_exito"] = msj_exito
                                     st.rerun()
                                 else:
                                     st.error("❌ No tienes suficientes Sobolevs.")
@@ -679,9 +716,10 @@ if nombres_jugadores:
                             f"Partido {id_p} ({grupo}): {b1} {equipo1} vs {b2} {equipo2} - Finalizado"
                         ):
                             if estado_json == "finalizado":
-                                st.success(
-                                    f"**Resultado Final Oficial:** {b1} {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {b2} {equipo2}"
-                                )
+                                res_oficial = f"**Resultado Oficial:** {b1} {equipo1} **{p.get('goles_1_real')} - {p.get('goles_2_real')}** {b2} {equipo2}"
+                                if p.get('penales_1_real') is not None:
+                                    res_oficial += f" | ⚽ Penales: **{p.get('penales_1_real')} - {p.get('penales_2_real')}**"
+                                st.success(res_oficial)
                             else:
                                 st.warning(
                                     "⏳ Esperando que la administradora registre el resultado oficial para pagar los premios."
@@ -698,9 +736,12 @@ if nombres_jugadores:
                             )
 
                             if mi_apuesta:
-                                st.info(
-                                    f"📝 **Tu pronóstico:** {b1} {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {b2} {equipo2} | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs"
-                                )
+                                msj_apuesta = f"📝 **Tu pronóstico:** {b1} {equipo1} **{mi_apuesta['goles_1_pronostico']} - {mi_apuesta['goles_2_pronostico']}** {b2} {equipo2}"
+                                if mi_apuesta.get("penales_1_pronostico") is not None:
+                                    msj_apuesta += f" | ⚽ Penales: **{mi_apuesta['penales_1_pronostico']} - {mi_apuesta['penales_2_pronostico']}**"
+                                msj_apuesta += f" | Inversión: **{mi_apuesta.get('monto_apostado', 0)}** Sobolevs"
+                                
+                                st.info(msj_apuesta)
                                 if estado_json == "finalizado":
                                     st.write(
                                         f"🏆 Ganancia obtenida: **{mi_apuesta.get('puntos_ganados', 0)} Sobolevs**"
@@ -721,6 +762,8 @@ if nombres_jugadores:
                                 conteo_marcadores = {}
                                 for pron in apuestas_partido:
                                     marcador = f"{pron['goles_1_pronostico']} - {pron['goles_2_pronostico']}"
+                                    if pron.get("penales_1_pronostico") is not None:
+                                        marcador += f" (P: {pron['penales_1_pronostico']}-{pron['penales_2_pronostico']})"
                                     conteo_marcadores[marcador] = (
                                         conteo_marcadores.get(marcador, 0) + 1
                                     )
@@ -804,6 +847,8 @@ if nombres_jugadores:
                         equipo2 = p["equipo_2"]
                         g1_real = p.get("goles_1_real")
                         g2_real = p.get("goles_2_real")
+                        p1_real = p.get("penales_1_real")
+                        p2_real = p.get("penales_2_real")
 
                         b1 = banderas.get(equipo1, "🏳️")
                         b2 = banderas.get(equipo2, "🏳️")
@@ -816,30 +861,41 @@ if nombres_jugadores:
                             ]
 
                             if apuestas_partido:
-                                with st.expander(
-                                    f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"
-                                ):
+                                titulo_exp = f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"
+                                if p1_real is not None:
+                                    titulo_exp += f" (P: {p1_real}-{p2_real})"
+                                    
+                                with st.expander(titulo_exp):
                                     datos_desglose = []
 
                                     for pron in apuestas_partido:
                                         g1_p = pron["goles_1_pronostico"]
                                         g2_p = pron["goles_2_pronostico"]
+                                        p1_p = pron.get("penales_1_pronostico")
+                                        p2_p = pron.get("penales_2_pronostico")
                                         ganancia = pron.get("puntos_ganados", 0)
+                                        monto = pron.get("monto_apostado", 1)
 
+                                        # Determinamos el texto según el multiplicador pagado
                                         if ganancia > 0:
-                                            if g1_real == g1_p and g2_real == g2_p:
+                                            if ganancia == (monto * 15):
+                                                texto_acierto = "🔥 Penales Exactos"
+                                            elif ganancia == (monto * 10):
                                                 texto_acierto = "🎯 Marcador Exacto"
-                                            # Agregamos la condición de que los goles reales no sean iguales
-                                            elif (g1_real - g2_real) == (g1_p - g2_p):
+                                            elif ganancia == (monto * 6):
                                                 texto_acierto = "⚖️ Diferencia"
                                             else:
                                                 texto_acierto = "✅ Ganador"
                                         else:
                                             texto_acierto = "❌ Fallo"
 
+                                        pron_str = f"{g1_p} - {g2_p}"
+                                        if p1_p is not None:
+                                            pron_str += f" (P: {p1_p}-{p2_p})"
+                                            
                                         datos_desglose.append(
                                             {
-                                                "Pronóstico": f"{g1_p} - {g2_p}",
+                                                "Pronóstico": pron_str,
                                                 "Resultado": texto_acierto,
                                             }
                                         )
@@ -851,9 +907,8 @@ if nombres_jugadores:
                                         hide_index=True,
                                     )
                             else:
-                                with st.expander(
-                                    f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"
-                                ):
+                                titulo_exp = f"✅ Partido {id_p}: {b1} {equipo1} {g1_real} - {g2_real} {b2} {equipo2}"
+                                with st.expander(titulo_exp):
                                     st.write(
                                         "Ningún familiar registró pronósticos para este encuentro."
                                     )
@@ -866,6 +921,7 @@ if nombres_jugadores:
                 )
 
                 st.markdown("""
+                * **🔥 Acierto de Penales (x15):** En eliminatorias, aciertas el empate del partido y el marcador exacto de la tanda de penales. Tu inversión se multiplica por 15.
                 * **🎯 Acierto de Marcador (x10):** Adivinas los goles exactos de ambos equipos. *(Ej: Pronosticas 2-1 y termina 2-1)*. Tu inversión se multiplica por 10.
                 * **⚖️ Acierto de Diferencia (x6):** Adivinas el ganador y la diferencia de goles exacta (o el empate). *(Ej: Pronosticas 2-0 y termina 3-1, la diferencia de goles es +2)*. Tu inversión se multiplica por 6.
                 * **✅ Acierto de Ganador (x4):** Solo adivinas quién gana o si hay empate, pero fallas la diferencia. *(Ej: Pronosticas 1-0 y termina 3-0)*. Tu inversión se multiplica por 4.
@@ -1038,7 +1094,7 @@ if nombres_jugadores:
                                         st.rerun()
 
                     # ==========================================
-                    # REPARTICIÓN DE PREMIOS (CORREGIDO E INDENTADO)
+                    # REPARTICIÓN DE PREMIOS 
                     # ==========================================
                     st.markdown("---")
                     st.subheader("🏦 Repartición de Premios")
@@ -1053,6 +1109,8 @@ if nombres_jugadores:
                             if p.get("estado") == "finalizado":
                                 g1_real = p.get("goles_1_real")
                                 g2_real = p.get("goles_2_real")
+                                p1_real = p.get("penales_1_real")
+                                p2_real = p.get("penales_2_real")
 
                                 if g1_real is not None and g2_real is not None:
                                     for pron in pronosticos:
@@ -1061,21 +1119,25 @@ if nombres_jugadores:
                                         ] and not pron.get("pagado", False):
                                             g1_pron = pron["goles_1_pronostico"]
                                             g2_pron = pron["goles_2_pronostico"]
+                                            p1_pron = pron.get("penales_1_pronostico")
+                                            p2_pron = pron.get("penales_2_pronostico")
                                             monto = pron.get("monto_apostado", 0)
 
                                             multiplicador = 0
 
-                                            # 1. ACERTO EXACTO (x10)
-                                            if (
-                                                g1_real == g1_pron
-                                                and g2_real == g2_pron
-                                            ):
+                                            # 0. ACERTO DE PENALES EXACTOS (x15)
+                                            if (g1_real == g2_real) and (g1_pron == g2_pron) and p1_real is not None and p2_real is not None:
+                                                if (p1_real == p1_pron) and (p2_real == p2_pron):
+                                                    multiplicador = 15
+                                                else:
+                                                    multiplicador = 10 # Falló penales exactos pero acertó el empate de los 120 mins
+                                                    
+                                            # 1. ACERTO EXACTO NORMAL (x10)
+                                            elif (g1_real == g1_pron and g2_real == g2_pron) and multiplicador == 0:
                                                 multiplicador = 10
 
                                             # 2. ACERTO DE DIFERENCIA EXACTA (x6)
-                                            elif (g1_real - g2_real) == (
-                                                g1_pron - g2_pron
-                                            ):
+                                            elif (g1_real - g2_real) == (g1_pron - g2_pron) and multiplicador == 0:
                                                 multiplicador = 6
 
                                             # 3. ACERTO DE GANADOR / EMPATE NO EXACTO (x4)
@@ -1092,7 +1154,7 @@ if nombres_jugadores:
                                                     g1_real == g2_real
                                                     and g1_pron == g2_pron
                                                 )
-                                            ):
+                                            ) and multiplicador == 0:
                                                 multiplicador = 4
 
                                             ganancia = monto * multiplicador
@@ -1122,7 +1184,7 @@ if nombres_jugadores:
                             )
 
                     # ==========================================
-                    # RESPALDOS Y DESCARGAS DEL SISTEMA (FUERA DEL ELSE)
+                    # RESPALDOS Y DESCARGAS DEL SISTEMA 
                     # ==========================================
                     st.markdown("---")
                     st.subheader("💾 Respaldos de la Base de Datos")

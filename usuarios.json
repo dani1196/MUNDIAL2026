@@ -25,7 +25,7 @@
     },
     {
         "nombre": "Ivan",
-        "monedas": 90,
+        "monedas": 70,
         "dolares_depositados": 1.0,
         "pin": "0003"
     },
@@ -55,7 +55,7 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 458,
+        "monedas": 433,
         "dolares_depositados": 11.0,
         "pin": "1514"
     },
