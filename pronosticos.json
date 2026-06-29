@@ -166,7 +166,7 @@
         "id_partido": 69,
         "goles_1_pronostico": 3,
         "goles_2_pronostico": 0,
-        "monto_apostado": 20,
+        "monto_apostado": 100,
         "puntos_ganados": 0
     },
     {
@@ -182,7 +182,15 @@
         "id_partido": 69,
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
-        "monto_apostado": 50,
+        "monto_apostado": 100,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 69,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 0,
+        "monto_apostado": 100,
         "puntos_ganados": 0
     }
 ]
