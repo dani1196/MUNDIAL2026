@@ -140,7 +140,8 @@
         "goles_1_pronostico": 3,
         "goles_2_pronostico": 0,
         "monto_apostado": 22,
-        "puntos_ganados": 0
+        "puntos_ganados": 88,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
@@ -148,7 +149,8 @@
         "goles_1_pronostico": 3,
         "goles_2_pronostico": 0,
         "monto_apostado": 50,
-        "puntos_ganados": 0
+        "puntos_ganados": 200,
+        "pagado": true
     },
     {
         "usuario": "Daniela",
@@ -156,7 +158,8 @@
         "goles_1_pronostico": 3,
         "goles_2_pronostico": 1,
         "monto_apostado": 10,
-        "puntos_ganados": 0
+        "puntos_ganados": 40,
+        "pagado": true
     },
     {
         "usuario": "Daniela",
@@ -172,6 +175,14 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
         "monto_apostado": 20,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 69,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 0,
+        "monto_apostado": 50,
         "puntos_ganados": 0
     }
 ]
