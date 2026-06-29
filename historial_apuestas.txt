@@ -18,3 +18,9 @@
 [2026-06-28 13:36:39] APUESTA | Daniel | Partido 67 | Goles: 1-2 | Monto: 20
 [2026-06-28 13:53:44] APUESTA | Daniela | Partido 67 | Goles: 1-2 | Monto: 7
 [2026-06-28 14:01:30] APUESTA | Ivan | Partido 68 | Goles: 3-0 | Monto: 22
+[2026-06-29 09:06:47] APUESTA | Daniel | Partido 68 | Goles: 3-0 | Monto: 30
+[2026-06-29 09:07:26] APUESTA | Daniel | Partido 68 | Goles: 3-0 | Monto: 50
+[2026-06-29 09:10:45] APUESTA | Daniela | Partido 68 | Goles: 3-1 | Monto: 10
+[2026-06-29 09:10:57] APUESTA | Daniela | Partido 69 | Goles: 3-0 | Monto: 12
+[2026-06-29 09:11:16] APUESTA | Daniela | Partido 69 | Goles: 3-0 | Monto: 20
+[2026-06-29 12:33:59] APUESTA | Ivan | Partido 69 | Goles: 2-0 | Monto: 20
