@@ -978,16 +978,39 @@ if nombres_jugadores:
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
                 st.markdown("""
-                ### ¡Bienvenidos a la gloria eterna! 🌍⚽
-                
-                Se le informa a toda la familia que el **Banco Central del Sobolev** ha entrado en fase de máxima emisión. 
-                
-                * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a quien lidere la tabla, aunque dudamos que acepte Sobolevs.
-                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos.
-                * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
-                
-                **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
                             
+                📜 ¡EDICTO OFICIAL No. 3!
+                ## *Día de Milagros, Penales y Gigantes Caídos*
+
+                ¡Atención, comunidad de apostadores!
+
+                Que conste en los registros de la historia de los Mundiales que el día de hoy las pizarras se rompieron, los pronósticos saltaron por los aires y la suerte del día de hoy nos recordó por qué este juego es el más hermoso —y a veces el más cruel— del mundo. 
+
+                Si tu cartilla de apuestas terminó hoy en el suelo, no estás solo. Hoy se dictó una lección magistral: **en este deporte, lo improbable es solo el prólogo de lo que está por suceder.**
+
+                ---
+
+                ### 🏛️ El Resumen de la Jornada
+
+                *   **¡Súper Campeones en la vida real! 🇯🇵 vs 🇧🇷**  
+                    El primer choque del día nos regaló un espectáculo digno de un guión de anime. Brasil y Japón revivieron aquella mítica final inconclusa de la televisión. Más allá del resultado, la selección nipona nos dio a todos una cátedra que trasciende la cancha: un ejemplo absoluto de **cultura, educación, orden y compromiso**. ¡Un aplauso de pie para los samuráis azules!
+
+                *   **El drama del alargue europeo 🥵**  
+                    Alemania y Países Bajos llegaron al campo con el cartel de favoritos indiscutibles. Nadie previó el drama: ambos colosos del Viejo Continente se vieron arrastrados al agotador terreno de los tiempos de alargue, desgastando hasta la última gota de sudor ante rivales que se negaron a morir.
+
+                *   **¡La hazaña Guaraní! 🇵🇾 🔨 🇩🇪**  
+                    Paraguay firmó la primera gran epopeya. Resistieron la presión de la gigante Alemania, aguantaron con el corazón en la mano y, de nuevo en la ruleta de los penales, la garra guaraní hizo historia. **¡Alemania a casa!**
+                    
+                *   **¡Marruecos hace rugir al Atlas! 🇲🇦 ❌ 🇳🇱**  
+                    Y para cerrar un día de locos, los Países Bajos no pudieron descifrar el cerrojo marroquí en los 120 minutos. El destino se selló en la tanda de penales, donde la templanza y el corazón de los Leones del Atlas dejaron congelada a la Naranja Mecánica. **¡Marruecos elimina a una potencia y desata la locura!**
+
+                ---
+
+               Por todo lo expresado anteriormente, el comisionado informa de manera oficial a toda la comunidad que la masiva caída de favoritos y las consecuentes apuestas perdidas del día de hoy han servido, milagrosamente, para financiar la creciente recuperación del valor del Sobolev. 
+
+Queda así certificado ante este comité que el balón hace absolutamente lo que quiere, que la lógica se rinde ante la pasión y que, definitivamente, **no existe enemigo pequeño** en esta competencia. 
+
+    
                 ---
                             
                 ## 📜 EDICTO ESPECIAL: EL TRIUNFO DE LA FE 🇪🇨🔥
@@ -1011,6 +1034,21 @@ if nombres_jugadores:
                 Dado, firmado y sellado por el Comisionado en el fragor de la victoria. 
 
                 **¡SI SE PUDO, SI SE PUEDE Y SIEMPRE SE PODRÁ!**
+                
+                ---
+                ### ¡Bienvenidos a la gloria eterna! 🌍⚽
+                
+                Se le informa a toda la familia que el **Banco Central del Sobolev** ha entrado en fase de máxima emisión. 
+                
+                * **La regla es clara:** Si no apuestas, no existes. Si apuestas y pierdes, bueno... siempre puedes intentar pedirle un préstamo a quien lidere la tabla, aunque dudamos que acepte Sobolevs.
+                * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos.
+                * **Mensaje motivacional:** No importa si tu pronóstico parece hecho por alguien que nunca ha visto un balón en su vida; ¡a veces la suerte favorece a los que no tienen ni idea!
+                
+                **¡Que empiece el juego, que corran los Sobolevs y que gane el que menos se equivoque!** 🚀
+                            
+                ---
+                            
+                
                 """)
 
             # --- PESTAÑA: CONTROL (Exclusiva para Administradora) ---

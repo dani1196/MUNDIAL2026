@@ -771,11 +771,11 @@
     "equipo_2": "Marruecos",
     "fecha": "2026-06-29",
     "hora": "20:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "penales_1_real": null,
-    "penales_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 1,
+    "penales_1_real": 2,
+    "penales_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 71,
