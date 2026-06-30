@@ -167,7 +167,8 @@
         "goles_1_pronostico": 3,
         "goles_2_pronostico": 0,
         "monto_apostado": 100,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Ivan",
@@ -175,7 +176,8 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
         "monto_apostado": 20,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
@@ -183,7 +185,8 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
         "monto_apostado": 100,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
@@ -191,7 +194,8 @@
         "goles_1_pronostico": 2,
         "goles_2_pronostico": 0,
         "monto_apostado": 100,
-        "puntos_ganados": 0
+        "puntos_ganados": 0,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
