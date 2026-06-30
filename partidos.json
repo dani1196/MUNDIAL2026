@@ -758,10 +758,10 @@
     "equipo_2": "Paraguay",
     "fecha": "2026-06-29",
     "hora": "15:30",
-    "goles_1_real": 3,
-    "goles_2_real": 4,
-    "penales_1_real": null,
-    "penales_2_real": null,
+    "goles_1_real": 1,
+    "goles_2_real": 1,
+    "penales_1_real": 3,
+    "penales_2_real": 4,
     "estado": "finalizado"
   },
   {
