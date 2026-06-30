@@ -797,11 +797,11 @@
     "equipo_2": "Suecia",
     "fecha": "2026-06-30",
     "hora": "16:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 3,
+    "goles_2_real": 1,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 73,
