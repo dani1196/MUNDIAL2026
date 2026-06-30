@@ -784,11 +784,11 @@
     "equipo_2": "Noruega",
     "fecha": "2026-06-30",
     "hora": "12:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 1,
+    "goles_2_real": 2,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 72,
