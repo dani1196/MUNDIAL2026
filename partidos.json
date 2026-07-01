@@ -836,11 +836,11 @@
     "equipo_2": "Senegal",
     "fecha": "2026-07-01",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 3,
+    "goles_2_real": 2,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 76,
