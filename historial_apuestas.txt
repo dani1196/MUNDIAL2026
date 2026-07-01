@@ -49,3 +49,5 @@
 [2026-06-30 10:44:50] APUESTA | Jorge | Partido 74 | Goles: 3-2 | Monto: 100
 [2026-06-30 14:14:04] APUESTA | Ivan | Partido 72 | Goles: 3-1 | Monto: 20
 [2026-06-30 14:14:54] APUESTA | Ivan | Partido 73 | Goles: 0-2 | Monto: 30
+[2026-07-01 12:47:05] APUESTA | Ivan | Partido 75 | Goles: 1-2 | Monto: 20
+[2026-07-01 12:49:47] APUESTA | Ivan | Partido 76 | Goles: 3-1 | Monto: 30
