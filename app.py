@@ -978,6 +978,42 @@ if nombres_jugadores:
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
                 st.markdown("""
+            
+            📜 ¡EDICTO OFICIAL No. 4!
+            ## *RESILIENCIA*
+
+            ¡Atención, comunidad de apostadores y sobrevivientes de la parley!
+
+            ### 🏛️ El Resumen del Trago Amargo
+
+            * **La Tri cayó con las botas puestas 🇪🇨💔**  
+            El análisis de la comunidad era el correcto, la victoria estaba a nuestro alcance, pero el destino fue caprichoso. Nos despedimos del torneo con el orgullo intacto. 
+
+            * **La alegría ajena (y el negocio) de los Aztecas 🇲🇽🦅**  
+            México descifró el cerrojo en un partido de dientes apretados. Festejan ellos, pero nos dejan la certeza de que el fútbol da revanchas. Mientras tanto, la masiva caída de las apuestas a favor de la Tri ha servido, milagrosamente, para estabilizar los fondos de contingencia del **Banco Central del Sobolev**.
+                                  
+            *Considerando que:* el torneo no se detiene, que la pelota sigue rodando y que las cuotas de los partidos restantes esperan a aquellos que tienen la sangre fría para encontrar la próxima gran oportunidad, el Comisionado pone en conocimiento de todos los siguientes decretos obligatorios: 
+
+            ### 📢 DECRETO PRIMERO: PROHIBICIÓN ABSOLUTA DE LA DERROTA MENTAL
+            Queda terminantemente prohibido albergar pensamientos de derrota, lamentos tardíos o abandonar la competencia por despecho futbolístico. Un verdadero apostador no se define por un pronósitico equivocado; se define por cómo se levanta, analiza el siguiente partido y vuelve a meterle fe a la cartilla. El luto terminó al pitazo final; hoy se vuelve a estudiar la pizarra.
+
+            ### 📢 DECRETO SEGUNDO: EL GOCE DEL BUEN FÚTBOL
+            Se establece como mandato divino **seguir disfrutando de cada uno de los partidos restantes del campeonato**. El mundial sigue siendo una fiesta. Se ordena sintonizar los cuartos de final con la cabeza fría, los ojos abiertos para detectar el 'value' en las cuotas, y una buena bebida en la mano. 
+
+            Dado, firmado y sellado por el Comisionado, con el corazón golpeado pero la billetera lista para la revancha. 
+
+            **¡PERDIMOS UNA BATALLA, PERO LA ESTRATEGIA PARA GANAR LA GUERRA SIGUE INTACTA!**
+                               
+            ---
+            ### ¡El show debe continuar! 🌍⚽
+                                
+            Se le recuerda a toda la familia que el mercado sigue abierto y el arbitraje de Sobolevs no duerme:
+                                
+            * **La regla de oro:** Si no apuestas, no existes. Si te retiras ahora por un corazón roto, verás a los demás quedarse con el pozo de la gloria.
+            * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos con los partidos que quedan.
+            * **Mensaje del Comisionado:** No importa si tu próximo pronóstico parece hecho por alguien que todavía está llorando por el partido de Ecuador; ¡el fútbol es sabio y la suerte favorece a los que insisten!
+                                
+            **¡Que no muera el juego, que sigan corriendo los Sobolevs y que la gestión de riesgo nos acompañe hasta la final!** 🚀
             📜 ¡EDICTO OFICIAL No. 3!
             ## *Día de Milagros, Penales y Gigantes Caídos*
 
@@ -986,8 +1022,6 @@ if nombres_jugadores:
             Que conste en los registros de la historia de los Mundiales que el día de hoy las pizarras se rompieron, los pronósticos saltaron por los aires y la suerte del día de hoy nos recordó por qué este juego es el más hermoso —y a veces el más cruel— del mundo. 
 
             Si tu cartilla de apuestas terminó hoy en el suelo, no estás solo. Hoy se dictó una lección magistral: **en este deporte, lo improbable es solo el prólogo de lo que está por suceder.**
-
-            ---
 
             ### 🏛️ El Resumen de la Jornada
 
@@ -1003,7 +1037,6 @@ if nombres_jugadores:
             * **¡Marruecos hace rugir al Atlas! 🇲🇦 ❌ 🇳🇱**  
             Y para cerrar un día de locos, los Países Bajos no pudieron descifrar el cerrojo marroquí en los 120 minutos. El destino se selló en la tanda de penales, donde la templanza y el corazón de los Leones del Atlas dejaron congelada a la Naranja Mecánica. **¡Marruecos elimina a una potencia y desata la locura!**
 
-            ---
 
             Por todo lo expresado anteriormente, el comisionado informa de manera oficial a toda la comunidad que la masiva caída de favoritos y las consecuentes apuestas perdidas del día de hoy han servido, milagrosamente, para financiar la creciente recuperación del valor del Sobolev. 
 
