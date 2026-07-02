@@ -58,3 +58,11 @@
 [2026-07-01 13:50:36] APUESTA | Daniela | Partido 76 | Goles: 2-1 | Monto: 10
 [2026-07-01 14:14:27] APUESTA | Daniel | Partido 75 | Goles: 2-0 | Monto: 20
 [2026-07-01 14:30:24] APUESTA | Daniela | Partido 75 | Goles: 1-2 | Monto: 5
+[2026-07-02 09:10:56] APUESTA | Daniela | Partido 77 | Goles: 3-1 | Monto: 15
+[2026-07-02 10:28:40] APUESTA | Daniel | Partido 77 | Goles: 3-0 | Monto: 60
+[2026-07-02 10:46:51] APUESTA | Ivan | Partido 77 | Goles: 2-1 | Monto: 10
+[2026-07-02 10:47:19] APUESTA | Ivan | Partido 78 | Goles: 2-1 | Monto: 10
+[2026-07-02 10:47:54] APUESTA | Ivan | Partido 79 | Goles: 1-2 | Monto: 10
+[2026-07-02 11:18:16] APUESTA | Jorge | Partido 77 | Goles: 3-1 | Monto: 500
+[2026-07-02 11:18:56] APUESTA | Jorge | Partido 78 | Goles: 3-1 | Monto: 400
+[2026-07-02 11:19:44] APUESTA | Jorge | Partido 79 | Goles: 3-2 | Monto: 23

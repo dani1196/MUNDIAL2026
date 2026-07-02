@@ -998,7 +998,7 @@ if nombres_jugadores:
             Queda terminantemente prohibido albergar pensamientos de derrota, lamentos tardíos o abandonar la competencia por despecho futbolístico. Un verdadero apostador no se define por un pronósitico equivocado; se define por cómo se levanta, analiza el siguiente partido y vuelve a meterle fe a la cartilla. El luto terminó al pitazo final; hoy se vuelve a estudiar la pizarra.
 
             ### 📢 DECRETO SEGUNDO: EL GOCE DEL BUEN FÚTBOL
-            Se establece como mandato divino **seguir disfrutando de cada uno de los partidos restantes del campeonato**. El mundial sigue siendo una fiesta. Se ordena sintonizar los cuartos de final con la cabeza fría, los ojos abiertos para detectar el 'value' en las cuotas, y una buena bebida en la mano. 
+            Se establece como mandato divino **seguir disfrutando de cada uno de los partidos restantes del campeonato**. El mundial sigue siendo una fiesta. Se ordena sintonizar los dieciseisavos de final con la cabeza fría, los ojos abiertos para detectar el 'value' en las cuotas, y una buena bebida en la mano. 
 
             Dado, firmado y sellado por el Comisionado, con el corazón golpeado pero la billetera lista para la revancha. 
 
