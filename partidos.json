@@ -849,11 +849,11 @@
     "equipo_2": "Bosnia y Herzegovina",
     "fecha": "2026-07-01",
     "hora": "19:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 2,
+    "goles_2_real": 0,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 77,
