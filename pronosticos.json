@@ -474,7 +474,7 @@
         "goles_2_pronostico": 2,
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
-        "monto_apostado": 23,
+        "monto_apostado": 500,
         "puntos_ganados": 0
     },
     {
@@ -527,6 +527,16 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 10,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 79,
+        "goles_1_pronostico": 2,
+        "goles_2_pronostico": 1,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 20,
         "puntos_ganados": 0
     }
 ]
