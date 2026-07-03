@@ -875,11 +875,11 @@
     "equipo_2": "Croacia",
     "fecha": "2026-07-02",
     "hora": "18:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 2,
+    "goles_2_real": 1,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 79,
