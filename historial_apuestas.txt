@@ -84,3 +84,5 @@
 [2026-07-03 10:44:25] APUESTA | Daniel | Partido 82 | Goles: 2-1 | Monto: 100
 [2026-07-03 10:44:27] APUESTA | Daniel | Partido 81 | Goles: 2-0 | Monto: 200
 [2026-07-03 10:44:30] APUESTA | Daniel | Partido 80 | Goles: 0-2 | Monto: 100
+[2026-07-03 14:44:34] APUESTA | Jorge | Partido 81 | Goles: 5-0 | Monto: 5000
+[2026-07-03 14:45:01] APUESTA | Jorge | Partido 82 | Goles: 3-2 | Monto: 123

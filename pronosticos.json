@@ -583,5 +583,25 @@
         "penales_2_pronostico": null,
         "monto_apostado": 100,
         "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 81,
+        "goles_1_pronostico": 5,
+        "goles_2_pronostico": 0,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 5000,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 82,
+        "goles_1_pronostico": 3,
+        "goles_2_pronostico": 2,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 123,
+        "puntos_ganados": 0
     }
 ]

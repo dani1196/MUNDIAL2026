@@ -55,7 +55,7 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 5123,
+        "monedas": 0,
         "dolares_depositados": 11.0,
         "pin": "1514"
     },
