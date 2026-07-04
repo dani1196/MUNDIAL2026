@@ -531,7 +531,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 10,
-        "puntos_ganados": 0
+        "puntos_ganados": 40,
+        "pagado": true
     },
     {
         "usuario": "Daniela",
@@ -574,7 +575,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 200,
-        "puntos_ganados": 0
+        "puntos_ganados": 800,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
@@ -594,7 +596,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 5000,
-        "puntos_ganados": 0
+        "puntos_ganados": 20000,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
@@ -614,7 +617,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 80,
-        "puntos_ganados": 0
+        "puntos_ganados": 320,
+        "pagado": true
     },
     {
         "usuario": "Ivan",
