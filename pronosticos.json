@@ -662,7 +662,7 @@
         "goles_2_pronostico": 3,
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
-        "monto_apostado": 150,
+        "monto_apostado": 500,
         "puntos_ganados": 0
     },
     {
@@ -672,7 +672,17 @@
         "goles_2_pronostico": 3,
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
-        "monto_apostado": 20000,
+        "monto_apostado": 20738,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 84,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 3,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 5000,
         "puntos_ganados": 0
     }
 ]
