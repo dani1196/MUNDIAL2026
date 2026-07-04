@@ -914,11 +914,11 @@
     "equipo_2": "Cabo Verde",
     "fecha": "2026-07-03",
     "hora": "17:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 3,
+    "goles_2_real": 2,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 82,
