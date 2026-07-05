@@ -999,7 +999,7 @@ if nombres_jugadores:
             ### IV. Mención de Honor: El Oráculo del Desastre Financiero
             No podemos cerrar este decreto sin rendir cuentas ante la historia y otorgar una **mención especial y honorífica al Camarada** que, desafiando la prudencia patrimonial, no dudó un solo segundo en **apostar absolutamente todo su capital**, guiado únicamente por una fe ciega en su propio instinto, sus acertados pronósticos no solo doblegaron a las casas de apuestas, sino que se han convertido en el factor definitivo que ha hecho **quebrar la moneda nacional**. Una hazaña legendaria que lo consagra como un auténtico héroe para los osados, un peligro público para el Banco Central.
 
-            Dado y firmado para su difusión general. Que la pelota ruede con justicia y el Sobolev encuentre pronto su estabilidad.*
+            Dado y firmado para su difusión general. Que la pelota ruede con justicia y el Sobolev encuentre pronto su estabilidad.
             
             ---
             
