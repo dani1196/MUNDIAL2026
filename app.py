@@ -991,7 +991,7 @@ if nombres_jugadores:
             ### II. Paradoja en las Arcas: El Triunfo de los Favoritos y el Colapso del Sobolev
             Sin embargo, el destino deportivo es caprichoso. Pese al susto argentino, los triunfos consolidados de las potencias —**Argentina y Francia**— han tenido un efecto colateral devastador fuera de las canchas.
 
-            > ⚠️ **AVISO FINANCIERO URGENTE:** La combinación de estos resultados ha desbordado por completo las previsiones del Banco Central. Nos enfrentamos en este preciso instante a una **devaluación histórica del sobolev**, cuyas consecuencias macroeconómicas están aún por cuantificarse. 
+            > ⚠️ **AVISO FINANCIERO URGENTE:** La combinación de estos resultados ha desbordado por completo las previsiones del Banco Central. Nos enfrentamos en este preciso instante a una **devaluación histórica del Sobolev**, cuyas consecuencias macroeconómicas están aún por cuantificarse. 
 
             ### III. La Última Jornada de Octavos: El Clamor por la Venganza
             Mañana concluye la crucial fase de octavos de final y las miradas están puestas en el choque entre **Inglaterra y México**. Tras la dolorosa eliminación de la selección ecuatoriana, el sentimiento es unánime: se aguarda con fervor que el conjunto de los *Tres Leones* actúe como brazo ejecutor y **vengue la caída de la Tri** frente al combinado azteca.
@@ -999,7 +999,7 @@ if nombres_jugadores:
             ### IV. Mención de Honor: El Oráculo del Desastre Financiero
             No podemos cerrar este decreto sin rendir cuentas ante la historia y otorgar una **mención especial y honorífica al Camarada** que, desafiando la prudencia patrimonial, no dudó un solo segundo en **apostar absolutamente todo su capital**, guiado únicamente por una fe ciega en su propio instinto, sus acertados pronósticos no solo doblegaron a las casas de apuestas, sino que se han convertido en el factor definitivo que ha hecho **quebrar la moneda nacional**. Una hazaña legendaria que lo consagra como un auténtico héroe para los osados, un peligro público para el Banco Central.
 
-            *Dado y firmado para su difusión general. Que la pelota ruede con justicia y el Sobolev encuentre pronto su estabilidad.*
+            Dado y firmado para su difusión general. Que la pelota ruede con justicia y el Sobolev encuentre pronto su estabilidad.*
             
             ---
             
