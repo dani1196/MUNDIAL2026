@@ -978,8 +978,32 @@ if nombres_jugadores:
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
                 st.markdown("""
+            ## 📜 ¡EDICTO OFICIAL No. 5! 
+            ## *DEL ESTUPOR EN LA CANCHA A LA AGONÍA DEL SOBOLEV*
+
+            A la comunidad de apostadores:
+
+            Se hace saber que las últimas 24 horas han marcado un hito de proporciones sísmicas, tanto en el césped internacional como en las arcas de nuestra economía. 
+
+            ### I. El Batacazo Histórico: Cabo Verde Silencia a la Albiceleste
+            En lo que ya se califica como la mayor hazaña de su historia deportiva, la selección de **Cabo Verde**, en su debut absoluto en una Copa del Mundo, desafió todos los pronósticos al silenciar por completo a la apasionada afición argentina. Con un planteamiento táctico impecable y un coraje inquebrantable, los tiburones azules sumieron a la actual campeona en un mar de dudas.
+
+            ### II. Paradoja en las Arcas: El Triunfo de los Favoritos y el Colapso del Sobolev
+            Sin embargo, el destino deportivo es caprichoso. Pese al susto argentino, los triunfos consolidados de las potencias —**Argentina y Francia**— han tenido un efecto colateral devastador fuera de las canchas.
+
+            > ⚠️ **AVISO FINANCIERO URGENTE:** La combinación de estos resultados ha desbordado por completo las previsiones del Banco Central. Nos enfrentamos en este preciso instante a una **devaluación histórica del sobolev**, cuyas consecuencias macroeconómicas están aún por cuantificarse. 
+
+            ### III. La Última Jornada de Octavos: El Clamor por la Venganza
+            Mañana concluye la crucial fase de octavos de final y las miradas están puestas en el choque entre **Inglaterra y México**. Tras la dolorosa eliminación de la selección ecuatoriana, el sentimiento es unánime: se aguarda con fervor que el conjunto de los *Tres Leones* actúe como brazo ejecutor y **vengue la caída de la Tri** frente al combinado azteca.
             
-            📜 ¡EDICTO OFICIAL No. 4!
+            ### IV. Mención de Honor: El Oráculo del Desastre Financiero
+            No podemos cerrar este decreto sin rendir cuentas ante la historia y otorgar una **mención especial y honorífica al Camarada** que, desafiando la prudencia patrimonial, no dudó un solo segundo en **apostar absolutamente todo su capital**, guiado únicamente por una fe ciega en su propio instinto, sus acertados pronósticos no solo doblegaron a las casas de apuestas, sino que se han convertido en el factor definitivo que ha hecho **quebrar la moneda nacional**. Una hazaña legendaria que lo consagra como el auténtico "Cisne Negro" de nuestra economía; un héroe para los osados, un peligro público para el Banco Central.
+
+            *Dado y firmado para su difusión general. Que la pelota ruede con justicia y el Sobolev encuentre pronto su estabilidad.*
+            
+            ---
+            
+            ## 📜 ¡EDICTO OFICIAL No. 4!
             ## *RESILIENCIA*
 
             ¡Atención, comunidad de apostadores y sobrevivientes de la parley!
@@ -1003,18 +1027,10 @@ if nombres_jugadores:
             Dado, firmado y sellado por el Comisionado, con el corazón golpeado pero la billetera lista para la revancha. 
 
             **¡PERDIMOS UNA BATALLA, PERO LA ESTRATEGIA PARA GANAR LA GUERRA SIGUE INTACTA!**
-                               
-            ---
-            ### ¡El show debe continuar! 🌍⚽
-                                
-            Se le recuerda a toda la familia que el mercado sigue abierto y el arbitraje de Sobolevs no duerme:
-                                
-            * **La regla de oro:** Si no apuestas, no existes. Si te retiras ahora por un corazón roto, verás a los demás quedarse con el pozo de la gloria.
-            * **Recuerden:** El que se arriesga, gana. El que no se arriesga, se queda viendo cómo los demás celebran sus aciertos con los partidos que quedan.
-            * **Mensaje del Comisionado:** No importa si tu próximo pronóstico parece hecho por alguien que todavía está llorando por el partido de Ecuador; ¡el fútbol es sabio y la suerte favorece a los que insisten!
-                                
-            **¡Que no muera el juego, que sigan corriendo los Sobolevs y que la gestión de riesgo nos acompañe hasta la final!** 🚀
-            📜 ¡EDICTO OFICIAL No. 3!
+            
+            ---                 
+            
+            ## 📜 ¡EDICTO OFICIAL No. 3!
             ## *Día de Milagros, Penales y Gigantes Caídos*
 
             ¡Atención, comunidad de apostadores!
