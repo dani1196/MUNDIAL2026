@@ -992,11 +992,11 @@
     "equipo_2": "España",
     "fecha": "2026-07-06",
     "hora": "14:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 0,
+    "goles_2_real": 1,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "finalizado"
   },
   {
     "id_partido": 88,
@@ -1009,7 +1009,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 89,
@@ -1022,7 +1022,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 90,
@@ -1035,7 +1035,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 91,
@@ -1048,7 +1048,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 92,
@@ -1061,7 +1061,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 93,
@@ -1074,7 +1074,7 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   },
   {
     "id_partido": 94,
@@ -1087,6 +1087,6 @@
     "goles_2_real": null,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "programado"
+    "estado": "pendiente"
   }
 ]
