@@ -942,6 +942,8 @@
     "hora": "12:00",
     "goles_1_real": 0,
     "goles_2_real": 3,
+    "penales_1_real": null,
+    "penales_2_real": null,
     "estado": "finalizado"
   },
   {
@@ -953,6 +955,8 @@
     "hora": "16:00",
     "goles_1_real": 0,
     "goles_2_real": 1,
+    "penales_1_real": null,
+    "penales_2_real": null,
     "estado": "finalizado"
   },
   {
@@ -962,9 +966,11 @@
     "equipo_2": "Noruega",
     "fecha": "2026-07-05",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 1,
+    "goles_2_real": 2,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "finalizado"
   },
   {
     "id_partido": 86,
@@ -973,8 +979,114 @@
     "equipo_2": "Inglaterra",
     "fecha": "2026-07-05",
     "hora": "19:00",
+    "goles_1_real": 2,
+    "goles_2_real": 3,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "finalizado"
+  },
+  {
+    "id_partido": 87,
+    "grupo": "Octavos",
+    "equipo_1": "Portugal",
+    "equipo_2": "España",
+    "fecha": "2026-07-06",
+    "hora": "14:00",
     "goles_1_real": null,
     "goles_2_real": null,
-    "estado": "pendiente"
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 88,
+    "grupo": "Octavos",
+    "equipo_1": "Estados Unidos",
+    "equipo_2": "Bélgica",
+    "fecha": "2026-07-06",
+    "hora": "19:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 89,
+    "grupo": "Octavos",
+    "equipo_1": "Argentina",
+    "equipo_2": "Egipto",
+    "fecha": "2026-07-07",
+    "hora": "11:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 90,
+    "grupo": "Octavos",
+    "equipo_1": "Suiza",
+    "equipo_2": "Colombia",
+    "fecha": "2026-07-07",
+    "hora": "15:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 91,
+    "grupo": "Cuartos",
+    "equipo_1": "Francia",
+    "equipo_2": "Marruecos",
+    "fecha": "2026-07-09",
+    "hora": "15:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 92,
+    "grupo": "Cuartos",
+    "equipo_1": "Ganador Portugal/España",
+    "equipo_2": "Ganador Estados Unidos/Bélgica",
+    "fecha": "2026-07-10",
+    "hora": "14:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 93,
+    "grupo": "Cuartos",
+    "equipo_1": "Noruega",
+    "equipo_2": "Inglaterra",
+    "fecha": "2026-07-11",
+    "hora": "16:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
+  },
+  {
+    "id_partido": 94,
+    "grupo": "Cuartos",
+    "equipo_1": "Ganador Argentina/Egipto",
+    "equipo_2": "Ganador Suiza/Colombia",
+    "fecha": "2026-07-11",
+    "hora": "20:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "programado"
   }
 ]

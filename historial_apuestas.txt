@@ -100,3 +100,11 @@
 [2026-07-05 12:52:45] APUESTA | Daniela | Partido 85 | Goles: 1-1 | Penales: 4-3 | Monto: 300
 [2026-07-05 12:52:53] APUESTA | Daniela | Partido 86 | Goles: 0-3 | Monto: 1000
 [2026-07-05 12:53:25] APUESTA | Daniela | Partido 86 | Goles: 0-3 | Monto: 1500
+[2026-07-05 14:33:43] APUESTA | Daniel | Partido 85 | Goles: 3-2 | Monto: 2000
+[2026-07-05 14:43:49] APUESTA | Jorge | Partido 85 | Goles: 2-3 | Monto: 952
+[2026-07-05 14:44:52] APUESTA | Jorge | Partido 85 | Goles: 3-2 | Monto: 952
+[2026-07-05 18:06:51] APUESTA | Daniel | Partido 86 | Goles: 0-2 | Monto: 1000
+[2026-07-05 18:06:54] APUESTA | Daniel | Partido 86 | Goles: 0-2 | Monto: 1000
+[2026-07-05 18:07:39] APUESTA | Daniel | Partido 86 | Goles: 0-2 | Monto: 5000
+[2026-07-05 18:07:41] APUESTA | Daniel | Partido 86 | Goles: 0-2 | Monto: 5000
+[2026-07-05 18:55:19] APUESTA | Jorge | Partido 86 | Goles: 2-4 | Monto: 80000

@@ -1,7 +1,7 @@
 [
     {
         "nombre": "Daniel",
-        "monedas": 21824,
+        "monedas": 14824,
         "dolares_depositados": 2,
         "pin": "1234"
     },
@@ -55,7 +55,7 @@
     },
     {
         "nombre": "Jorge",
-        "monedas": 82952,
+        "monedas": 2000,
         "dolares_depositados": 11.0,
         "pin": "1514"
     },
