@@ -117,3 +117,6 @@
 [2026-07-06 23:05:57] APUESTA | Jorge | Partido 89 | Goles: 4-1 | Monto: 80000
 [2026-07-07 10:41:49] APUESTA | Daniela | Partido 89 | Goles: 2-0 | Monto: 15000
 [2026-07-07 10:51:17] APUESTA | Daniel | Partido 89 | Goles: 2-1 | Monto: 30000
+[2026-07-07 13:57:44] APUESTA | Daniela | Partido 90 | Goles: 1-2 | Monto: 10000
+[2026-07-07 13:58:04] APUESTA | Daniela | Partido 90 | Goles: 1-3 | Monto: 20000
+[2026-07-07 13:58:10] APUESTA | Daniela | Partido 90 | Goles: 1-2 | Monto: 20000
