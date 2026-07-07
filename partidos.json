@@ -1018,11 +1018,11 @@
     "equipo_2": "Egipto",
     "fecha": "2026-07-07",
     "hora": "11:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 3,
+    "goles_2_real": 2,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 90,
