@@ -841,5 +841,15 @@
         "monto_apostado": 20000,
         "puntos_ganados": 0,
         "pagado": true
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 91,
+        "goles_1_pronostico": 4,
+        "goles_2_pronostico": 1,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 300000,
+        "puntos_ganados": 0
     }
 ]
