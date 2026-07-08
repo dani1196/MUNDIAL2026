@@ -1053,8 +1053,8 @@
   {
     "id_partido": 92,
     "grupo": "Cuartos",
-    "equipo_1": "Ganador Portugal/España",
-    "equipo_2": "Ganador Estados Unidos/Bélgica",
+    "equipo_1": "España",
+    "equipo_2": "Bélgica",
     "fecha": "2026-07-10",
     "hora": "14:00",
     "goles_1_real": null,
@@ -1079,8 +1079,8 @@
   {
     "id_partido": 94,
     "grupo": "Cuartos",
-    "equipo_1": "Ganador Argentina/Egipto",
-    "equipo_2": "Ganador Suiza/Colombia",
+    "equipo_1": "Argentina",
+    "equipo_2": "Suiza",
     "fecha": "2026-07-11",
     "hora": "20:00",
     "goles_1_real": null,
