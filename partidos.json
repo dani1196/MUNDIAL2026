@@ -1031,11 +1031,11 @@
     "equipo_2": "Colombia",
     "fecha": "2026-07-07",
     "hora": "15:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
-    "penales_1_real": null,
-    "penales_2_real": null,
-    "estado": "pendiente"
+    "goles_1_real": 0,
+    "goles_2_real": 0,
+    "penales_1_real": 4,
+    "penales_2_real": 3,
+    "estado": "finalizado"
   },
   {
     "id_partido": 91,
