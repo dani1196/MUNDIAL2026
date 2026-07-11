@@ -123,3 +123,19 @@
 [2026-07-08 10:03:21] APUESTA | Jorge | Partido 91 | Goles: 4-1 | Monto: 300000
 [2026-07-09 11:58:13] APUESTA | Daniela | Partido 91 | Goles: 3-2 | Monto: 40000
 [2026-07-09 12:09:23] APUESTA | Daniel | Partido 91 | Goles: 3-1 | Monto: 100000
+[2026-07-10 10:35:47] APUESTA | Daniela | Partido 92 | Goles: 1-1 | Penales: 3-4 | Monto: 20000
+[2026-07-10 12:24:22] APUESTA | Daniel | Partido 92 | Goles: 3-2 | Monto: 100000
+[2026-07-10 13:19:23] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:20:02] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 1200000
+[2026-07-10 13:20:54] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 1200000
+[2026-07-10 13:20:57] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 1200000
+[2026-07-10 13:44:00] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:51:18] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 22000
+[2026-07-10 13:51:42] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:57:45] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:58:12] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:58:39] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:59:08] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:59:18] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:59:24] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 222000
+[2026-07-10 13:59:41] APUESTA | Jorge | Partido 92 | Goles: 2-3 | Monto: 22000
