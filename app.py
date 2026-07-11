@@ -978,6 +978,25 @@ if nombres_jugadores:
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
                 st.markdown("""
+           ### 📜 ¡EDICTO OFICIAL No. 6! 
+
+            **Considerando que:**
+
+            **PRIMERO:** La selección de **Inglaterra** se ha erigido como el implacable brazo ejecutor del destino futbolístico, vengando el honor de La Tri tras eliminar a la selección mexicana. Este decreto del fútbol se consumó en un duelo agónico y vibrante de octavos de final el pasado 5 de julio en el mítico Estadio Azteca, sellando un 3-2 a favor de los ingleses bajo la batuta de Jude Bellingham y Harry Kane. ¡La historia se escribe con goles!
+
+            **SEGUNDO:** El avance despiadado de este torneo nos arrastra inexorablemente al día de mañana, sábado 11 de julio, fecha en la que se desatará una nueva tormenta en los cuartos de final. El Estadio de Miami no será un simple campo, sino un auténtico coliseo que presenciará el inminente choque de titanes entre los Tres Leones ingleses y los feroces Vikingos noruegos, quienes llegan sedientos de gloria tras la monumental hazaña de eliminar al conjunto brasileño. 
+
+            **TERCERO:** El triunfo de hoy, 10 de julio, donde **España** doblegó a Bélgica, no solo les ha otorgado el codiciado boleto a semifinales. En un giro que ha hecho temblar los cimientos de nuestra comunidad, un único y brillante camarada, nadando a contracorriente del clamor popular, depositó su inquebrantable fe en la Furia Roja. Esta magistral hazaña matemática y predictiva le ha permitido amasar una fortuna en Sobolevs, catapultándose para consolidar un nuevo primer lugar en nuestra tabla de posiciones. ¡La audacia recompensa a los valientes!
+
+            **POR TANTO, SE DECRETA:**
+
+            Que todos los visionarios, estrategas y matemáticos de esta comunidad fijen sus miradas en la guerra de mañana entre escandinavos y británicos. Que los pronósticos se calculen con precisión milimétrica y que, guiados por la lógica inquebrantable o la fe más ciega, pongan en juego sus capitales. 
+
+            ¡Que lluevan los pronósticos y que el mejor estratega se lleve la victoria!
+
+            Dado, firmado y notificado.
+            
+            ---
             ## 📜 ¡EDICTO OFICIAL No. 5! 
             ## *DEL ESTUPOR EN LA CANCHA A LA AGONÍA DEL SOBOLEV*
 
