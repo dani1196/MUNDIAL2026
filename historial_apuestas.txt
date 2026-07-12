@@ -147,3 +147,7 @@
 [2026-07-11 14:22:46] APUESTA | Jorge | Partido 93 | Goles: 3-2 | Monto: 1000000
 [2026-07-11 14:23:06] APUESTA | Jorge | Partido 93 | Goles: 3-2 | Monto: 1000000
 [2026-07-11 14:25:40] APUESTA | Daniela | Partido 93 | Goles: 2-1 | Monto: 30000
+[2026-07-11 19:03:23] APUESTA | Jorge | Partido 94 | Goles: 2-1 | Monto: 100000
+[2026-07-11 19:03:33] APUESTA | Jorge | Partido 94 | Goles: 2-1 | Monto: 100000
+[2026-07-11 19:04:25] APUESTA | Jorge | Partido 94 | Goles: 2-1 | Monto: 199999
+[2026-07-11 19:35:37] APUESTA | Daniela | Partido 94 | Goles: 2-1 | Monto: 50000
