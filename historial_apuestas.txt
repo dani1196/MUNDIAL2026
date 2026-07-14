@@ -151,3 +151,17 @@
 [2026-07-11 19:03:33] APUESTA | Jorge | Partido 94 | Goles: 2-1 | Monto: 100000
 [2026-07-11 19:04:25] APUESTA | Jorge | Partido 94 | Goles: 2-1 | Monto: 199999
 [2026-07-11 19:35:37] APUESTA | Daniela | Partido 94 | Goles: 2-1 | Monto: 50000
+[2026-07-14 13:07:07] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:07:10] APUESTA | Daniela | Partido 95 | Goles: 2-1 | Monto: 80000
+[2026-07-14 13:07:20] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:07:24] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:07:25] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:07:56] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:08:08] APUESTA | Daniel | Partido 95 | Goles: 2-1 | Monto: 1000000
+[2026-07-14 13:12:42] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
+[2026-07-14 13:13:44] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
+[2026-07-14 13:14:31] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
+[2026-07-14 13:16:11] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
+[2026-07-14 13:16:17] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
+[2026-07-14 13:16:34] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 799996
+[2026-07-14 13:17:22] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 799000
