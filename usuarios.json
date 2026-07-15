@@ -1,21 +1,13 @@
 [
     {
         "nombre": "Daniel",
-<<<<<<< HEAD
-        "monedas": 214824,
-=======
         "monedas": 14824,
->>>>>>> 30e5cf8 (apuestas 96)
         "dolares_depositados": 2,
         "pin": "1234"
     },
     {
         "nombre": "Daniela",
-<<<<<<< HEAD
-        "monedas": 183885,
-=======
         "monedas": 103885,
->>>>>>> 30e5cf8 (apuestas 96)
         "dolares_depositados": 2,
         "pin": "5678"
     },
@@ -63,11 +55,7 @@
     },
     {
         "nombre": "Jorge",
-<<<<<<< HEAD
-        "monedas": 997,
-=======
         "monedas": 0,
->>>>>>> 30e5cf8 (apuestas 96)
         "dolares_depositados": 11.0,
         "pin": "1514"
     },

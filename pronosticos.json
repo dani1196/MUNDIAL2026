@@ -984,8 +984,6 @@
         "monto_apostado": 799000,
         "puntos_ganados": 0,
         "pagado": true
-<<<<<<< HEAD
-=======
     },
     {
         "usuario": "Daniela",
@@ -1016,6 +1014,5 @@
         "penales_2_pronostico": null,
         "monto_apostado": 997,
         "puntos_ganados": 0
->>>>>>> 30e5cf8 (apuestas 96)
     }
 ]

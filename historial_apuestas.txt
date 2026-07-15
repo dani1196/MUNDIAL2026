@@ -165,11 +165,8 @@
 [2026-07-14 13:16:17] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 1
 [2026-07-14 13:16:34] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 799996
 [2026-07-14 13:17:22] APUESTA | Jorge | Partido 95 | Goles: 3-2 | Monto: 799000
-<<<<<<< HEAD
-=======
 [2026-07-15 13:02:56] APUESTA | Daniela | Partido 96 | Goles: 1-2 | Monto: 80000
 [2026-07-15 13:06:10] APUESTA | Daniel | Partido 96 | Goles: 1-2 | Monto: 1
 [2026-07-15 13:06:19] APUESTA | Daniel | Partido 96 | Goles: 1-2 | Monto: 200000
 [2026-07-15 13:43:12] APUESTA | Jorge | Partido 96 | Goles: 1-2 | Monto: 997
 [2026-07-15 13:43:49] APUESTA | Jorge | Partido 96 | Goles: 1-2 | Monto: 997
->>>>>>> 30e5cf8 (apuestas 96)
