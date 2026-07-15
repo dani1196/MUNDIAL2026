@@ -993,7 +993,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 80000,
-        "puntos_ganados": 0
+        "puntos_ganados": 800000,
+        "pagado": true
     },
     {
         "usuario": "Daniel",
@@ -1003,7 +1004,8 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 200000,
-        "puntos_ganados": 0
+        "puntos_ganados": 2000000,
+        "pagado": true
     },
     {
         "usuario": "Jorge",
@@ -1013,6 +1015,7 @@
         "penales_1_pronostico": null,
         "penales_2_pronostico": null,
         "monto_apostado": 997,
-        "puntos_ganados": 0
+        "puntos_ganados": 9970,
+        "pagado": true
     }
 ]

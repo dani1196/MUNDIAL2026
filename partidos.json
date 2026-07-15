@@ -1115,4 +1115,18 @@
     "penales_2_real": null,
     "estado": "finalizado"
   }
+  ,
+  {
+    "id_partido": 104,
+    "grupo": "Final",
+    "equipo_1": "España",
+    "equipo_2": "Argentina",
+    "fecha": "2026-07-19",
+    "hora": "14:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "pendiente"
+  }
 ]
