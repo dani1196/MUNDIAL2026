@@ -984,5 +984,38 @@
         "monto_apostado": 799000,
         "puntos_ganados": 0,
         "pagado": true
+<<<<<<< HEAD
+=======
+    },
+    {
+        "usuario": "Daniela",
+        "id_partido": 96,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 80000,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Daniel",
+        "id_partido": 96,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 200000,
+        "puntos_ganados": 0
+    },
+    {
+        "usuario": "Jorge",
+        "id_partido": 96,
+        "goles_1_pronostico": 1,
+        "goles_2_pronostico": 2,
+        "penales_1_pronostico": null,
+        "penales_2_pronostico": null,
+        "monto_apostado": 997,
+        "puntos_ganados": 0
+>>>>>>> 30e5cf8 (apuestas 96)
     }
 ]
