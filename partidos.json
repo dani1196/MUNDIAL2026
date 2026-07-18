@@ -1114,8 +1114,20 @@
     "penales_1_real": null,
     "penales_2_real": null,
     "estado": "finalizado"
-  }
-  ,
+  },
+  {
+    "id_partido": 103,
+    "grupo": "Eliminatoria por el tercer lugar",
+    "equipo_1": "Francia",
+    "equipo_2": "Inglaterra",
+    "fecha": "2026-07-18",
+    "hora": "16:00",
+    "goles_1_real": null,
+    "goles_2_real": null,
+    "penales_1_real": null,
+    "penales_2_real": null,
+    "estado": "pendiente"
+  },
   {
     "id_partido": 104,
     "grupo": "Final",
