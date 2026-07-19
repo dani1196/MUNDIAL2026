@@ -170,3 +170,6 @@
 [2026-07-15 13:06:19] APUESTA | Daniel | Partido 96 | Goles: 1-2 | Monto: 200000
 [2026-07-15 13:43:12] APUESTA | Jorge | Partido 96 | Goles: 1-2 | Monto: 997
 [2026-07-15 13:43:49] APUESTA | Jorge | Partido 96 | Goles: 1-2 | Monto: 997
+[2026-07-18 14:27:37] APUESTA | Jorge | Partido 103 | Goles: 2-3 | Monto: 9970
+[2026-07-18 15:34:11] APUESTA | Daniela | Partido 103 | Goles: 1-0 | Monto: 1000
+[2026-07-18 15:34:44] APUESTA | Daniel | Partido 103 | Goles: 2-1 | Monto: 1000000

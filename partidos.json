@@ -1122,11 +1122,11 @@
     "equipo_2": "Inglaterra",
     "fecha": "2026-07-18",
     "hora": "16:00",
-    "goles_1_real": null,
-    "goles_2_real": null,
+    "goles_1_real": 4,
+    "goles_2_real": 6,
     "penales_1_real": null,
     "penales_2_real": null,
-    "estado": "pendiente"
+    "estado": "finalizado"
   },
   {
     "id_partido": 104,
