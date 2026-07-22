@@ -978,6 +978,22 @@ if nombres_jugadores:
             with tab_edictos:
                 st.subheader("📢 Edictos del Comisionado")
                 st.markdown("""
+           ### 📜 ¡EDICTO FINAL!
+           
+           ### I. El Desenlace del Torneo 
+            Las instancias definitivas de nuestro certamen nos regalaron momentos de tensión pura y absoluta incertidumbre. Tras unas semifinales donde la estrategia, el azar y la resistencia fueron puestos a prueba, llegamos a una gran final que terminó por desafiar cualquier modelo predictivo. 
+            
+            ### II. La máxima recuperación del Sobolev 
+            Nuestros registros y cálculos financieros fueron llevados al límite hasta que, literalmente, **quebraron las tablas**. La inmensa mayoría de los apostadores volcó su confianza y sus fondos a favor de *la Albiceleste*, anticipando una coronación que parecía matemáticamente inminente. Sin embargo, en un giro monumental de los acontecimientos, fue *la Furia Roja* quien impuso sus condiciones en el campo de juego, derrotando al gran favorito y desbaratando las proyecciones de casi todos los participantes.
+  
+
+            ### IV. La Mirada hacia el Futuro
+            Más allá de los resultados inesperados y las caídas en las predicciones, este evento marca un hito histórico para nuestra comunidad. Queremos expresar nuestro más profundo agradecimiento por su entusiasmo, participación y apoyo incondicional. Su compromiso ha sido el motor esencial para el exitoso nacimiento y consolidación del **Banco del Sobolev**, demostrando que la intersección entre la pasión deportiva y las probabilidades financieras crea una experiencia inigualable. Cerramos las operaciones y los registros de este ciclo, pero la expectativa se mantiene intacta. Esperaremos con ansias la llegada del próximo mundial para abrir nuevamente nuestras puertas a nuevos pronósticos, renovados análisis y futuros desafíos.
+            
+            En el juego, al igual que en la vida, a veces se gana y a veces se pierde. Lo verdaderamente importante es disfrutar del viaje, aceptar cualquier resultado con espíritu deportivo y mantener siempre viva la fe y la alegría que nos une. 
+            
+            ¡Gracias de todo corazón por hacer posible que el Banco del Sobolev exista; su energía y su entusiasmo son, sin duda, nuestro mayor premio! 
+            ---
            ### 📜 ¡EDICTO OFICIAL No. 6! 
 
             **Considerando que:**
