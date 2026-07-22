@@ -173,3 +173,9 @@
 [2026-07-18 14:27:37] APUESTA | Jorge | Partido 103 | Goles: 2-3 | Monto: 9970
 [2026-07-18 15:34:11] APUESTA | Daniela | Partido 103 | Goles: 1-0 | Monto: 1000
 [2026-07-18 15:34:44] APUESTA | Daniel | Partido 103 | Goles: 2-1 | Monto: 1000000
+[2026-07-19 11:45:40] APUESTA | Daniela | Partido 104 | Goles: 2-3 | Monto: 902885
+[2026-07-19 13:12:42] APUESTA | Daniel | Partido 104 | Goles: 2-3 | Monto: 1014824
+[2026-07-19 13:16:33] APUESTA | Jorge | Partido 104 | Goles: 1-2 | Monto: 38889
+[2026-07-19 13:17:28] APUESTA | Jorge | Partido 104 | Goles: 1-2 | Monto: 1
+[2026-07-19 13:18:10] APUESTA | Jorge | Partido 104 | Goles: 1-2 | Monto: 39880
+[2026-07-19 13:18:18] APUESTA | Jorge | Partido 104 | Goles: 1-2 | Monto: 39880
